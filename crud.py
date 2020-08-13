@@ -76,13 +76,23 @@ def get_loan_by_id(loan_id):
 
     return Loan.query.get(loan_id)
 
+def get_user_by_id(user_id):
+
+    return User.query.get(user_id)
+
 def get_user_by_email(email):
 
     return User.query.filter(User.email == email).first()
 
-#Query Model "Loan"
+def get_loan_by_category(category_loan_id):
 
+    return Category_loan.query.get(category_loan_id)
 
+#Query columns by ID from Model.py
+
+if __name__ == '__main__':
+    from server import app
+    connect_to_db(app)
 
 
 
