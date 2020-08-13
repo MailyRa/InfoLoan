@@ -47,7 +47,7 @@ class Loan(db.Model):
     loan_name = db.Column(db.String)
     loan_description = db.Column(db.String)
     category_loans_id = db.Column(db.String, db.ForeignKey('category_loan.category_loans_id'))
-
+    loan_website= db.Column(db.String)
     def __repr__(self):
         return f'<Loan loan_id={self.loan_id}, loan_name={self.loan_name}, loan_description={self.loan_description}'
 
@@ -69,17 +69,6 @@ class Category_loan(db.Model):
 
     def __repr__(self):
         return f'<Category_loan category_loans_id={self.category_loans_id}, category_name={self.category_name}'
-
-class Loan_website(db.Model):
-    __tablename__ = 'loan_website'
-
-    loan_website_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    loan_id = db.Column(db.Integer, db.ForeignKey('loan.loan_id'))
-    url = db.Column(db.String)
-
-    def __repr__(self):
-        return f'<Loan_website loan_website_id={self.loan_website_id}, url={self.url}'
-
 
 
 if __name__ == '__main__':

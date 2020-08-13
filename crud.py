@@ -50,43 +50,44 @@ def create_user_loan(loan_id, user_id):
 #Create functions from all the model.py tables TOTAL of 5 functions
 
 
-def get_user():
+# def get_users():
 
-     return User.query.all()
+#      return User.query.all()
 
-def get_loan():
+# def get_loans():
 
-    return Loan.query.all()
+#     return Loan.query.all()
 
-def get_category_loan():
+# def get_category_loans():
 
-    return Category_loan.query.all()
+#     return Category_loan.query.all()
 
-def get_loan_website():
+# def get_loan_websites():
 
-    return Loan_website.query.all()
+#     return Loan_website.query.all()
 
-def get_user_loan():
+# def get_user_loans():
 
-    return User_loan.query.all()
+#     return User_loan.query.all()
 
-#Query all the information from all the tables TOTAL of 5 
+# #Query all the information from all the tables TOTAL of 5 
 
-def get_loan_by_id(loan_id):
+# def get_loan_by_id(loan_id):
 
-    return Loan.query.get(loan_id)
+#     return Loan.query.get(loan_id)
 
-def get_user_by_id(user_id):
+# def get_user_by_id(user_id):
 
-    return User.query.get(user_id)
+#     return User.query.get(user_id)
 
-def get_user_by_email(email):
+# def get_user_by_email(email):
 
-    return User.query.filter(User.email == email).first()
+#     return User.query.filter(User.email == email).first()
 
-def get_loan_by_category(category_loan_id):
+# def get_loan_by_category(category_loan_id):
 
-    return Category_loan.query.get(category_loan_id)
+#     return Category_loan.query.get(category_loan_id)
+
 
 #Query columns by ID from Model.py
 
