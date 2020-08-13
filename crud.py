@@ -1,4 +1,4 @@
-from model import db, User, Loan, User_loan, Category_loan, Loan_website  
+from model import db, User, Loan, User_loan, Category_loan 
 
 def create_user(fname, lname, dob, address, credit_score, email, password):
 
@@ -9,11 +9,12 @@ def create_user(fname, lname, dob, address, credit_score, email, password):
 
     return user 
 
-def create_loan(loan_name, loan_description, category_loans_id):
+def create_loan(loan_name, loan_description, loan_website, category_loans_id):
 
     loan = Loan(loan_name=loan_name,
                 loan_description=loan_description,
-                category_loans_id=category_loans_id)
+                category_loans_id=category_loans_id,
+                loan_website=loan_website)
     
     db.session.add(loan)
     db.session.commit()
@@ -28,15 +29,6 @@ def create_category_loan(category_name):
     db.session.commit()
 
     return category_loan
-
-def create_loan_website(loan_id, url):
-
-    loan_website = Loan_website(loan_id=loan_id, url=url)
-
-    db.session.add(Loan_website)
-    db.session.commit()
-    
-    return loan_website
 
 def create_user_loan(loan_id, user_id):
 
@@ -58,9 +50,9 @@ def create_user_loan(loan_id, user_id):
 
 #     return Loan.query.all()
 
-# def get_category_loans():
+def get_category_loans():
 
-#     return Category_loan.query.all()
+    return Category_loan.query.all()
 
 # def get_loan_websites():
 
@@ -90,12 +82,3 @@ def create_user_loan(loan_id, user_id):
 
 
 #Query columns by ID from Model.py
-
-if __name__ == '__main__':
-    from server import app
-    connect_to_db(app)
-
-
-
-
-
