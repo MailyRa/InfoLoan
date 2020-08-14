@@ -19,7 +19,7 @@ class User(db.Model):
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     fname = db.Column(db.String)
     lname = db.Column(db.String)
-    dob = db.Column(db.Date)
+    dob = db.Column(db.DateTime)
     address = db.Column(db.String)
     credit_score = db.Column(db.Integer)
     email = db.Column(db.String, unique=True)

@@ -72,9 +72,9 @@ def get_category_loans():
 
 #     return User.query.get(user_id)
 
-# def get_user_by_email(email):
+def get_user_by_email(email):
 
-#     return User.query.filter(User.email == email).first()
+    return User.query.filter(User.email == email).first()
 
 # def get_loan_by_category(category_loan_id):
 
