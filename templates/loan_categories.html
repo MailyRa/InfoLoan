@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <title>
+            Categories of Loans
+        </title>
+    </head>
+    <ul>
+        {% for category in categories %}
+        {{category.category_loans_id}}
+        {{category.category_name}}
+        <br>
+        {% endfor %}
+    </ul>
+
+</html>
+

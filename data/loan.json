@@ -1,0 +1,64 @@
+[
+    {
+        "category_name": "Car loan",
+        "loans": [
+            {
+                "loan_name": "Chase Auto Loans",
+                "loan_description": "Explore rates and payments",
+                "loan_website": "https://autofinance.chase.com/auto-finance/auto-loans?offercode=WDXDUXXX28"
+            },
+            {
+                "loan_name": "Other Auto Loan",
+                "loan_description": "Other",
+                "loan_website": "www.loan.com"
+            }
+        ]
+    },
+    {
+        "category_name": "Home loan",
+        "loans": [
+            {
+                "loan_name": "Chase Home Lending",
+                "loan_description": "Your home journey starts here",
+                "loan_website": "https://www.chase.com/personal/mortgage"
+            }
+        ]
+    },
+    {
+        "category_name": "Personal loan",
+        "loans": [
+            {
+                "loan_name": "WellsFargo Personal Loan",
+                "loan_description": "Secured personal loan",
+                "loan_website": "https://www.wellsfargo.com/personal-credit/personal-loan"
+            },
+            {
+                "loan_name": "Chase Personal Loan",
+                "loan_description": "Secured personal loan",
+                "loan_website": "https://www.wellsfargo.com/personal-credit/personal-loan"
+            }
+        ]
+    },
+    {
+        "category_name": "Business loan",
+        "loans": [
+            {
+                "loan_name": "Chase Business Loan",
+                "loan_description": "Financing to help you manage your small business",
+                "loan_website": "https://www.chase.com/business/loans"
+            }
+        ]
+    },
+    {
+        "category_name": "Education Loan ",
+        "loans": [
+            {
+                "loan_name": "Chase Student Loan",
+                "loan_description": "Helping students with education",
+                "loan_website": "https://www.chase.com/personal/student-loan-servicing"
+            }
+        ]
+    }
+    
+]
+
