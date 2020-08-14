@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
-{% block title %} Welcome to LoanInfo! {% endblock %}
+{% block title %} Welcome {% endblock %}
 
-{% block body %}
-    <!-- Mount your react components on to this element. -->
-    <div id="app"></div>
-
-{% endblock %}
-
-{% block js %}
-  <script type="text/jsx" src="/static/homepage.jsx"></script>
-
-{% endblock %}
+{% block scripts %}
+    <script type="text/jsx" src="/static/js/homepage.jsx" ></script>
   
+{% endblock %}
+
+{% block content %}
+    <!-- Mount your react components on to this element. -->
+<div id="app"></div>
+
+{% endblock %}
+
