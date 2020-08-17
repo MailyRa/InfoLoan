@@ -1,5 +1,4 @@
-
-from flask import Flask, render_template, request, flash, session, redirect, json
+from flask import Flask, render_template, request, flash, session, redirect, json, jsonify
 from model import connect_to_db, User
 from datetime import datetime 
 
@@ -14,20 +13,26 @@ app.jinja_env.undefined = StrictUndefined
 
 @app.route("/")
 def homepage():
-    return render_template("homepage.html")
+    return render_template("root.html")
 
 
 @app.route("/loan_categories")
 def loan_categories():
+    return render_template("loan_categories.html")
 
+
+@app.route("/loan_categories.json")
+def loan_categories_json():
     categories = crud.get_category_loans()
-
-    return render_template("loan_categories.html", categories=categories)
+   
+    category_json = [
+        category.category_name for category in categories
+    ]
+    return jsonify(category_json)
 
 
 @app.route("/create_profile", methods=["GET"])
 def create_profile():
-
     return render_template("profile.html")
 
 
@@ -46,10 +51,9 @@ def create_user():
     user = crud.get_user_by_email(email)
     
     if user:
-        flash('Cannot create an account with that email. Please try again')
-        
-        return redirect('/create_profile')
+        flash('Email or password exists already, please log in')
 
+        return redirect('/login')
     else:
         crud.create_user(fname, lname, dob, address, credit_score, email, password)
         flash('Account created! Please log in')
@@ -66,9 +70,12 @@ def login():
 
 @app.route("/handle_login", methods=['POST'])
 def handle_login():
-
     email = request.form.get('email')
     password = request.form.get('password')
+
+    if not email or not password:
+        flash("Invalid password and/or username try again!")
+        return redirect('/login')
 
     user = crud.get_user_by_email(email)
 
@@ -92,10 +99,19 @@ def handle_logout():
     return redirect('/')
 
 
+@app.route("/car_loans")
+def car_loans():
+     return render_template("car_loans.html")
 
 
-# @app.route("/loans")
-# def loans():
+# @app.route("/car_loans.json")
+# def loan_categories_json():
+#     categories = crud.get_category_loans()
+   
+#     category_json = [
+#         category.category_name for category in categories
+#     ]
+#     return jsonify(category_json)
 
 
 # @app.route("/loan_information")

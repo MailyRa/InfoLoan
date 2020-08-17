@@ -1,16 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %} Loan Categories {% endblock %}
+
 <html>
-    <head>
-        <title>
-            Categories of Loans
-        </title>
-    </head>
-    <ul>
-        {% for category in categories %}
-        {{category.category_loans_id}}
-        {{category.category_name}}
-        <br>
-        {% endfor %}
-    </ul>
+    {% block js %}
+    <script src="/static/js/loan_categories.jsx" type="text/jsx"></script>
+    {% endblock %}
+
+    {% block body %}
+   
+    <div id="loan_categories"></div>
+
+    {% endblock %}
 
 </html>
-

@@ -1,8 +1,16 @@
-<form action="/handle_login" method="POST">
-    <p>
-      <h2>Login</h2>
-      Email <input type="text" name="email">
-      Password <input type="password" name="password">
-      <form action="/handle_login" method="POST"> <button type="submit"> login</button></form>
-    </p>
-</form>
+{% extends 'base.html' %}
+
+{% block title %} Login {% endblock %}
+
+<html>
+
+    {% block js %}
+    <script src="/static/js/login.jsx" type="text/jsx"></script>
+    {% endblock %}
+
+    {% block body %}
+    <h1>Login</h1>
+    <div id="login"></div>
+    {% endblock %}
+
+</html>
