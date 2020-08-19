@@ -81,4 +81,8 @@ def get_user_by_email(email):
 #     return Category_loan.query.get(category_loan_id)
 
 
+def get_category_by_name():
+
+    return Category_loan.query.all()
+
 #Query columns by ID from Model.py

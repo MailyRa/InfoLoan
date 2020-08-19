@@ -16,11 +16,6 @@ def homepage():
     return render_template("root.html")
 
 
-@app.route("/loan_categories")
-def loan_categories():
-    return render_template("loan_categories.html")
-
-
 @app.route("/loan_categories.json")
 def loan_categories_json():
     categories = crud.get_category_loans()
@@ -31,63 +26,67 @@ def loan_categories_json():
     return jsonify(category_json)
 
 
-@app.route("/create_profile", methods=["GET"])
-def create_profile():
-    return render_template("profile.html")
+@app.route("/car_loans.json")
+def car_loans_json():
+    
+    car_loan = crud.get_category_by_name
+
+    car_loans_json= [
+        car_loan.category_name for car_loan in car_loan
+    ]
+
+    return jsonify(car_loans_json)
 
 
 
-@app.route("/create_user", methods=["POST"])
+
+@app.route("/create_user", methods=['POST'])
 def create_user():
    
-    fname = request.form.get('fname')
-    lname = request.form.get('lname')
-    dob = request.form.get('dob')
-    address = request.form.get('address')
-    credit_score = request.form.get('credit_score')
-    email = request.form.get('email')
-    password = request.form.get('password')
+    data = request.get_json()
 
-    user = crud.get_user_by_email(email)
-    
+    user_fname = data.get('user_fname')
+    user_lname = data.get('user_lname')
+    user_dob = data.get('user_dob')
+    user_address = data.get('user_address')
+    user_credit_score = data.get('user_credit_score')
+    user_email = data.get('user_email')
+    user_password = data.get('user_password')
+
+    user = crud.get_user_by_email(user_email)
+
     if user:
-        flash('Email or password exists already, please log in')
+        return jsonify ({"error": "User already exists"})
+        
+    else: 
+        new_user = crud.create_user(user_fname, user_lname, user_dob, user_address, user_credit_score, user_email, user_password)
 
-        return redirect('/login')
-    else:
-        crud.create_user(fname, lname, dob, address, credit_score, email, password)
-        flash('Account created! Please log in')
-            
-        return redirect('/login')
-
-
-@app.route("/login", methods=['GET'])
-def login():
-
-    return render_template("login.html")
-
-
+        return jsonify({
+            "f_name": new_user.fname, 
+            "lname": new_user.lname, 
+            "dob": new_user.dob, 
+            "address": new_user.address,
+            "credit_score": new_user.credit_score, 
+            "email": new_user.email, 
+        })
+        
 
 @app.route("/handle_login", methods=['POST'])
 def handle_login():
-    email = request.form.get('email')
-    password = request.form.get('password')
 
-    if not email or not password:
-        flash("Invalid password and/or username try again!")
-        return redirect('/login')
+    data = request.get_json()
 
-    user = crud.get_user_by_email(email)
+    user_email = data.get('user_email')
+    user_password = data.get('user_password')
 
-    if user and user.password == password:
+    user = crud.get_user_by_email(user_email)
+
+    if user and user.password == user_password:
         session['current_user'] = user.user_id
-        flash(f'Log in Sucess {email}')
-
-        return redirect('/loan_categories')
     
+        return jsonify({"user_email": user_email})
     else:
-        flash('Incorrect password and/or username try again!')
-        return redirect('/login')
+        return jsonify ({"error": "Incorrect Password or Username"})
 
 
 
@@ -99,19 +98,8 @@ def handle_logout():
     return redirect('/')
 
 
-@app.route("/car_loans")
-def car_loans():
-     return render_template("car_loans.html")
 
 
-# @app.route("/car_loans.json")
-# def loan_categories_json():
-#     categories = crud.get_category_loans()
-   
-#     category_json = [
-#         category.category_name for category in categories
-#     ]
-#     return jsonify(category_json)
 
 
 # @app.route("/loan_information")

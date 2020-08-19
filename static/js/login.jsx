@@ -1,3 +1,6 @@
+
+
+
 function LogIn() {
     return (
         <div>
@@ -12,4 +15,4 @@ function LogIn() {
     );
 }
 
-ReactDOM.render(<LogIn />, document.getElementById('login'));
+ReactDOM.render(<LogIn />, document.getElementById('root'));
