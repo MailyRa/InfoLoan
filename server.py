@@ -10,9 +10,9 @@ app = Flask(__name__)
 app.secret_key = 'dev'
 app.jinja_env.undefined = StrictUndefined
 
-
-@app.route("/")
-def homepage():
+@app.route('/', defaults={'path':''})
+@app.route('/<path:path>')
+def homepage(path):
     return render_template("root.html")
 
 
@@ -21,22 +21,32 @@ def loan_categories_json():
     categories = crud.get_category_loans()
    
     category_json = [
-        category.category_name for category in categories
-    ]
+        {
+            "category_id": category.category_loans_id,
+            "category_name": category.category_name 
+        } for category in categories
+    ] 
     return jsonify(category_json)
 
 
-@app.route("/car_loans.json")
-def car_loans_json():
-    
-    car_loan = crud.get_category_by_name
+@app.route("/car_loans.json", methods=['GET'])
+def loans_json():
 
-    car_loans_json= [
-        car_loan.category_name for car_loan in car_loan
+    category_id = int(request.args.get("category_id"))
+    
+    loans = crud.get_loans_by_category_id(category_id)
+
+    loan_json = [
+        {
+            "loan_id": loan.loan_id,
+            "loan_name": loan.loan_name,
+            "loan_description": loan.loan_description,
+            "loan_website": loan.loan_website
+
+        } for loan in loans
     ]
 
-    return jsonify(car_loans_json)
-
+    return jsonify(loan_json)
 
 
 
@@ -89,42 +99,59 @@ def handle_login():
         return jsonify ({"error": "Incorrect Password or Username"})
 
 
+@app.route("/save_loan.json", methods=['POST'])
+def save_loan_json():
+
+    user_id = session['current_user']
+    
+    data = request.get_json()
+    loan_id = data.get('loan_id')
+
+    crud.save_loan_for_user(user_id, loan_id)
+
+    return jsonify({"success": "Loan Saved!"})
+
+
+@app.route("/user_profile.json", methods=['POST'])
+def user_profile():
+    user_id = session['current_user']
+    user = crud.get_user_by_id(user_id)
+
+    users_loans = crud.get_user_loans_by_user(user_id)
+
+    user_json = {
+        "fname": user.fname,
+        "lname": user.lname,
+        "dob": user.dob,
+        "address": user.address,
+        "credit_score": user.credit_score,
+        "email": user.address,
+        "loans": [
+            {
+                "loan_name": loan[1].loan_name,
+                "loan_description": loan[1].loan_description,
+                "loan_website": loan[1].loan_website
+            } for loan in users_loans
+        ]
+    }
+    return jsonify(user_json)
+
+
+
 
 @app.route("/handle_logout", methods=['POST'])
 def handle_logout():
 
     session.clear()
 
-    return redirect('/')
+    return jsonify({"success": True})
 
-
-
-
-
-
-# @app.route("/loan_information")
-# def loan_information():
-
-
-# @app.route("/user_profile")
-# def user_profile():
-
-
-
-# @app.route("/save_loans")
-# def save_loans():
 
 
 
 # @app.route("/compare_loans")
 # def compare_loans():
 
-
-
-# @app.route("/loan_website")
-# def loan_website():
-
-# @app.route("/")
 
 
 if __name__ == '__main__':
