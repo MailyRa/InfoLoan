@@ -29,7 +29,7 @@ def loan_categories_json():
     return jsonify(category_json)
 
 
-@app.route("/car_loans.json", methods=['GET'])
+@app.route("/loans.json", methods=['GET'])
 def loans_json():
 
     category_id = int(request.args.get("category_id"))
@@ -115,6 +115,7 @@ def save_loan_json():
 @app.route("/user_profile.json", methods=['POST'])
 def user_profile():
     user_id = session['current_user']
+    
     user = crud.get_user_by_id(user_id)
 
     users_loans = crud.get_user_loans_by_user(user_id)
@@ -125,7 +126,7 @@ def user_profile():
         "dob": user.dob,
         "address": user.address,
         "credit_score": user.credit_score,
-        "email": user.address,
+        "email": user.email,
         "loans": [
             {
                 "loan_name": loan[1].loan_name,

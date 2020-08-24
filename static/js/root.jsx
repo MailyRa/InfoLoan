@@ -5,22 +5,27 @@ const Prompt =  ReactRouterDOM.Prompt;
 const Switch = ReactRouterDOM.Switch;
 const Redirect = ReactRouterDOM.Redirect;
 const useParams = ReactRouterDOM.useParams;
+const useHistory = ReactRouterDOM.useHistory;
+const Promise = ReactRouterDOM.Promise;
 
 function Homepage() {
     return <div>
-        <h1>Welcome to InfoLoan!</h1>
-        <h4> Check out the different loan categories</h4>
+        <h2>Welcome we are here to help you 
+            with any financial question you may have!</h2>
+        <h4> <Link to="/loan_categories"> Check out our different loan categories </Link> </h4>
         </div>
 }
 
 
 
-
 // Handling User login 
 function Login() {
+
+
+    let history = useHistory();
+
     const[email, setEmail] = React.useState('');
     const[password, setPassword] = React.useState('');
-    const[redir, setRedir] = React.useState('');
 
     const handleLogIn = () => {
         const user = {"user_email": email, "user_password": password}
@@ -39,14 +44,10 @@ function Login() {
             if("error" in data) {
                 alert(data["error"])
             } else { 
-                alert("Sucessful Login!" + " " + data["user_email"])
-                setRedir('/loan_categories')
+                localStorage.setItem('is_logged_in', true);
+                window.location.href = "/loan_categories";
             }
         })
-    }
-
-    if (redir !== '') {
-        window.location.href = redir
     }
 
     return(
@@ -56,11 +57,11 @@ function Login() {
             onChange={(e) => setEmail(e.target.value)}
             value={email}/>
             <p>Password:</p>
-            <input type="text"
+            <input type="password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}/>
 
-            <button id= "Login" 
+            <button 
             onClick={handleLogIn}> Submit </button>
         </div>
     )
@@ -69,11 +70,9 @@ function Login() {
 
 
 
-
-
-
 // Handle Logout 
 function Logout(props){
+
     fetch("handle_logout", {
         method: 'POST',
         headers: {
@@ -82,27 +81,16 @@ function Logout(props){
     })
     .then(response => response.json())
     .then(data => {
+        localStorage.setItem('is_logged_in', false);
+        window.location.href = "/login";
     })
-
-    window.location.href = "/login";
 }
-
 
 
 
 //User profile 
+function Userprofile (props) {
 
-function SaveLoanItem (props) {
-    return <li>{props.name}</li>
-
-}
-
-
-function Userprofile(props) {
-    //Here the user will see their saved loans 
-    //Have the option to compare it to other loans they saved
-    //Edit their personal info 
-    //Option to add a photo to their profile?
 
     const[fname, setFname] = React.useState('');
     const[lname, setLname] = React.useState('');
@@ -111,6 +99,7 @@ function Userprofile(props) {
     const[credit_score, setCreditScore] = React.useState('');
     const[email, setEmail] = React.useState('');
     const[usersLoans, setUsersLoans] = React.useState('');
+
 
     React.useEffect(() => {
         fetch("/user_profile.json", {
@@ -128,32 +117,29 @@ function Userprofile(props) {
             setAddress(data["address"]),
             setCreditScore(data["credit_score"]),
             setEmail(data["email"])
-
+            const loanList =[]
             for(const loan of data["loans"]) {
                 console.log(loan)
-                <SaveLoanItem 
-                    name={loan["loan_name"]}
-                    description={loan["loan_description"]}
-                    website={loan["loan_website"]}/>
-
+                loanList.push(<p>{loan["loan_name"]}</p>);
             }
+    
         })
-    })
-    return (
-        <div id="User">
-            <p><h1>Profile</h1></p>
-            <p><h3>First Name:</h3> {fname}</p>
-            <p><h3>Last Name:</h3> {lname}</p>
-            <p><h3>Date of Birth:</h3> {dob} </p>
-            <p><h3>Address:</h3> {address} </p>
-            <p><h3>Credit Score:</h3> {credit_score}</p>
-            <p><h3>Email: </h3> {email}</p>
+    }, []);
 
-            <ul>
-                {usersLoans}
-            </ul>
-        </div>
-       
+    return (
+        <div>
+        <h1> Profile </h1> 
+        <p>First Name: {fname} </p>
+        <p>Last Name: {lname}</p>
+        <p>Date of Birth: {dob} </p>
+        <p>Address: {address} </p>
+        <p>Credit Score: {credit_score}</p>
+        <p>Email: {email}</p>
+
+        <ul>
+            {usersLoans}
+        </ul>
+    </div>
     )
 }
 
@@ -162,6 +148,8 @@ function Userprofile(props) {
 
 // Creating User
 function CreateUser() {
+
+    let history = useHistory();
 
     const[fname, setFname] = React.useState('');
     const[lname, setLname] = React.useState('');
@@ -192,15 +180,12 @@ function CreateUser() {
         .then(data => {
             if ("error" in data) {
                 alert(data["error"])
-                setRedir('/login')
+                history.push('/login');
             } else {
-                setRedir('/loan_categories')
+                history.push('/loan_categories');
             }
     
         })
-    }
-    if (redir !== '') {
-        window.location.href = redir
     }
 
     return(
@@ -241,7 +226,7 @@ function CreateUser() {
 
 
             <p>Password:</p>
-            <input type="text"
+            <input type="password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}/>
 
@@ -253,14 +238,28 @@ function CreateUser() {
 
 
 
-
-
-
 // Loan Categories
 function CategoriesListItem(props) {
-    const href = "/loans/"+props.id
-    return <li><a href={href}>{props.name}</a></li>
+    return <option value={props.id}>{props.name}</option>
 
+}
+
+function getLoans(category_id) {
+    const loanData = [];
+    return fetch("/loans.json?category_id=" + category_id)
+    .then((response) => response.json())
+    .then((data) => {
+        for(const loan of data) {
+            loanData.push(
+                <LoanList 
+                    id={loan["loan_id"]}
+                    name={loan["loan_name"]}
+                    description={loan["loan_description"]}
+                    website={loan["loan_website"]}/>
+            );
+        }
+        return loanData
+    }, [])
 }
 
 function CategoryContainer(props) { 
@@ -282,15 +281,37 @@ function CategoryContainer(props) {
         })
     }, [])
 
+    const [loans, setLoans] = React.useState([""])
+    const updateLoans = (category_id) => {
+        if (category_id === "") {
+            setLoans()
+            return
+        }
+        getLoans(category_id).then(response => {
+            setLoans(response)
+        })
+    }
+
     return (
     
         <div>
-            <ul>
+            <form>
+            <label htmlFor="Loan Categories"> Choose a loan type: </label><br/>
+            <select name="loans" id="loans" onChange={e => updateLoans(e.target.value)}>
+                <option id="0"></option>
                 {categories}
+            </select>
+            
+            </form>
+
+            <ul>
+                {loans}
             </ul>
+            
         </div>
     );
 }
+
 
 
 
@@ -311,7 +332,7 @@ function LoanList(props){
         .then(data => {
             if ("success" in data) {
                 alert( "Loan Saved!")
-            }else {
+            } else {
                 alert("error")
             }
         })
@@ -321,7 +342,7 @@ function LoanList(props){
             <h1>{props.name}</h1>
             <p>{props.description}</p>
             <p><a href={props.website}>{props.website}</a></p>
-            <button id="saveLoan"
+            <button
              onClick={saveLoan}> Save Loan</button>
         </div>
     </li>
@@ -333,23 +354,14 @@ function LoanContainer(props) {
 
     const [loan, setLoan] = React.useState(['']);
     React.useEffect(() => {
-        fetch("/car_loans.json?category_id=" + category_id)
-        .then((response) => response.json())
-        .then((data) => {
-            const loanData = []
-            for(const loan of data) {
-                console.log(loan)
-                loanData.push(
-                    <LoanList 
-                        id={loan["loan_id"]}
-                        name={loan["loan_name"]}
-                        description={loan["loan_description"]}
-                        website={loan["loan_website"]}/>
-                );
-            }
-            setLoan(loanData);
+        if (category_id === "") {
+            return
+        }
+        getLoans(category_id).then(response => {
+            setLoan(response)
         })
     }, [])
+    
 
     return (
         <div>
@@ -359,32 +371,51 @@ function LoanContainer(props) {
         </div>
     );
 }
+
+
+
 function App() {
-    return(
+
+    const isLoggedIn = localStorage.getItem('is_logged_in');
+
+    const [loginOutButton, setLoginOutButton] = React.useState(['']);
+    React.useEffect(() => {
+        let listItem = undefined;
+        if(isLoggedIn === 'true') {
+            listItem = 
+                <li className="nav-item">
+                    <a className="nav-link" href="/logout">Logout</a>
+                </li>
+        } else {
+            
+            listItem =
+                <li className="nav-item">
+                    <a className="nav-link" href="/login">Login</a>
+                </li>
+
+        }
+
+            setLoginOutButton(listItem)
+    }, [])
+
+    return (
         <Router>
-            <div>
-                <nav>
-                    <ul>
-                        <li>
-                            <Link to="/"> Home </Link>
+
+            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                <a className="navbar-brand" href="/">InfoLoan!</a>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarNav">
+                    <ul className="navbar-nav ml-auto">
+                        <li className="nav-item active">
+                            <a className="nav-link" href="/">Home</a>
                         </li>
-                        <li>
-                            <Link to="/login"> Log In </Link>
-                        </li>
-                        <li>
-                            <Link to="/logout">Log out</Link>
-                        </li>
-                        <li>
-                            <Link to="/loan_categories"> Loan Categories </Link>
-                        </li>
-                        <li>
-                            <Link to="/create_user_form"> Create Profile </Link>
-                        </li>
-                        <li>
-                            <Link to="/user_profile"> Profile </Link>
-                        </li>
+                        {loginOutButton}
                     </ul>
-                </nav>
+                </div>
+            </nav>
+            <div>
                 <Switch>
                     <Route path="/user_profile">
                         <Userprofile />
@@ -407,6 +438,9 @@ function App() {
                     <Route path="/">
                         <Homepage />
                     </Route>
+                    <Route path="/save_loans">
+                        <LoanList />
+                    </Route>
                 </Switch>
             </div>
         </Router>
@@ -414,5 +448,3 @@ function App() {
 }
 
 ReactDOM.render(<App />, document.getElementById('root'))
-
-

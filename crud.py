@@ -71,9 +71,15 @@ def get_category_loans():
 
 
 
+
+
 def get_user_loans_by_user(user_id):
     
     return db.session.query(User_loan, Loan).join(Loan, User_loan.loan_id==Loan.loan_id).filter(User_loan.user_id==user_id).all()
+
+
+
+
 
 # #Query all the information from all the tables TOTAL of 5 
 
