@@ -101,6 +101,10 @@ def get_category_by_id(category_loan_id):
 def get_loans_by_category_id(category_loan_id):
     return Loan.query.filter(Loan.category_loans_id==category_loan_id).all()
 
+def get_loans_by_ids(loan_ids):
+    # Get all loans that have ids in this list
+    return Loan.query.filter(Loan.loan_id.in_(loan_ids)).all()
+
 # def get_category_by_name():
 
 #     return Category_loan.query.all()

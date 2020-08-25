@@ -112,7 +112,7 @@ def save_loan_json():
     return jsonify({"success": "Loan Saved!"})
 
 
-@app.route("/user_profile.json", methods=['POST'])
+@app.route("/user_profile.json", methods=['GET'])
 def user_profile():
     user_id = session['current_user']
     
@@ -123,12 +123,13 @@ def user_profile():
     user_json = {
         "fname": user.fname,
         "lname": user.lname,
-        "dob": user.dob,
+        "dob": user.dob.strftime("%m/%d/%Y"),
         "address": user.address,
         "credit_score": user.credit_score,
         "email": user.email,
         "loans": [
             {
+                "loan_id": loan[1].loan_id,
                 "loan_name": loan[1].loan_name,
                 "loan_description": loan[1].loan_description,
                 "loan_website": loan[1].loan_website
@@ -147,11 +148,22 @@ def handle_logout():
 
     return jsonify({"success": True})
 
+@app.route("/compare_loans.json", methods=['POST'])
+def compare_loans():
+    loan_ids = [int(loan_id) for loan_id in request.get_json()["loan_ids"]]
 
+    loans = crud.get_loans_by_ids(loan_ids)
 
+    loans_json = [
+        {
+            "loan_id": loan.loan_id,
+            "loan_name": loan.loan_name,
+            "loan_description": loan.loan_description,
+            "loan_website": loan.loan_website
+        } for loan in loans
+    ]
 
-# @app.route("/compare_loans")
-# def compare_loans():
+    return jsonify(loans_json)
 
 
 

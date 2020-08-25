@@ -7,6 +7,7 @@ const Redirect = ReactRouterDOM.Redirect;
 const useParams = ReactRouterDOM.useParams;
 const useHistory = ReactRouterDOM.useHistory;
 const Promise = ReactRouterDOM.Promise;
+const useLocation = ReactRouterDOM.useLocation;
 
 function Homepage() {
     return <div>
@@ -18,9 +19,10 @@ function Homepage() {
 
 
 
+
+
 // Handling User login 
 function Login() {
-
 
     let history = useHistory();
 
@@ -88,6 +90,8 @@ function Logout(props){
 
 
 
+
+
 //User profile 
 function Userprofile (props) {
 
@@ -98,15 +102,14 @@ function Userprofile (props) {
     const[address, setAddress] = React.useState('');
     const[credit_score, setCreditScore] = React.useState('');
     const[email, setEmail] = React.useState('');
-    const[usersLoans, setUsersLoans] = React.useState('');
+    
 
 
     React.useEffect(() => {
         fetch("/user_profile.json", {
-            method: 'POST',
+            method: 'GET',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
             },
         })
         .then(response => response.json())
@@ -124,7 +127,7 @@ function Userprofile (props) {
             }
     
         })
-    }, []);
+    }, [])
 
     return (
         <div>
@@ -136,12 +139,12 @@ function Userprofile (props) {
         <p>Credit Score: {credit_score}</p>
         <p>Email: {email}</p>
 
-        <ul>
-            {usersLoans}
-        </ul>
+
     </div>
     )
 }
+
+
 
 
 
@@ -158,7 +161,6 @@ function CreateUser() {
     const[credit_score, setCreditScore] = React.useState('');
     const[email, setEmail] = React.useState('');
     const[password, setPassword] = React.useState('');
-    const[redir, setRedir] = React.useState('');
 
     const createUser = () => {
         const user = {"user_fname": fname, "user_lname": lname, "user_dob": dob, "user_address": address,
@@ -316,6 +318,7 @@ function CategoryContainer(props) {
 
 
 
+
 // Loans
 function LoanList(props){
     //Save Loan in User Profile
@@ -337,6 +340,7 @@ function LoanList(props){
             }
         })
     }
+
     return <li>
         <div>
             <h1>{props.name}</h1>
@@ -374,6 +378,126 @@ function LoanContainer(props) {
 
 
 
+
+
+//Fetch saved loans by user and compare them 
+
+function SavedLoansItem(props) {
+    return <div> 
+                <p><input type="checkbox" name={props.id}/>
+                {' '}
+                Check to compare loan</p>
+
+                <b>{props.name}</b>
+                <p>{props.description}</p>
+                <p><a href={props.website}>{props.website}</a></p>
+            </div>
+}
+
+
+
+function SavedLoans(props) {
+    const [savedLoans, setSavedLoans] = React.useState(['']);
+    React.useEffect(() => {
+        fetch("/user_profile.json", {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+            },
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data)
+            const loanData = []
+            for(const loan of data["loans"]) {
+                console.log(loan)
+                loanData.push(
+                        <SavedLoansItem
+                            id={loan["loan_id"]}
+                            name={loan["loan_name"]}
+                            description={loan["loan_description"]}
+                            website={loan["loan_website"]}/>
+                );
+            }
+            setSavedLoans(loanData);
+        })
+
+    }, [])
+
+//TO DO: I need to add ONCLICK logic for SEARCH 
+    return (
+        <div>
+            <input type="text" placeholder="Search..." />
+            <button> Search  </button>
+            <form action="/compare_loans">
+                <button>Compare Loans</button>
+                <h2>Saved Loans</h2>
+                {savedLoans}
+            </form>
+        </div>
+    )
+}
+
+
+function CompareLoansList(props) {
+    const location = useLocation();
+
+    const queryDict = new URLSearchParams(useLocation().search);
+    
+    let loanIds = [];
+    for(const key of queryDict) {
+        loanIds.push(key[0])
+    }
+
+    const [loanData, setLoanData] = React.useState([]);
+
+    React.useEffect(() => {
+        fetch("/compare_loans.json", {
+            method: "POST",
+            body: JSON.stringify({"loan_ids": loanIds}),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            let loanArr = [];
+            for(const loanJson of data) {
+                loanArr.push(
+                    <tr>
+                        <td>{loanJson["loan_name"]}</td>
+                        <td>{loanJson["loan_description"]}</td>
+                        <td>{loanJson["loan_website"]}</td>
+                    </tr>
+                )
+            }
+            setLoanData(loanArr);
+        })
+    }, [])
+
+    return (
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Website</th>
+                </tr>
+            </thead>
+            <tbody>
+                {loanData}
+            </tbody>
+        </table>
+    )
+}
+
+
+
+
+
+
 function App() {
 
     const isLoggedIn = localStorage.getItem('is_logged_in');
@@ -383,15 +507,34 @@ function App() {
         let listItem = undefined;
         if(isLoggedIn === 'true') {
             listItem = 
-                <li className="nav-item">
-                    <a className="nav-link" href="/logout">Logout</a>
-                </li>
+                    <ul>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/logout">Logout</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/user_profile">Profile</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/loan_categories"> Loan Categories</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/saved_loans"> Saved Loans</a>
+                        </li>
+                    </ul>
         } else {
             
             listItem =
-                <li className="nav-item">
-                    <a className="nav-link" href="/login">Login</a>
-                </li>
+                    <ul>
+                        <li className="nav-item active">
+                            <a className="nav-link" href="/login">Login</a>
+                        </li>
+                        <li className="nav-item active">
+                            <a className="nav-link" href="/create_user_form"> Create Profile </a>
+                        </li>
+                        <li className="nav-item active">
+                            <a className="nav-link" href="/loan_categories"> Loan Categories</a>
+                        </li>
+                    </ul>
 
         }
 
@@ -403,7 +546,7 @@ function App() {
 
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <a className="navbar-brand" href="/">InfoLoan!</a>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button className="navbar-toggler" type="button"  data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
@@ -435,11 +578,14 @@ function App() {
                     <Route path="/loan_categories">
                         <CategoryContainer />
                     </Route>
+                    <Route path="/saved_loans">
+                        <SavedLoans />
+                    </Route>
+                    <Route path="/compare_loans">
+                        <CompareLoansList />
+                    </Route>
                     <Route path="/">
                         <Homepage />
-                    </Route>
-                    <Route path="/save_loans">
-                        <LoanList />
                     </Route>
                 </Switch>
             </div>
