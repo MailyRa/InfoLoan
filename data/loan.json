@@ -4,59 +4,484 @@
         "loans": [
             {
                 "loan_name": "Chase Auto Loans",
-                "loan_description": "Explore rates and payments",
-                "loan_website": "https://autofinance.chase.com/auto-finance/auto-loans?offercode=WDXDUXXX28"
+                "loan_description": "Chase Auto is here to help you get the right car. Apply for an auto loan for a new or used car or refinance your existing car loan with Chase. Use the payment calculator to estimate monthly payments.",
+                "loan_website": "https://autofinance.chase.com/auto-finance/auto-loans?offercode=WDXDUXXX28",
+                "loan_gov" : "No",
+                "loan_region": "All-States",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
             },
             {
-                "loan_name": "Other Auto Loan",
-                "loan_description": "Other",
-                "loan_website": "www.loan.com"
+                "loan_name": "Wells Fargo Auto Loan",
+                "loan_description": "Vehicle loans are available through our nationwide network of dealers only. Ask for a Wells Fargo auto loan at your local dealership when discussing your financing options.",
+                "loan_website": "https://www.wellsfargo.com/auto-loans/",
+                "loan_gov": "No",
+                "loan_region": "All-States",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
+            },
+            {
+                "loan_name": "San Francisco Federal Credit Union",
+                "loan_description": "Our auto lending staff takes the headache and hassle out of applying for an auto loan.  Our process is straightforward – and quick. We’ll walk you through our various terms and loan rates, so that you get the loan and the monthly payment you can afford. Why choose San Francisco Federal Credit Union for your auto loan? No Payments for 90 Days*. UP to 100% Financing Available Competitive rates, as low as 0.99% APR Flexible Loan Terms and Rates. Affordable Payments. Our auto rates are as low as 0.99% APR. And we have terms up to 96 months!",
+                "loan_website": "https://www.sanfranciscofcu.com/vehicle-loans?gclid=Cj0KCQjws536BRDTARIsANeUZ5_dja_2iC5mntDva9cUFVcapWERTQTl4Fg7y9vQ8cwad6HdEVEWyxQaAg55EALw_wcB",
+                "loan_gov": "No",
+                "loan_region": "California",
+                "loan_city": "San Francisco",
+                "loan_credit_union": "Yes"
+            },
+            {
+                "loan_name": "First Tech Federal Credit Union",
+                "loan_description": "Find the right auto loan for you. Competitive rates, fast loan decisions, and no payment for up to 90 days.",
+                "loan_website": "https://www.firsttechfed.com/loans/auto-loans",
+                "loan_gov" : "No",
+                "loan_region": "All-States",
+                "loan_city": "All-cities",
+                "loan_credit_union": "Yes"
+            },
+            {
+                "loan_name": "Provident Credit Union",
+                "loan_description": "Low fixed rates on new and used vehicles. ​No Payments for 90 days option 100% financing is available Range of terms to meet your needs. Rate bonus available to qualified members. Contact us for details.",
+                "loan_website": "https://providentcu.org/products/auto-loans",
+                "loan_gov" : "No",
+                "loan_region": "California",
+                "loan_city": "All-cities",
+                "loan_credit_union": "Yes"
+            },
+            {
+                "loan_name": "Bank of Texas",
+                "loan_description": "With an approved auto loan from Bank of Texas, you can buy your vehicle with the help of a trusted bank. Apply online now from our mobile-friendly, easy-to-use application.",
+                "loan_website": "https://www.bankoftexas.com/personal/products-and-services/loans-and-lines-of-credit/auto-loans",
+                "loan_gov" : "No",
+                "loan_region": "Texas",
+                "loan_city": "All-cities",
+                "loan_credit_union": "Yes"
+            },
+            {
+                "loan_name": "Tropical Financial Credit Union",
+                "loan_description": "Finding the perfect auto loan in Florida has never been easier. With some of the best auto loan rates around and an easy application, getting into a new car is quicker than finding your next road trip radio station.Before putting the keys in the ignition compare new and used auto loan rates, estimate your costs with our car loan calculator, and get pre-approved so that you can shop with confidence. We're here to help every step of your car buying journey. ",
+                "loan_website": "https://cms2.hubspot.com/ctas/v2/public/cs/c/?cta_guid=08318a32-3c3b-437d-bc10-fda8094a6e04&placement_guid=1e642420-3836-4193-8ffe-a08f9b837390&portal_id=1731768&canon=https%3A%2F%2Fwww.tropicalfcu.com%2Fbest-car-mortgage-and-personal-loans-in-florida&redirect_url=APefjpExwSvcicY6-3c27GWXyCKGBMs_YXV6W4UKeYDxx4svYdsYqfLjaOp7ehTJ5DxKUOB7TB_sPF7rlh_lv_o6WVwyLzFARKBCP5iEAbN49yfS-v9MHsJBUKuNhZpskwPfxkJ0BaCXlQLNlzRW_MEWm98HOWzlGg&click=421ce34a-2495-4920-af5e-f06d173cc0cf&hsutk=c7a000001a7d1cb61a270174324e35d9&signature=AAH58kHzSIZRhj569cr44B-AuNXavk6ljQ&utm_referrer=https%3A%2F%2Flocations.tropicalfcu.com%2Ftropical-financial-credit-union-f049ed7613a5&pageId=4239400102",
+                "loan_gov" : "No",
+                "loan_region": "Florida",
+                "loan_city": "All-cities",
+                "loan_credit_union": "Yes"
+            },
+            {
+                "loan_name": "Florida Credit Union",
+                "loan_description": "At Florida Credit Union, we do more than provide financing. We can help steer you all the way through the purchasing process, which is why we partner with TrueCar, an online car buying resource to help you shop with confidence and ease. And even then, our service doesn’t stop. Whether you need a loan for a car, truck, SUV, boat or RV, we have options with competitive interest rates that are often lower than traditional banks.​",
+                "loan_website": "https://www.flcu.org/Personal/Borrow/Vehicle-Loans",
+                "loan_gov" : "No",
+                "loan_region": "Florida",
+                "loan_city": "All-cities",
+                "loan_credit_union": "Yes"
+            },
+            {
+                "loan_name": "Clean Vehicle Assistance Program",
+                "loan_description": "The Clean Vehicle Assistance Program provides grants and affordable financing to help income-qualified Californians purchase or lease a new or used hybrid or electric vehicle. Our goal is to make clean vehicles accessible and affordable to all who qualify. The Clean Vehicle Assistance Program is funded by California Climate Investments, a statewide initiative that puts billions of Cap-and-Trade dollars to work reducing greenhouse gas emissions, strengthening the economy and improving public health and the environment—particularly in disadvantaged communities.",
+                "loan_website": "https://cleanvehiclegrants.org",
+                "loan_gov" : "Yes",
+                "loan_region": "California",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
+            },
+            {
+                "loan_name": "Dream Auto Loan Financing for Everyone",
+                "loan_description": "The truth is, a lot of bad credit consumers just need a second chance and that's what we can offer you. If you want to finance a car (new or used) then you've come to the right place. In just seconds, we can get you financing regardless of credit history.",
+                "loan_website": "https://www.dreamautoloan.com/",
+                "loan_gov" : "Yes",
+                "loan_region": "All-States",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
             }
+
         ]
     },
     {
         "category_name": "Home loan",
         "loans": [
             {
+                "loan_name": "Home Mortgage Loans",
+                "loan_description": " Why choose Wells Fargo?, Experience: Put our experience to work – we’re a leading mortgage lender with options to fit your needs.",
+                "loan_website": "https://www.wellsfargo.com/mortgage/",
+                "loan_gov" : "No",
+                "loan_region": "All-States",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
+            },
+            {
                 "loan_name": "Chase Home Lending",
-                "loan_description": "Your home journey starts here",
-                "loan_website": "https://www.chase.com/personal/mortgage"
+                "loan_description": "Buying a home can be a truly rewarding experience. It's also one of the biggest investments you'll make. From finding your new place to getting the keys – we're here to help.",
+                "loan_website": "https://www.chase.com/personal/mortgage",
+                "loan_gov" : "No",
+                "loan_region": "All-States",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
+            },
+            {
+                "loan_name": "VA Home Loans",
+                "loan_description": "VA helps Servicemembers, Veterans, and eligible surviving spouses become homeowners. As part of our mission to serve you, we provide a home loan guaranty benefit and other housing-related programs to help you buy, build, repair, retain, or adapt a home for your own personal occupancy",
+                "loan_website": "https://www.benefits.va.gov/homeloans/",
+                "loan_gov" : "Yes",
+                "loan_region": "All-States",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
+            },
+            {
+                "loan_name": "Local Public Housing Agency (PHA)",
+                "loan_description": "If you need public housing assistance or would like specific information about public housing programs such as housing choice vouchers, please contact your local Public Housing Agency.",
+                "loan_website": "https://www.hud.gov/program_offices/public_indian_housing/pha/contacts",
+                "loan_gov" : "Yes",
+                "loan_region": "All-States",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
+            },
+            {
+                "loan_name": "Homeownership Voucher",
+                "loan_description": "The Housing Choice Voucher (HCV) homeownership program allows families that are assisted under the HCV program to use their voucher to buy a home and receive monthly assistance in meeting homeownership expenses.  While the HCV homeownership regulations contemplate a downpayment grant option (where the PHA offers a single downpayment assistance grant to the family instead of a monthly homeownership subsidy), funding has not been appropriated for this purpose and this regulatory provision has never been implemented. ",
+                "loan_website": "https://www.hud.gov/program_offices/public_indian_housing/programs/hcv/homeownership",
+                "loan_gov" : "Yes",
+                "loan_region": "All-States",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
+            },
+            {
+                "loan_name": "Federal Housing Administration (FHA)",
+                "loan_description": "The Federal Housing Administration, generally known as F.H.A. Provides mortgage insurance on loans made by FHA-approved lenders throughout the United States and its territories. FHA insures mortgages on single family homes, multifamily properties, residential care facilities, and hospitals. It is one of the largest insurers of mortgages in the world, insuring more than 46 million mortgages since its inception in 1934. ",
+                "loan_website": "https://www.hud.gov/buying/loans",
+                "loan_gov" : "Yes",
+                "loan_region": "All-States",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
+            },
+            {
+                "loan_name": "Alliant",
+                "loan_description": "What to expect when applying for a mortgage. Alliant offers competitive low rates with a team of home loan experts ready to lend a hand. Whether you’ve already found your next home or you’re just starting your search, we’re ready when you’re ready",
+                "loan_website": "https://www.alliantcreditunion.org/borrow/mortgages",
+                "loan_gov" : "No",
+                "loan_region": "Illinois",
+                "loan_city": "Chicago",
+                "loan_credit_union": "Yes"
+            },
+            {
+                "loan_name": "Bank of America Home Mortgage Loan",
+                "loan_description": "The Bank of America Digital Mortgage Experience® puts you in control. Prequalify to estimate how much you can borrow, apply for a new mortgage, or refinance your current home. All with customized terms that meet your needs.",
+                "loan_website": "https://www.bankofamerica.com/mortgage/home-mortgage/",
+                "loan_gov" : "No",
+                "loan_region": "All-State",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
+            },
+            {
+                "loan_name": "Cathay Bank",
+                "loan_description": "Thinking of buying a new home or refinancing? We’ll work with you to find the best fixed or adjustable-rate mortgage option for your needs. Whether you're a first-time home buyer, want to upgrade your current home, or you’re ready to refinance your present mortgage, our experienced Mortgage Loan Originators (MLO) are here to help.",
+                "loan_website": "https://www.cathaybank.com/personal/lending/home-mortgage-loans",
+                "loan_gov" : "No",
+                "loan_region": "All-State",
+                "loan_city": "All-cities",
+                "loan_credit_union": "Yes"
+            },
+            {
+                "loan_name": "Patelco Credit Union",
+                "loan_description": "For those who are on a fixed income, plan to live in their home for a long time and do not expect to refinance. Interest rate and payments fixed for the life of the loan. Low down payment option (as low as 3%) 10, 15, 20, 30 year terms availabl. Borrow up to $2.5 million",
+                "loan_website": "https://www.patelco.org/explore-services/home-loans-mortgages",
+                "loan_gov" : "No",
+                "loan_region": "California",
+                "loan_city": "All-cities",
+                "loan_credit_union": "Yes"
             }
+            
         ]
     },
     {
         "category_name": "Personal loan",
         "loans": [
             {
-                "loan_name": "WellsFargo Personal Loan",
-                "loan_description": "Secured personal loan",
-                "loan_website": "https://www.wellsfargo.com/personal-credit/personal-loan"
+                "loan_name": "Navy Federal Credit Union Personal Loan",
+                "loan_description": "A loan from Navy Federal can be a great way to consolidate debt, finance home improvements or cover unexpected expenses. Applying is fast and easy, and you can enjoy a fixed monthly payment at a competitive rate. Plus, you won’t pay any origination or prepayment fees. In most cases, you’ll receive same-day funding.",
+                "loan_website": "https://www.navyfederal.org/loans-cards/personal-loans/?cmpid=ppc%7Cgoogle%7Cevgrn%7Cclns%7Cgen%7Cpersonal%20loan%7C01/01/2020%7Cml%7C&gclid=Cj0KCQjws536BRDTARIsANeUZ5-WXQTLuSbZi8BjRL5si2atrAtxMX5EMLiAJpejYRV6GJI5DjjVtuMaAq7oEALw_wcB&gclsrc=aw.ds",
+                "loan_gov" : "Yes",
+                "loan_region": "All-State",
+                "loan_city": "All-cities",
+                "loan_credit_union": "Yes"
             },
             {
-                "loan_name": "Chase Personal Loan",
-                "loan_description": "Secured personal loan",
-                "loan_website": "https://www.wellsfargo.com/personal-credit/personal-loan"
+                "loan_name": "San Francisco Credit Union Personal Loan",
+                "loan_description": "There are times when we all need some short term financial assistance to pay off bills, medical expenses or other needs that require cash. A personal loan from San Francisco Federal Credit Union may be the assistance you need during these times, especially because we offer: Rates as low as 1.99% APR. Loan amounts starting at $500. Terms from 1 to 84 months. No loan origination fees",
+                "loan_website": "https://www.sanfranciscofcu.com/personal-loans",
+                "loan_gov" : "No",
+                "loan_region": "California",
+                "loan_city": "San Francisco",
+                "loan_credit_union": "Yes"
+            },
+            {
+                "loan_name": "Alliant Personal Loan",
+                "loan_description": "The Run Down: Loan consolidation, home expenses or emergencies. No collateral required for these unsecured personal loans​. Loans from $1,000 to $50,​​​​​00056.​​ Terms from 1 to 5 years56. Typically, same-day deposit into your account! (Or we’ll mail a check if you prefer. No prepayment penalties. Pay early and save on interest. Loan approval and APR based on payment method, creditworthiness and ability to repay.",
+                "loan_website": "https://www.alliantcreditunion.org/borrow/get-a-credit-union-personal-loan",
+                "loan_gov" : "No",
+                "loan_region": "All-State",
+                "loan_city": "All-cities",
+                "loan_credit_union": "Yes"
+            },
+            {
+                "loan_name": "PenFed Credit Union Personal Loan",
+                "loan_description": "As low as 6.49% APR. Terms up to 60 months. Funds could be available the next day. Loans up to $20,000. No title or deed required. No early payoff penalty. No origination fee. No hidden fees",
+                "loan_website": "https://www.penfed.org/personal/personal-loans",
+                "loan_gov" : "No",
+                "loan_region": "All-State",
+                "loan_city": "All-cities",
+                "loan_credit_union": "Yes"
+            },
+            {
+                "loan_name": "Wells Fargo Personal Loan",
+                "loan_description": "Your actual Annual Percentage Rate (APR) may be higher than the rate shown. The APR shown is for a $10,000 personal loan with a 3 year term and includes a relationship discount of 0.25%.2 Your APR will be based on the specific characteristics of your credit application including, but not limited to, evaluation of credit history, amount of credit requested and income verification.",
+                "loan_website": "https://www.wellsfargo.com/personal-credit/personal-loan/",
+                "loan_gov" : "No",
+                "loan_region": "All-State",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
+            },
+            {
+                "loan_name": "Personal Loans",
+                "loan_description": "The annual percentage rate (APR) is the annualized interest rate that you are charged on your personal loan. PersonalLoans.com is not a lending operation and doesn't provide loans, but it does refer consumers to reputable professional lenders or lending partners who can provide quick and convenient loan assistance. We don't charge fees for this service. PersonalLoans.com does not have the ability tell you the exact APR that your lender or lending partner will charge. Annual percentage rates can vary based on not only the information that you supply in your initial loan request, but the information that your lender or lending partner supplies to you as well.",
+                "loan_website": "https://personalloans.com/ppc/?aid=10763&note=300&atrk=bc4134282236912253",
+                "loan_gov" : "No",
+                "loan_region": "All-State",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
+            },
+            {
+                "loan_name": "Money Mutual Personal Loan",
+                "loan_description": "Money challenges? You’re not alone. 4 in 10 Americans wouldn’t be able to come up with $400 in an emergency according to the Economic Well-Being of U.S. Households report. Because of that reality, and a heartfelt duty to our fellow Americans, MoneyMutual built our online marketplace. We offer you simple, quick and secure access to lenders. It all starts with a simple form that takes about five minutes to complete. We provide that information, at your request, to lenders who might be able provide you with financial assistance. You could have a decision in minutes and the money you need could be direct deposited in your account in as little as 24 hours.* If you are short on money, don’t wait. Get started now.",
+                "loan_website": "https://moneymutual.com/?zone_id=584098&sub_code=bc4134282236932232&tsid=128877bf-1030-4789-8627-b9ef41029040&promo_id=43254",
+                "loan_gov" : "No",
+                "loan_region": "All-State",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
+            },
+            {
+                "loan_name": "Credit Loan.com",
+                "loan_description": "A bad credit loan is a personal loan taken out by a borrower with bad credit. Even though consumers with high credit scores will have more favorable terms, it is possible for borrowers with bad credit to obtain a loan. Whether you’re looking to consolidate credit card debt, build up your savings account, or pay off bills, CreditLoan.com can help you get the funds you need.",
+                "loan_website": "https://www.creditloan.com/bad-credit-loans/?zone_id=583474&utm_medium=network&sub_code=bc4134282236943330&tsid=f207a384-f76d-4542-be69-b002927f9c4e&promo_id=43101&utm_source=pw",
+                "loan_gov" : "No",
+                "loan_region": "All-State",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
+            },
+            {
+                "loan_name": "Cash Advance.com",
+                "loan_description": "You need money, and you need it quickly. We've all been there -- we know what it's like to feel like there's nowhere left to turn. Whether it's an emergency situation or an unexpected expense, that's where Cash Advance® comes in. We provide a free service that aims to quickly connect customers with lenders that offer loans that may work for them.",
+                "loan_website": "https://www.cashadvance.com/?aid=214&note=204&atrk=bc41342822369911",
+                "loan_gov" : "No",
+                "loan_region": "All-State",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
+            },
+            {
+                "loan_name": "CDC Federal Credit Union",
+                "loan_description": "Do you need money for an unexpected expense or special purchase? From a leaky roof to a cruise around the world, a CDC Federal Credit Union personal loan can provide you with the money you need for any situation. With flexible payment options, competitive rates and terms, your loan can be tailored to your needs and lifestyle. Apply for Loan",
+                "loan_website": "https://www.cdcfcu.com/Borrow/Consumer-Loans/Personal",
+                "loan_gov" : "Yes",
+                "loan_region": "All-State",
+                "loan_city": "All-cities",
+                "loan_credit_union": "Yes"
             }
+                
+                
+               
         ]
     },
     {
         "category_name": "Business loan",
         "loans": [
             {
-                "loan_name": "Chase Business Loan",
-                "loan_description": "Financing to help you manage your small business",
-                "loan_website": "https://www.chase.com/business/loans"
+                "loan_name": "U.S. Small Business Administration",
+                "loan_description": "Our nation's small businesses are facing an unprecedented economic disruption due to the Coronavirus (COVID-19) outbreak. On Friday, March 27, 2020, the President signed into law the CARES Act, which contains $376 billion in relief for American workers and small businesses.",
+                "loan_website": "https://www.sba.gov/page/coronavirus-covid-19-small-business-guidance-loan-resources",
+                "loan_gov" : "Yes",
+                "loan_region": "All-State",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
+            },
+            {
+                "loan_name": " The CARES Act Provides Assistance to Small Businesses",
+                "loan_description": "The Paycheck Protection Program established by the CARES Act, is implemented by the Small Business Administration with support from the Department of the Treasury.  This program provides small businesses with funds to pay up to 8 weeks of payroll costs including benefits. Funds can also be used to pay interest on mortgages, rent, and utilities.",
+                "loan_website": "https://home.treasury.gov/policy-issues/cares/assistance-for-small-businesses",
+                "loan_gov" : "Yes",
+                "loan_region": "All-State",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
+            },
+            {
+                "loan_name": "Wells Fargo Small Business Loans",
+                "loan_description": "$0 opening fee, $10,000 to $100,000 loan amounts, 1- to 5-year terms. Fixed rates start at 6.25%1. No specific collateral required. Includes Wells Fargo BusinessLoan® Term loan and FastFlex® Small Business Loan2",
+                "loan_website": "https://www.wellsfargo.com/biz/business-credit/",
+                "loan_gov" : "No",
+                "loan_region": "All-State",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
+            },
+            {
+                "loan_name": "Chase Small Business Financing",
+                "loan_description": "Chase has a variety of small business financing options to help launch your next venture or invest in the future growth of your business.",
+                "loan_website": "https://www.chase.com/business/loans",
+                "loan_gov" : "No",
+                "loan_region": "All-State",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
+            },
+            {
+                "loan_name": "Small Business Loans & Financing",
+                "loan_description": "Commercial real estate. Purchase the land or buildings your business needs as it grows. Leverage your equity and invest in your business. Loan amount: From $25,000. Interest rate: As low as 3.00%. Loan terms: Up to 10 years (with balloon payment); Up to 15 years (with full amortization).Qualifications: Minimum 2 years in business under existing ownership; minimum $250,000 in annual revenue",
+                "loan_website": "https://www.bankofamerica.com/smallbusiness/business-financing/",
+                "loan_gov" : "No",
+                "loan_region": "All-State",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
+            },
+            {
+                "loan_name": "US Bank Business Loans",
+                "loan_description": "Let’s work together to find working capital options to cover operating expenses, maintain inventory, pay vendors and more. Backed by the strength and stability of U.S. Bank, our business loans offer you competitive rates, flexible terms and guidance from a business banker.",
+                "loan_website": "https://www.usbank.com/business-banking/business-lending/business-loans.html",
+                "loan_gov" : "No",
+                "loan_region": "All-State",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
+            },
+            {
+                "loan_name": "Citizens Bank",
+                "loan_description": "As you're exploring financing solutions, this calculator can help you forecast your debt service coverage. This will help you determine whether you can currently afford the additional debt needed to boost your business.",
+                "loan_website": "https://www.citizensbank.com/small-business/loans/overview.aspx",
+                "loan_gov" : "No",
+                "loan_region": "Rhode Island",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
+            },
+            {
+                "loan_name": "Shopify Business Loan",
+                "loan_description": "Be empowered to make the best choices for your business with funding designed for business owners. Get capital based on your history with Shopify and skip lengthy application processes.",
+                "loan_website": "https://www.shopify.com/capital?term=small%20business%20loans&Network=Search&SiteTarget=&mt=e&adid=433479262993&adpos=&CampaignId=9985402932&gclid=Cj0KCQjws536BRDTARIsANeUZ598EIZy9WDnmp3He4kODH4TK6T40OLkRdaEkdzqLC0pFd69jdDB40EaAnbHEALw_wcB",
+                "loan_gov" : "No",
+                "loan_region": "All-State",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
+            },
+            {
+                "loan_name": "GovLoans.org Business Loan Program",
+                "loan_description": "7(a) loans are the most basic and most used type loan of the Small Business Administration's (SBA) business loan programs. Its name comes from section 7(a) of the Small Business Act, which authorizes the agency to provide business loans to American small businesses. The loan program is designed to assist for-profit businesses that are not able to get other financing from other resources.",
+                "loan_website": "https://www.govloans.gov/loans/7(a)-small-business-loan",
+                "loan_gov" : "Yes",
+                "loan_region": "All-State",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
+            },
+            {
+                "loan_name": "City National Bank",
+                "loan_description": "At City National®, we provide a curated financial experience for business owners who are seeking more. Here, you'll receive unlimited access to unparalleled expertise and tailored solutions for your next opportunity, so you can continue to raise the bar. ",
+                "loan_website": "https://www.cnb.com/campaigns/NextLevelBusiness.html?gclid=Cj0KCQjws536BRDTARIsANeUZ5_dfCTxXjaC5WNB2uNyeOcE2xnd9Yu9gZk3JVfqv5To43PqWf7IGaMaAisuEALw_wcB&cid=sem&utm_channel=advertising&utm_source=google&utm_medium=sem&utm_campaign=SF_Non-Brand_BusinessBanking&utm_term=%2Bsmall%20%2Bbusiness%20%2Bloan&utm_SFCampaignID=7011R000001X3NnQAK&utm_content=iC_advertising_sem_google_7011R000001X3NnQAK_SF_Non-Brand_BusinessBanking_%2Bsmall%20%2Bbusiness%20%2Bloan_1732045340_iC_SF_Non-Brand_BusinessBanking_Tier1_Business_SF_Non-Brand_SEM&ef_id=Cj0KCQjws536BRDTARIsANeUZ5_dfCTxXjaC5WNB2uNyeOcE2xnd9Yu9gZk3JVfqv5To43PqWf7IGaMaAisuEALw_wcB:G:s",
+                "loan_gov" : "No",
+                "loan_region": "All-State",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
             }
+                
+                
+                
+               
         ]
     },
     {
         "category_name": "Education Loan ",
         "loans": [
             {
-                "loan_name": "Chase Student Loan",
-                "loan_description": "Helping students with education",
-                "loan_website": "https://www.chase.com/personal/student-loan-servicing"
+                "loan_name": "Discover Educational Loan",
+                "loan_description": "Get good grades. Get paid. Now freshmen can get a student loan with even more rewards for good grades. Variable Rates: 1.24% - 10.99% APR. Fixed Rated 4.24% - 12.39% APR",
+                "loan_website": "https://www.discover.com/student-loans/",
+                "loan_gov" : "No",
+                "loan_region": "All-State",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
+            },
+            {
+                "loan_name": "Wells Fargo Private Student Loans",
+                "loan_description": "Flexible repayment options. Student borrowers make no payments until 6 months after school",
+                "loan_website": "https://www.wellsfargo.com/student/",
+                "loan_gov" : "No",
+                "loan_region": "All-State",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
+            },
+            {
+                "loan_name": "Navient Private Student Loan",
+                "loan_description": "Real people share their tips, insights, and inspiring experiences. Millions of people are successfully repaying their student loans and applying their degrees to pursue their dreams. Check out some of their stories, and find out how we’re working to make student loans better.",
+                "loan_website": "https://navientnavigator.com",
+                "loan_gov" : "No",
+                "loan_region": "All-State",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
+            },
+            {
+                "loan_name": "Citizens Bank Undergraduate Loan",
+                "loan_description": "A private Citizens Bank Student Loan lets you choose from competitive fixed and variable rates, and repayment options that give you the freedom to pay back your loan on your schedule. With Multi-Year Approval†, you’ll know how much money we will lend you across multiple years of college. In year two and beyond, the application is simplified, such that after a soft credit check, you can request your funds for the upcoming school year.",
+                "loan_website": "https://www.citizensbank.com/student-lending/student-loans.aspx",
+                "loan_gov" : "No",
+                "loan_region": "Rhode Island",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
+            },
+            {
+                "loan_name": "SoFi",
+                "loan_description": "SoFi has offered student loans since 2011. The lender has served more than 250,000 borrowers with more than $18 billion in student loan refinancing. Borrowers with a credit score as low as 650 may be approved. You can apply for student loan refinancing online with SoFi and get an instant decision.",
+                "loan_website": "https://www.sofi.com/student-loan-refinance-affiliates/?subid=a9881577ae11b2e0015f",
+                "loan_gov" : "No",
+                "loan_region": "All-State",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
+            },
+            {
+                "loan_name": "Chevron Federal Credit Union",
+                "loan_description": "When federal aid falls short, we can help fill the gap. Through our partner, Student Choice, CFCU offers a private student loan program that helps students and their families fill the gap between the rising costs of college and limited availability of federal aid. If you have tapped all of the free and low-cost funds available to you and need a smart private loan solution, we invite you to learn more about our program.",
+                "loan_website": "https://www.chevronfcu.org/consumer/student-loans",
+                "loan_gov" : "No",
+                "loan_region": "California",
+                "loan_city": "All-cities",
+                "loan_credit_union": "Yes"
+            },
+            {
+                "loan_name": "Summit Credit Union Private Student Loan",
+                "loan_description": "Higher education is expensive. Tuition, books, computers and room & board. It all adds up – and it adds up fast! If there’s a gap between your financial aid package and the cost of your education, count on an affordable, private student loan from Summit to help you fill it.",
+                "loan_website": "https://www.summitcreditunion.com/borrow/student-loans",
+                "loan_gov" : "No",
+                "loan_region": "All-State",
+                "loan_city": "All-cities",
+                "loan_credit_union": "Yes"
+            },
+            {
+                "loan_name": "Navy Federal Credit Union Student Loans & Refinancing",
+                "loan_description": "Loans available for a semester or the entire academic year up to the school-certified cost of attendance. Variety of repayment options while you're in school to help reduce overall loan costs 0.25% interest rate reduction when you sign up for automatic payments. A co-signer release may be requested after 24 consecutive, on-time principal and interest payments",
+                "loan_website": "https://www.navyfederal.org/loans-cards/student-loans/?cmpid=ppc%7Cgoogle%7Cevgrn%7Cclns%7Cgen%7Cstudent%20loans%7C01/01/2020%7Cml%7C&gclid=Cj0KCQjw1qL6BRCmARIsADV9JtaO0qAwhFaigYLSvFHtCN3whffn_F1WCKdAYSB3mHelCisYzK46b7UaAnZKEALw_wcB&gclsrc=aw.ds",
+                "loan_gov" : "Yes",
+                "loan_region": "All-State",
+                "loan_city": "All-cities",
+                "loan_credit_union": "Yes"
+            },
+            {
+                "loan_name": "Financial Partners Credit Union Educational Loan",
+                "loan_description": "Choose the student loan that’s right for you. Whether you’re an undergraduate, graduate, or parent— we have options to meet your specific needs",
+                "loan_website": "https://www.salliemae.com/landing/student-loans/?body-link-1=&MPID=1000000539&dtd_cell=SMLRSOPAAGAGAGOTAAX0858N010020",
+                "loan_gov" : "No",
+                "loan_region": "All-State",
+                "loan_city": "All-cities",
+                "loan_credit_union": "No"
+            },
+            {
+                "loan_name": "San Mateo Credit Union Educational Loan",
+                "loan_description": "Whether you’re headed off to college or logging on to class, San Mateo Credit Union helps you cover your costs. From California universities to global online programs, from job training to professional certifications, SMCU student loans can support your studies, your way.",
+                "loan_website": "https://www.smcu.org/Loans/Consumer-Loans/Student-Loans",
+                "loan_gov" : "No",
+                "loan_region": "California",
+                "loan_city": "San Mateo",
+                "loan_credit_union": "Yes"
             }
+                
         ]
     }
     

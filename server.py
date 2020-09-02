@@ -10,10 +10,15 @@ app = Flask(__name__)
 app.secret_key = 'dev'
 app.jinja_env.undefined = StrictUndefined
 
+
+
+
 @app.route('/', defaults={'path':''})
 @app.route('/<path:path>')
 def homepage(path):
     return render_template("root.html")
+
+
 
 
 @app.route("/loan_categories.json")
@@ -29,6 +34,8 @@ def loan_categories_json():
     return jsonify(category_json)
 
 
+
+
 @app.route("/loans.json", methods=['GET'])
 def loans_json():
 
@@ -41,7 +48,11 @@ def loans_json():
             "loan_id": loan.loan_id,
             "loan_name": loan.loan_name,
             "loan_description": loan.loan_description,
-            "loan_website": loan.loan_website
+            "loan_website": loan.loan_website,
+            "loan_gov": loan.loan_gov,
+            "loan_region": loan.loan_region,
+            "loan_city": loan.loan_city,
+            "loan_credit_union": loan.loan_credit_union
 
         } for loan in loans
     ]
@@ -107,9 +118,29 @@ def save_loan_json():
     data = request.get_json()
     loan_id = data.get('loan_id')
 
-    crud.save_loan_for_user(user_id, loan_id)
+    saved_loan = crud.save_loan_for_user(user_id, loan_id)
+
+    if saved_loan == None:
+        
+        return jsonify({"Error": "Loan already Saved!"})
 
     return jsonify({"success": "Loan Saved!"})
+
+
+@app.route("/delete_loan.json", methods=['POST'])
+def delete_loan_json():
+
+    user_id = session['current_user']
+
+
+    data = request.get_json()
+    loan_id = data.get("loan_id")
+
+
+    crud.delete_loan_for_user(user_id, loan_id)
+
+    return jsonify({"delete": "Completed"})
+
 
 
 @app.route("/user_profile.json", methods=['GET'])
@@ -132,7 +163,11 @@ def user_profile():
                 "loan_id": loan[1].loan_id,
                 "loan_name": loan[1].loan_name,
                 "loan_description": loan[1].loan_description,
-                "loan_website": loan[1].loan_website
+                "loan_website": loan[1].loan_website,
+                "loan_gov": loan[1].loan_gov,
+                "loan_region": loan[1].loan_region,
+                "loan_city": loan[1].loan_city,
+                "loan_credit_union": loan[1].loan_credit_union
             } for loan in users_loans
         ]
     }
@@ -148,6 +183,9 @@ def handle_logout():
 
     return jsonify({"success": True})
 
+
+
+
 @app.route("/compare_loans.json", methods=['POST'])
 def compare_loans():
     loan_ids = [int(loan_id) for loan_id in request.get_json()["loan_ids"]]
@@ -159,7 +197,12 @@ def compare_loans():
             "loan_id": loan.loan_id,
             "loan_name": loan.loan_name,
             "loan_description": loan.loan_description,
-            "loan_website": loan.loan_website
+            "loan_website": loan.loan_website,
+            "loan_gov": loan.loan_gov,
+            "loan_region": loan.loan_region,
+            "loan_city": loan.loan_city,
+            "loan_credit_union": loan.loan_credit_union
+
         } for loan in loans
     ]
 

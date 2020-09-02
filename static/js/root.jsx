@@ -1,3 +1,6 @@
+
+import {Map, GoogleApiWrapper} from 'google-maps-react';
+
 const Router = ReactRouterDOM.BrowserRouter;
 const Route =  ReactRouterDOM.Route;
 const Link =  ReactRouterDOM.Link;
@@ -8,6 +11,9 @@ const useParams = ReactRouterDOM.useParams;
 const useHistory = ReactRouterDOM.useHistory;
 const Promise = ReactRouterDOM.Promise;
 const useLocation = ReactRouterDOM.useLocation;
+
+
+
 
 function Homepage() {
     return <div>
@@ -23,8 +29,6 @@ function Homepage() {
 
 // Handling User login 
 function Login() {
-
-    let history = useHistory();
 
     const[email, setEmail] = React.useState('');
     const[password, setPassword] = React.useState('');
@@ -72,6 +76,9 @@ function Login() {
 
 
 
+
+
+
 // Handle Logout 
 function Logout(props){
 
@@ -84,9 +91,12 @@ function Logout(props){
     .then(response => response.json())
     .then(data => {
         localStorage.setItem('is_logged_in', false);
+        //when I use the "useHook" it makes it slow
         window.location.href = "/login";
     })
 }
+
+
 
 
 
@@ -143,6 +153,7 @@ function Userprofile (props) {
     </div>
     )
 }
+
 
 
 
@@ -240,7 +251,11 @@ function CreateUser() {
 
 
 
-// Loan Categories
+
+
+
+
+// Displaying all the loans by categories
 function CategoriesListItem(props) {
     return <option value={props.id}>{props.name}</option>
 
@@ -253,19 +268,29 @@ function getLoans(category_id) {
     .then((data) => {
         for(const loan of data) {
             loanData.push(
-                <LoanList 
+                <SavedLoansRow 
                     id={loan["loan_id"]}
                     name={loan["loan_name"]}
                     description={loan["loan_description"]}
-                    website={loan["loan_website"]}/>
+                    website={loan["loan_website"]}
+                    gov={loan["loan_gov"]}
+                    region={loan["loan_region"]}
+                    city={loan["loan_city"]}
+                    creditUnion={loan["loan_credit_union"]}
+                    isSaved={false} />
             );
         }
-        return loanData
+        return [loanData, data]
     }, [])
 }
 
+
+
+
+//Getting the Category Loan Json from Server
 function CategoryContainer(props) { 
     const [categories, setCategories] = React.useState(["loading..."]);
+
     React.useEffect(() => {
         fetch('/loan_categories.json')
         .then((response) => response.json())
@@ -275,41 +300,108 @@ function CategoryContainer(props) {
                 categoryData.push(
         
                     <CategoriesListItem 
+                    //Play with this using Key instead of ID/make unique key using primary Key 
                      id={category["category_id"]}
                      name={category["category_name"]}/>
                 );
             }
+
             setCategories(categoryData);
         })
     }, [])
 
+
+
     const [loans, setLoans] = React.useState([""])
+    const [loanJson, setLoanJson] = React.useState([""])
     const updateLoans = (category_id) => {
         if (category_id === "") {
             setLoans()
             return
         }
         getLoans(category_id).then(response => {
-            setLoans(response)
+            setLoans(response[0])
+            setLoanJson(response[1])
         })
     }
+
+
+
+    const filterLoansEvent = (event) => {
+        const loanData = filterLoans(event, loanJson, false)
+        setLoans(loanData)
+    }
+
 
     return (
     
         <div>
+            <input type="text" placeholder="Search..." value={props.inputValue} onChange={filterLoansEvent} />
+            <button> Search  </button>
             <form>
             <label htmlFor="Loan Categories"> Choose a loan type: </label><br/>
             <select name="loans" id="loans" onChange={e => updateLoans(e.target.value)}>
                 <option id="0"></option>
                 {categories}
             </select>
-            
             </form>
-
-            <ul>
-                {loans}
-            </ul>
+            <LoanCategoryTable 
+                rows={loans} />
             
+        </div>
+    );
+}
+
+
+
+//Category Loan Table
+function LoanCategoryTable(props) {
+    return (
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Website</th>
+                <th>Government</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Credit Union</th>
+                </tr>
+            </thead>
+            <tbody>
+                {props.rows}
+            </tbody>
+        </table>
+    )
+}
+
+
+
+
+
+
+
+//Fetch the data to compare the loans for the user 
+function LoanContainer(props) {
+    let { category_id } = useParams();
+
+    const [loan, setLoan] = React.useState(['']);
+    React.useEffect(() => {
+        if (category_id === "") {
+            return
+        }
+        getLoans(category_id).then(response => {
+            setLoan(response[0])
+        })
+    }, [])
+    
+    return (
+        <div>
+            <ul>
+                {loan}
+            </ul>
         </div>
     );
 }
@@ -319,9 +411,32 @@ function CategoryContainer(props) {
 
 
 
-// Loans
-function LoanList(props){
-    //Save Loan in User Profile
+
+//Fetch saved loans by user/allow user to compare them and the search feature 
+function SavedLoansRow(props) {
+    
+    let history = useHistory();
+
+    const handleUnsave = (e) => {
+        e.preventDefault()
+        fetch("/delete_loan.json", {
+            method: 'POST',
+            body: JSON.stringify({"loan_id": props.id}),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            if ("delete" in data) {
+                history.push('/saved_loans');
+            }
+         
+        })
+    }
+
     const saveLoan = () => {
         fetch("/save_loan.json", {
             method: 'POST',
@@ -336,68 +451,95 @@ function LoanList(props){
             if ("success" in data) {
                 alert( "Loan Saved!")
             } else {
-                alert("error")
+                ("Error" in data); {
+                    alert("Loan already Saved")
+                }
             }
         })
     }
 
-    return <li>
-        <div>
-            <h1>{props.name}</h1>
-            <p>{props.description}</p>
-            <p><a href={props.website}>{props.website}</a></p>
-            <button
-             onClick={saveLoan}> Save Loan</button>
-        </div>
-    </li>
+    if (props.isSaved === true) {
+        return (
+            <tr>
+                <td><input type="checkbox" name={props.id}/>
+                    {' '}
+                    <p>Check to compare loan</p>
+                    <button 
+                        onClick={handleUnsave}>
+                        Unsave </button>
+                </td>
+                <td>{props.name}</td>
+                <td>{props.description}</td>
+                <td><a href={props.website}>Visit website</a></td>
+                <td>{props.gov}</td>
+                <td>{props.region}</td>
+                <td>{props.city}</td>
+                <td>{props.creditUnion}</td>
+            </tr>
+        )
+    } else {
+        return (
+            <tr>
+                <td><button onClick={saveLoan}>Save</button></td>
+                <td>{props.name}</td>
+                <td>{props.description}</td>
+                <td><a href={props.website}>Visit website</a></td>
+                <td>{props.gov}</td>
+                <td>{props.region}</td>
+                <td>{props.city}</td>
+                <td>{props.creditUnion}</td>
+            </tr>
+        )
+    }
 }
 
 
-function LoanContainer(props) {
-    let { category_id } = useParams();
+//Search Feature
+function searchIsMatch(loanJson, searchTerm) {
+    return loanJson["loan_name"].toLowerCase().includes(searchTerm.toLowerCase()) 
+    || loanJson["loan_description"].toLowerCase().includes(searchTerm.toLowerCase())
+    || loanJson["loan_website"].toLowerCase().includes(searchTerm.toLowerCase())
+    || loanJson["loan_gov"].toLowerCase().includes(searchTerm.toLowerCase())
+    || loanJson["loan_region"].toLowerCase().includes(searchTerm.toLowerCase())
+    || loanJson["loan_city"].toLowerCase().includes(searchTerm.toLowerCase())
+    || loanJson["loan_credit_union"].toLowerCase().includes(searchTerm.toLowerCase())
+    return true
+}
 
-    const [loan, setLoan] = React.useState(['']);
-    React.useEffect(() => {
-        if (category_id === "") {
-            return
+const filterLoans = (event, savedLoanJson, areSaved) => {
+    const filteredLoans = [];
+    for(const loanJson of savedLoanJson) {
+        if(searchIsMatch(loanJson, event.target.value)) {
+            filteredLoans.push(loanJson);
         }
-        getLoans(category_id).then(response => {
-            setLoan(response)
-        })
-    }, [])
-    
+    }
 
-    return (
-        <div>
-            <ul>
-                {loan}
-            </ul>
-        </div>
-    );
+    const loanData = []
+    for(const loan of filteredLoans) {
+        loanData.push(
+                <SavedLoansRow
+                    id={loan["loan_id"]}
+                    name={loan["loan_name"]}
+                    description={loan["loan_description"]}
+                    website={loan["loan_website"]}
+                    gov={loan["loan_gov"]}
+                    region={loan["loan_region"]}
+                    city={loan["loan_city"]}
+                    creditUnion={loan["loan_credit_union"]}
+                    isSaved={areSaved}/>
+        );
+    }
+    return loanData
 }
 
 
 
 
-
-//Fetch saved loans by user and compare them 
-
-function SavedLoansItem(props) {
-    return <div> 
-                <p><input type="checkbox" name={props.id}/>
-                {' '}
-                Check to compare loan</p>
-
-                <b>{props.name}</b>
-                <p>{props.description}</p>
-                <p><a href={props.website}>{props.website}</a></p>
-            </div>
-}
-
-
-
+//Save Loans
 function SavedLoans(props) {
+
     const [savedLoans, setSavedLoans] = React.useState(['']);
+    const [savedLoanJson, setSavedLoanJson] = React.useState([])
     React.useEffect(() => {
         fetch("/user_profile.json", {
             method: 'GET',
@@ -410,39 +552,55 @@ function SavedLoans(props) {
             console.log(data)
             const loanData = []
             for(const loan of data["loans"]) {
-                console.log(loan)
                 loanData.push(
-                        <SavedLoansItem
+                        <SavedLoansRow
                             id={loan["loan_id"]}
                             name={loan["loan_name"]}
                             description={loan["loan_description"]}
-                            website={loan["loan_website"]}/>
+                            website={loan["loan_website"]}
+                            gov={loan["loan_gov"]}
+                            region={loan["loan_region"]}
+                            city={loan["loan_city"]}
+                            creditUnion={loan["loan_credit_union"]}
+                            isSaved={true}/>
                 );
             }
+            setSavedLoanJson(data["loans"]);
             setSavedLoans(loanData);
         })
 
     }, [])
 
-//TO DO: I need to add ONCLICK logic for SEARCH 
+    const loanFilterOnChange = (event) => {
+        const loanData = filterLoans(event, savedLoanJson, true)
+        setSavedLoans(loanData)
+    }
+
     return (
         <div>
-            <input type="text" placeholder="Search..." />
+            <input type="text" placeholder="Search..." value={props.inputValue} onChange={loanFilterOnChange} />
             <button> Search  </button>
             <form action="/compare_loans">
                 <button>Compare Loans</button>
                 <h2>Saved Loans</h2>
-                {savedLoans}
+                <LoanCategoryTable 
+                    rows={savedLoans} />
             </form>
         </div>
     )
 }
 
 
+
+
+
+
+
+//Compare the loans the user saves
 function CompareLoansList(props) {
     const location = useLocation();
 
-    const queryDict = new URLSearchParams(useLocation().search);
+    const queryDict = new URLSearchParams(location.search);
     
     let loanIds = [];
     for(const key of queryDict) {
@@ -458,7 +616,7 @@ function CompareLoansList(props) {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
-            },
+            }, 
         })
         .then(response => response.json())
         .then(data => {
@@ -470,6 +628,10 @@ function CompareLoansList(props) {
                         <td>{loanJson["loan_name"]}</td>
                         <td>{loanJson["loan_description"]}</td>
                         <td>{loanJson["loan_website"]}</td>
+                        <td>{loanJson["loan_gov"]}</td>
+                        <td>{loanJson["loan_region"]}</td>
+                        <td>{loanJson["loan_city"]}</td>
+                        <td>{loanJson["loan_credit_union"]}</td>
                     </tr>
                 )
             }
@@ -484,6 +646,11 @@ function CompareLoansList(props) {
                 <th>Name</th>
                 <th>Description</th>
                 <th>Website</th>
+                <th>Government</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Credit Union</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -492,6 +659,9 @@ function CompareLoansList(props) {
         </table>
     )
 }
+
+
+
 
 
 
@@ -540,6 +710,25 @@ function App() {
 
             setLoginOutButton(listItem)
     }, [])
+
+
+
+    render() {
+
+        return (
+            <Map
+                google={this.props.google}
+                zoom={8}
+                style={mapStyles}
+                initialCenter={{ lat: 47.444, lng: -122.176}}
+            />
+
+        );
+
+    }
+
+
+
 
     return (
         <Router>
