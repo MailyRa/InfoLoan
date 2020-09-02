@@ -1,5 +1,5 @@
 
-import {Map, GoogleApiWrapper} from 'google-maps-react';
+
 
 const Router = ReactRouterDOM.BrowserRouter;
 const Route =  ReactRouterDOM.Route;
@@ -713,19 +713,19 @@ function App() {
 
 
 
-    render() {
+    // render() {
 
-        return (
-            <Map
-                google={this.props.google}
-                zoom={8}
-                style={mapStyles}
-                initialCenter={{ lat: 47.444, lng: -122.176}}
-            />
+    //     return (
+    //         <Map
+    //             google={this.props.google}
+    //             zoom={8}
+    //             style={mapStyles}
+    //             initialCenter={{ lat: 47.444, lng: -122.176}}
+    //         />
 
-        );
+    //     );
 
-    }
+    // }
 
 
 
