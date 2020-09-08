@@ -3,7 +3,7 @@
         "category_name": "Car loan",
         "loans": [
             {
-                "loan_name": "Chase Auto Loans",
+                "loan_name": "Chase Bank",
                 "loan_description": "Chase Auto is here to help you get the right car. Apply for an auto loan for a new or used car or refinance your existing car loan with Chase. Use the payment calculator to estimate monthly payments.",
                 "loan_website": "https://autofinance.chase.com/auto-finance/auto-loans?offercode=WDXDUXXX28",
                 "loan_gov" : "No",
@@ -12,7 +12,7 @@
                 "loan_credit_union": "No"
             },
             {
-                "loan_name": "Wells Fargo Auto Loan",
+                "loan_name": "Wells Fargo Bank",
                 "loan_description": "Vehicle loans are available through our nationwide network of dealers only. Ask for a Wells Fargo auto loan at your local dealership when discussing your financing options.",
                 "loan_website": "https://www.wellsfargo.com/auto-loans/",
                 "loan_gov": "No",
@@ -99,7 +99,7 @@
         "category_name": "Home loan",
         "loans": [
             {
-                "loan_name": "Home Mortgage Loans",
+                "loan_name": "Wells Fargo",
                 "loan_description": " Why choose Wells Fargo?, Experience: Put our experience to work – we’re a leading mortgage lender with options to fit your needs.",
                 "loan_website": "https://www.wellsfargo.com/mortgage/",
                 "loan_gov" : "No",
@@ -108,7 +108,7 @@
                 "loan_credit_union": "No"
             },
             {
-                "loan_name": "Chase Home Lending",
+                "loan_name": "Chase Bank",
                 "loan_description": "Buying a home can be a truly rewarding experience. It's also one of the biggest investments you'll make. From finding your new place to getting the keys – we're here to help.",
                 "loan_website": "https://www.chase.com/personal/mortgage",
                 "loan_gov" : "No",
@@ -153,7 +153,7 @@
                 "loan_credit_union": "No"
             },
             {
-                "loan_name": "Alliant",
+                "loan_name": "Alliant Credit Union",
                 "loan_description": "What to expect when applying for a mortgage. Alliant offers competitive low rates with a team of home loan experts ready to lend a hand. Whether you’ve already found your next home or you’re just starting your search, we’re ready when you’re ready",
                 "loan_website": "https://www.alliantcreditunion.org/borrow/mortgages",
                 "loan_gov" : "No",
@@ -162,7 +162,7 @@
                 "loan_credit_union": "Yes"
             },
             {
-                "loan_name": "Bank of America Home Mortgage Loan",
+                "loan_name": "Bank of America",
                 "loan_description": "The Bank of America Digital Mortgage Experience® puts you in control. Prequalify to estimate how much you can borrow, apply for a new mortgage, or refinance your current home. All with customized terms that meet your needs.",
                 "loan_website": "https://www.bankofamerica.com/mortgage/home-mortgage/",
                 "loan_gov" : "No",
@@ -195,7 +195,7 @@
         "category_name": "Personal loan",
         "loans": [
             {
-                "loan_name": "Navy Federal Credit Union Personal Loan",
+                "loan_name": "Navy Federal Credit Union",
                 "loan_description": "A loan from Navy Federal can be a great way to consolidate debt, finance home improvements or cover unexpected expenses. Applying is fast and easy, and you can enjoy a fixed monthly payment at a competitive rate. Plus, you won’t pay any origination or prepayment fees. In most cases, you’ll receive same-day funding.",
                 "loan_website": "https://www.navyfederal.org/loans-cards/personal-loans/?cmpid=ppc%7Cgoogle%7Cevgrn%7Cclns%7Cgen%7Cpersonal%20loan%7C01/01/2020%7Cml%7C&gclid=Cj0KCQjws536BRDTARIsANeUZ5-WXQTLuSbZi8BjRL5si2atrAtxMX5EMLiAJpejYRV6GJI5DjjVtuMaAq7oEALw_wcB&gclsrc=aw.ds",
                 "loan_gov" : "Yes",
@@ -204,7 +204,7 @@
                 "loan_credit_union": "Yes"
             },
             {
-                "loan_name": "San Francisco Credit Union Personal Loan",
+                "loan_name": "San Francisco Credit Union",
                 "loan_description": "There are times when we all need some short term financial assistance to pay off bills, medical expenses or other needs that require cash. A personal loan from San Francisco Federal Credit Union may be the assistance you need during these times, especially because we offer: Rates as low as 1.99% APR. Loan amounts starting at $500. Terms from 1 to 84 months. No loan origination fees",
                 "loan_website": "https://www.sanfranciscofcu.com/personal-loans",
                 "loan_gov" : "No",
@@ -213,7 +213,7 @@
                 "loan_credit_union": "Yes"
             },
             {
-                "loan_name": "Alliant Personal Loan",
+                "loan_name": "Alliant Credit Union",
                 "loan_description": "The Run Down: Loan consolidation, home expenses or emergencies. No collateral required for these unsecured personal loans​. Loans from $1,000 to $50,​​​​​00056.​​ Terms from 1 to 5 years56. Typically, same-day deposit into your account! (Or we’ll mail a check if you prefer. No prepayment penalties. Pay early and save on interest. Loan approval and APR based on payment method, creditworthiness and ability to repay.",
                 "loan_website": "https://www.alliantcreditunion.org/borrow/get-a-credit-union-personal-loan",
                 "loan_gov" : "No",
@@ -222,7 +222,7 @@
                 "loan_credit_union": "Yes"
             },
             {
-                "loan_name": "PenFed Credit Union Personal Loan",
+                "loan_name": "PenFed Credit Union",
                 "loan_description": "As low as 6.49% APR. Terms up to 60 months. Funds could be available the next day. Loans up to $20,000. No title or deed required. No early payoff penalty. No origination fee. No hidden fees",
                 "loan_website": "https://www.penfed.org/personal/personal-loans",
                 "loan_gov" : "No",
@@ -231,7 +231,7 @@
                 "loan_credit_union": "Yes"
             },
             {
-                "loan_name": "Wells Fargo Personal Loan",
+                "loan_name": "Wells Fargo Bank",
                 "loan_description": "Your actual Annual Percentage Rate (APR) may be higher than the rate shown. The APR shown is for a $10,000 personal loan with a 3 year term and includes a relationship discount of 0.25%.2 Your APR will be based on the specific characteristics of your credit application including, but not limited to, evaluation of credit history, amount of credit requested and income verification.",
                 "loan_website": "https://www.wellsfargo.com/personal-credit/personal-loan/",
                 "loan_gov" : "No",
@@ -311,7 +311,7 @@
                 "loan_credit_union": "No"
             },
             {
-                "loan_name": "Wells Fargo Small Business Loans",
+                "loan_name": "Wells Fargo Bank",
                 "loan_description": "$0 opening fee, $10,000 to $100,000 loan amounts, 1- to 5-year terms. Fixed rates start at 6.25%1. No specific collateral required. Includes Wells Fargo BusinessLoan® Term loan and FastFlex® Small Business Loan2",
                 "loan_website": "https://www.wellsfargo.com/biz/business-credit/",
                 "loan_gov" : "No",
@@ -320,7 +320,7 @@
                 "loan_credit_union": "No"
             },
             {
-                "loan_name": "Chase Small Business Financing",
+                "loan_name": "Chase Bank",
                 "loan_description": "Chase has a variety of small business financing options to help launch your next venture or invest in the future growth of your business.",
                 "loan_website": "https://www.chase.com/business/loans",
                 "loan_gov" : "No",
@@ -338,7 +338,7 @@
                 "loan_credit_union": "No"
             },
             {
-                "loan_name": "US Bank Business Loans",
+                "loan_name": "US Bank",
                 "loan_description": "Let’s work together to find working capital options to cover operating expenses, maintain inventory, pay vendors and more. Backed by the strength and stability of U.S. Bank, our business loans offer you competitive rates, flexible terms and guidance from a business banker.",
                 "loan_website": "https://www.usbank.com/business-banking/business-lending/business-loans.html",
                 "loan_gov" : "No",
@@ -392,7 +392,7 @@
         "category_name": "Education Loan ",
         "loans": [
             {
-                "loan_name": "Discover Educational Loan",
+                "loan_name": "Discover Bank",
                 "loan_description": "Get good grades. Get paid. Now freshmen can get a student loan with even more rewards for good grades. Variable Rates: 1.24% - 10.99% APR. Fixed Rated 4.24% - 12.39% APR",
                 "loan_website": "https://www.discover.com/student-loans/",
                 "loan_gov" : "No",
@@ -401,7 +401,7 @@
                 "loan_credit_union": "No"
             },
             {
-                "loan_name": "Wells Fargo Private Student Loans",
+                "loan_name": "Wells Fargo Bank",
                 "loan_description": "Flexible repayment options. Student borrowers make no payments until 6 months after school",
                 "loan_website": "https://www.wellsfargo.com/student/",
                 "loan_gov" : "No",
@@ -419,7 +419,7 @@
                 "loan_credit_union": "No"
             },
             {
-                "loan_name": "Citizens Bank Undergraduate Loan",
+                "loan_name": "Citizens Bank",
                 "loan_description": "A private Citizens Bank Student Loan lets you choose from competitive fixed and variable rates, and repayment options that give you the freedom to pay back your loan on your schedule. With Multi-Year Approval†, you’ll know how much money we will lend you across multiple years of college. In year two and beyond, the application is simplified, such that after a soft credit check, you can request your funds for the upcoming school year.",
                 "loan_website": "https://www.citizensbank.com/student-lending/student-loans.aspx",
                 "loan_gov" : "No",
@@ -446,7 +446,7 @@
                 "loan_credit_union": "Yes"
             },
             {
-                "loan_name": "Summit Credit Union Private Student Loan",
+                "loan_name": "Summit Credit Union",
                 "loan_description": "Higher education is expensive. Tuition, books, computers and room & board. It all adds up – and it adds up fast! If there’s a gap between your financial aid package and the cost of your education, count on an affordable, private student loan from Summit to help you fill it.",
                 "loan_website": "https://www.summitcreditunion.com/borrow/student-loans",
                 "loan_gov" : "No",
@@ -455,7 +455,7 @@
                 "loan_credit_union": "Yes"
             },
             {
-                "loan_name": "Navy Federal Credit Union Student Loans & Refinancing",
+                "loan_name": "Navy Federal Credit Union",
                 "loan_description": "Loans available for a semester or the entire academic year up to the school-certified cost of attendance. Variety of repayment options while you're in school to help reduce overall loan costs 0.25% interest rate reduction when you sign up for automatic payments. A co-signer release may be requested after 24 consecutive, on-time principal and interest payments",
                 "loan_website": "https://www.navyfederal.org/loans-cards/student-loans/?cmpid=ppc%7Cgoogle%7Cevgrn%7Cclns%7Cgen%7Cstudent%20loans%7C01/01/2020%7Cml%7C&gclid=Cj0KCQjw1qL6BRCmARIsADV9JtaO0qAwhFaigYLSvFHtCN3whffn_F1WCKdAYSB3mHelCisYzK46b7UaAnZKEALw_wcB&gclsrc=aw.ds",
                 "loan_gov" : "Yes",
@@ -464,7 +464,7 @@
                 "loan_credit_union": "Yes"
             },
             {
-                "loan_name": "Financial Partners Credit Union Educational Loan",
+                "loan_name": "Financial Partners Credit Union",
                 "loan_description": "Choose the student loan that’s right for you. Whether you’re an undergraduate, graduate, or parent— we have options to meet your specific needs",
                 "loan_website": "https://www.salliemae.com/landing/student-loans/?body-link-1=&MPID=1000000539&dtd_cell=SMLRSOPAAGAGAGOTAAX0858N010020",
                 "loan_gov" : "No",
@@ -473,7 +473,7 @@
                 "loan_credit_union": "No"
             },
             {
-                "loan_name": "San Mateo Credit Union Educational Loan",
+                "loan_name": "San Mateo Credit Union",
                 "loan_description": "Whether you’re headed off to college or logging on to class, San Mateo Credit Union helps you cover your costs. From California universities to global online programs, from job training to professional certifications, SMCU student loans can support your studies, your way.",
                 "loan_website": "https://www.smcu.org/Loans/Consumer-Loans/Student-Loans",
                 "loan_gov" : "No",
