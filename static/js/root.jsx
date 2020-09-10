@@ -11,7 +11,8 @@ const useParams = ReactRouterDOM.useParams;
 const useHistory = ReactRouterDOM.useHistory;
 const Promise = ReactRouterDOM.Promise;
 const useLocation = ReactRouterDOM.useLocation;
-
+//add
+const useRef = ReactRouterDOM.useRef;
 
 
 
@@ -322,15 +323,59 @@ function CategoryContainer(props) {
         getLoans(category_id).then(response => {
             setLoans(response[0])
             setLoanJson(response[1])
+            //add
+            updateFilteredLoans(searchTerm, isGov);
         })
     }
 
+    //add
+    const [isUnion, setIsUnion] = React.useState();
+    const [isGov, setIsGov] = React.useState();
+    const [searchTerm, setSearchTerm] = React.useState('')
 
 
+    //add
     const filterLoansEvent = (event) => {
-        const loanData = filterLoans(event, loanJson, false)
+        setSearchTerm(event.target.value)
+        updateFilteredLoans(event.target.value, isGov, isUnion)
+    }
+
+
+
+
+    //add
+    const handleGovTypeUpdated = (govType) => {
+        var isGovTemp = null;
+        if (govType === "Yes"){
+            isGovTemp = true;
+        } else if (govType === "No") {
+            isGovTemp = false;
+        } 
+        setIsGov(isGovTemp)
+        
+        updateFilteredLoans(searchTerm, isGovTemp, isUnion)
+    }
+
+    //add
+    const handleUnionUpdated = (unionType) => {
+        var isUnionTemp = null;
+        if (unionType === "Yes"){
+            isUnionTemp = true;
+        } else if (unionType === "No") {
+            isUnionTemp = false;
+        }
+        setIsUnion(isUnionTemp)
+
+        updateFilteredLoans(searchTerm, isGov, isUnionTemp)
+
+    }
+
+    //add
+    function updateFilteredLoans(searchTerm, isGov, isUnion) {
+        const loanData = filterLoans(searchTerm, loanJson, false, isGov, isUnion)
         setLoans(loanData)
     }
+
 
 
     return (
@@ -339,11 +384,30 @@ function CategoryContainer(props) {
             <input type="text" placeholder="Search..." value={props.inputValue} onChange={filterLoansEvent} />
             <button> Search  </button>
             <form>
+            <div>
             <label htmlFor="Loan Categories"> Choose a loan type: </label><br/>
             <select name="loans" id="loans" onChange={e => updateLoans(e.target.value)}>
                 <option id="0"></option>
                 {categories}
             </select>
+            </div>
+            <br/>
+            <div> <label htmlFor="Government"> Government Loan: </label><br/>
+            <select name="government_loans" id="gov_loan" onChange={e => handleGovTypeUpdated(e.target.value)}>
+                <option id="0">All</option>
+                <option id="1">Yes</option>
+                <option id="2">No</option>   
+            </select>
+            </div>
+            <br/>
+            <div><label htmlFor="Credit Union"> Credit Union: </label><br/>
+            <select name="credit_union" id="credit_union_bank" onChange={e => handleUnionUpdated(e.target.value)}>
+                <option id="0">All</option>
+                <option id="1">Yes</option>
+                <option id="2">No</option>   
+            </select>
+            </div>
+
             </form>
             <LoanCategoryTable 
                 rows={loans} />
@@ -352,7 +416,128 @@ function CategoryContainer(props) {
     );
 }
 
+//add
+//Map Container 
+function MapContainer(props) {
+    const location = useLocation();
+    const queryDict = new URLSearchParams(location.search);
+    
+    var searchTerm = "";
+    for(const key of queryDict) {
+        if (key[0] === "name") {
+            searchTerm = key[1];
+        }
+    }
+    
+    const lat = 37.601773;
+    const lng = -122.202870;
 
+    const options = { center: { lat: lat, lng: lng }, zoom: 11 }
+       
+    return (
+        <div id="map-container">
+            <MapComponent options={options}
+                          searchTerm={searchTerm} />
+        </div>
+    )
+}
+
+
+//add
+//Map Container 
+function MapContainer(props) {
+    const location = useLocation();
+    const queryDict = new URLSearchParams(location.search);
+    
+    var searchTerm = "";
+    for(const key of queryDict) {
+        if (key[0] === "name") {
+            searchTerm = key[1];
+        }
+    }
+    
+    const lat = 37.601773;
+    const lng = -122.202870;
+
+    const options = { center: { lat: lat, lng: lng }, zoom: 11 }
+       
+    return (
+        <div id="map-container">
+            <MapComponent options={options}
+                          searchTerm={searchTerm} />
+        </div>
+    )
+}
+
+
+
+//Map Component
+function MapComponent(props) {
+    const options = props.options;
+    const ref = React.useRef();
+    const [map, setMap] = React.useState();
+    const [places, setPlaces] = React.useState();
+    const [pyrmont, setPyrmont] = React.useState();
+    React.useEffect(() => {
+        const onLoad = () => {
+            const map = new window.google.maps.Map(ref.current, options)
+            setPyrmont(new window.google.maps.LatLng(options.center.lat, options.center.lng))
+            setPlaces(new google.maps.places.PlacesService(map));
+            setMap(map)
+        }
+
+        let script = document.createElement("script");
+        script.type = "text/javascript";
+        if (script.readyState) {
+            script.onreadystatechange = function() {
+              if (script.readyState === "loaded" || script.readyState === "complete") {
+                script.onreadystatechange = null;
+                onLoad();
+              }
+            };
+        } else {
+            script.onload = () => onLoad();
+        }
+
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDX3EFiSjD8lNuVqr4tue8KkoSwKuSmnbY&libraries=places';
+        document.getElementsByTagName("head")[0].appendChild(script);
+
+    }, [options])
+
+    if (places) {
+        var request = {
+            location: pyrmont,
+            radius: '2000',
+            query: props.searchTerm
+        };
+        places.textSearch(request, callback);
+    }
+
+    function callback(results, status) {
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+            for (var i = 0; i < results.length; i++) {
+                var place = results[i];
+                console.log(place);
+                const marker = new window.google.maps.Marker({
+                    map,
+                    position: place.geometry.location,
+                    label: `${i + 1}`,
+                    title: place.formatted_address,
+                })
+            }
+        }
+    }
+    
+    return (
+        <div>
+            <div id="map-div"
+                style={{ height: `60vh`, margin: `1em 0`, borderRadius: `0.5em`, width: '50%' }}
+                ref={ref}/>
+        
+        </div>
+        )
+
+}
 
 //Category Loan Table
 function LoanCategoryTable(props) {
@@ -458,6 +643,16 @@ function SavedLoansRow(props) {
         })
     }
 
+    //add
+    const handleFindNearestBank = () => {
+        console.log("Handling button click")
+        history.push('/map?name='+props.name);
+    }
+
+
+
+
+
     if (props.isSaved === true) {
         return (
             <tr>
@@ -481,6 +676,7 @@ function SavedLoansRow(props) {
         return (
             <tr>
                 <td><button onClick={saveLoan}>Save</button></td>
+                <td><button onClick={handleFindNearestBank}>Find the nearest bank</button></td>
                 <td>{props.name}</td>
                 <td>{props.description}</td>
                 <td><a href={props.website}>Visit website</a></td>
@@ -494,25 +690,44 @@ function SavedLoansRow(props) {
 }
 
 
+
+
+
 //Search Feature
-function searchIsMatch(loanJson, searchTerm) {
-    return loanJson["loan_name"].toLowerCase().includes(searchTerm.toLowerCase()) 
+function searchIsMatch(loanJson, searchTerm, isGov, isUnion) {
+    var match = loanJson["loan_name"].toLowerCase().includes(searchTerm.toLowerCase()) 
     || loanJson["loan_description"].toLowerCase().includes(searchTerm.toLowerCase())
     || loanJson["loan_website"].toLowerCase().includes(searchTerm.toLowerCase())
     || loanJson["loan_gov"].toLowerCase().includes(searchTerm.toLowerCase())
     || loanJson["loan_region"].toLowerCase().includes(searchTerm.toLowerCase())
     || loanJson["loan_city"].toLowerCase().includes(searchTerm.toLowerCase())
     || loanJson["loan_credit_union"].toLowerCase().includes(searchTerm.toLowerCase())
-    return true
+    
+    if (isGov === true) {
+        match = match && (loanJson["loan_gov"] === "Yes")
+    } else if (isGov === false) {
+        match = match && (loanJson["loan_gov"] === "No")
+    }
+
+    if (isUnion === true) {
+        match = match && (loanJson["loan_credit_union"] === "Yes")
+    } else if (isUnion === false) {
+        match = match && (loanJson["loan_credit_union"] === "No")
+    }
+
+    return match
 }
 
-const filterLoans = (event, savedLoanJson, areSaved) => {
+//add
+const filterLoans = (value, savedLoanJson, areSaved, isGov, isUnion) => {
     const filteredLoans = [];
     for(const loanJson of savedLoanJson) {
-        if(searchIsMatch(loanJson, event.target.value)) {
+        if(searchIsMatch(loanJson, value, isGov, isUnion)) {
             filteredLoans.push(loanJson);
         }
     }
+
+
 
     const loanData = []
     for(const loan of filteredLoans) {
@@ -572,7 +787,8 @@ function SavedLoans(props) {
     }, [])
 
     const loanFilterOnChange = (event) => {
-        const loanData = filterLoans(event, savedLoanJson, true)
+        //add
+        const loanData = filterLoans(event.target.value, savedLoanJson, true, null, null)
         setSavedLoans(loanData)
     }
 
@@ -627,7 +843,7 @@ function CompareLoansList(props) {
                     <tr>
                         <td>{loanJson["loan_name"]}</td>
                         <td>{loanJson["loan_description"]}</td>
-                        <td>{loanJson["loan_website"]}</td>
+                        <td><a href={loanJson["loan_website"]}> Visit website</a></td>
                         <td>{loanJson["loan_gov"]}</td>
                         <td>{loanJson["loan_region"]}</td>
                         <td>{loanJson["loan_city"]}</td>
@@ -713,23 +929,6 @@ function App() {
 
 
 
-    // render() {
-
-    //     return (
-    //         <Map
-    //             google={this.props.google}
-    //             zoom={8}
-    //             style={mapStyles}
-    //             initialCenter={{ lat: 47.444, lng: -122.176}}
-    //         />
-
-    //     );
-
-    // }
-
-
-
-
     return (
         <Router>
 
@@ -772,6 +971,9 @@ function App() {
                     </Route>
                     <Route path="/compare_loans">
                         <CompareLoansList />
+                    </Route>
+                    <Route path="/map">
+                        <MapContainer />
                     </Route>
                     <Route path="/">
                         <Homepage />
