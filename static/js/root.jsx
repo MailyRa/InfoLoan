@@ -1,6 +1,3 @@
-
-
-
 const Router = ReactRouterDOM.BrowserRouter;
 const Route =  ReactRouterDOM.Route;
 const Link =  ReactRouterDOM.Link;
@@ -11,7 +8,6 @@ const useParams = ReactRouterDOM.useParams;
 const useHistory = ReactRouterDOM.useHistory;
 const Promise = ReactRouterDOM.Promise;
 const useLocation = ReactRouterDOM.useLocation;
-//add
 const useRef = ReactRouterDOM.useRef;
 
 
@@ -688,10 +684,6 @@ function SavedLoansRow(props) {
         )
     }
 }
-
-
-
-
 
 //Search Feature
 function searchIsMatch(loanJson, searchTerm, isGov, isUnion) {
