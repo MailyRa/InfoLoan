@@ -1,0 +1,47 @@
+[33mcommit 9a29ea164062c0ee9ac42a90e2ea02428a42c736[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Maily Ramos <maily.ramos1993@gmail.com>
+Date:   Fri Aug 21 05:52:14 2020 +0000
+
+    User Profile and Saving user loans
+
+[33mcommit 174bc7f50ff0abdb4f7136e5b71d2723eb770ae1[m
+Author: Maily Ramos <maily.ramos1993@gmail.com>
+Date:   Wed Aug 19 18:54:26 2020 +0000
+
+    Created User Profile and Log in
+
+[33mcommit afbc76d52cabb63c6506346b23e7cf3b5806efc7[m
+Author: Maily Ramos <maily.ramos1993@gmail.com>
+Date:   Mon Aug 17 17:45:06 2020 +0000
+
+    car loans.jsx
+
+[33mcommit a24a269f6005e0457c2b89b93dcd5f3057fffdf8[m
+Author: Maily Ramos <maily.ramos1993@gmail.com>
+Date:   Mon Aug 17 17:42:49 2020 +0000
+
+    login.jsx, loan_categories.jsx, car_loans.jsx
+
+[33mcommit 056416ffe477343eda6a29d62220431bcd866cf5[m
+Author: Maily Ramos <maily.ramos1993@gmail.com>
+Date:   Fri Aug 14 21:39:16 2020 +0000
+
+    Fake HTML
+
+[33mcommit cc90fbe7f2feb81185b0a86170fe03a71b703928[m
+Author: Maily Ramos <maily.ramos1993@gmail.com>
+Date:   Fri Aug 14 17:57:08 2020 +0000
+
+    Homepage.jsx
+
+[33mcommit 99843e0c21be3c088ec9727259909c15becea145[m
+Author: Maily Ramos <maily.ramos1993@gmail.com>
+Date:   Fri Aug 14 05:48:33 2020 +0000
+
+    React Homepage
+
+[33mcommit a685f7422a5d836506d26d369985779480037e37[m
+Author: Maily Ramos <maily.ramos1993@gmail.com>
+Date:   Thu Aug 13 07:48:41 2020 +0000
+
+    Function loan_categories complete

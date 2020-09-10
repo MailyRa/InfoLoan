@@ -9,19 +9,67 @@ const useHistory = ReactRouterDOM.useHistory;
 const Promise = ReactRouterDOM.Promise;
 const useLocation = ReactRouterDOM.useLocation;
 const useRef = ReactRouterDOM.useRef;
-import Button from 'react-bootstrap/Button';
+
+const Form = ReactBootstrap.Form;
+const Column = ReactBootstrap.Form; 
+const Image = ReactBootstrap.Image;
+const Carousel = ReactBootstrap.Carousel;
 
 
-function Homepage() {
-    return <div>
-        <h2>Welcome we are here to help you 
-            with any financial question you may have!</h2>
-        <h4> <Link to="/loan_categories"> Check out our different loan categories </Link> </h4>
-        </div>
+function ControlledCarousel() {
+    const [index, setIndex] = React.useState(0);
+    
+    const handleSelect = (selectedIndex, e) => {
+      setIndex(selectedIndex);
+    };
+  
+    return (
+      <Carousel activeIndex={index} onSelect={handleSelect}>
+        <Carousel.Item>
+          <img
+            className="homepage w-100"
+            src="static/jpg/homepage.jpg?text=First slide&bg=373940"
+            alt="First slide"
+          />
+          <Carousel.Caption>
+            <h3>Welcome to the beginning of your Loan Journey</h3>
+            <p>Ready to buy a home?</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="homepage w-100"
+            src="static/jpg/college.jpg?text=Second slide&bg=282c34"
+            alt="Second slide"
+          />
+  
+          <Carousel.Caption>
+            <h3>Need help paying your School Loans?</h3>
+            <p>Find out what loans are best for you</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="homepage w-100"
+            src="static/jpg/credit.jpg?text=Third slide&bg=20232a"
+            alt="Third slide"
+          />
+          <Carousel.Caption>
+            <h3>Too many credit card balances?</h3>
+            <p>We have the best options to help you lower you balances</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+    </Carousel>
+    );
 }
 
 
-
+//Homepage
+function Homepage() {
+    return (
+        <ControlledCarousel />
+    )
+}
 
 
 // Handling User login 
@@ -54,26 +102,28 @@ function Login() {
     }
 
     return(
-        <div>
-            <p>Username:</p>
-            <input type="text"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}/>
-            <p>Password:</p>
-            <input type="password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}/>
 
-            <button 
-            onClick={handleLogIn}> Submit </button>
-        </div>
+        <Form>
+            <Form.Group controlId="formBasicEmail" className="login">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control type="email" placeholder="Enter email" onChange={(e) => setEmail(e.target.value)}
+                value={email}/>
+                <Form.Text className="text-muted">
+                We'll never share your email with anyone else.
+                </Form.Text>
+            </Form.Group>
+
+            <Form.Group controlId="formBasicPassword" className="login">
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" placeholder="Password"  onChange={(e) => setPassword(e.target.value)}
+                value={password}/>
+            </Form.Group>
+            <Button variant="primary" type="submit" onClick={handleLogIn}>
+                Submit
+            </Button>
+        </Form>
     )
 }
-
-
-
-
-
 
 
 // Handle Logout 
@@ -94,15 +144,8 @@ function Logout(props){
 }
 
 
-
-
-
-
-
 //User profile 
 function Userprofile (props) {
-
-
     const[fname, setFname] = React.useState('');
     const[lname, setLname] = React.useState('');
     const[dob, setDob] = React.useState('');
@@ -110,8 +153,6 @@ function Userprofile (props) {
     const[credit_score, setCreditScore] = React.useState('');
     const[email, setEmail] = React.useState('');
     
-
-
     React.useEffect(() => {
         fetch("/user_profile.json", {
             method: 'GET',
@@ -138,24 +179,16 @@ function Userprofile (props) {
 
     return (
         <div>
-        <h1> Profile </h1> 
-        <p>First Name: {fname} </p>
-        <p>Last Name: {lname}</p>
-        <p>Date of Birth: {dob} </p>
-        <p>Address: {address} </p>
-        <p>Credit Score: {credit_score}</p>
-        <p>Email: {email}</p>
-
-
-    </div>
+            <h1> Profile </h1> 
+            <p>First Name: {fname} </p>
+            <p>Last Name: {lname}</p>
+            <p>Date of Birth: {dob} </p>
+            <p>Address: {address} </p>
+            <p>Credit Score: {credit_score}</p>
+            <p>Email: {email}</p>
+        </div>
     )
 }
-
-
-
-
-
-
 
 // Creating User
 function CreateUser() {
@@ -245,17 +278,9 @@ function CreateUser() {
     )
 }
 
-
-
-
-
-
-
-
 // Displaying all the loans by categories
 function CategoriesListItem(props) {
     return <option value={props.id}>{props.name}</option>
-
 }
 
 function getLoans(category_id) {
@@ -281,16 +306,6 @@ function getLoans(category_id) {
     }, [])
 }
 
-
-
-
-
-
-
-
-
-
-
 //Getting the Category Loan Json from Server
 function CategoryContainer(props) { 
     const [categories, setCategories] = React.useState(["loading..."]);
@@ -313,8 +328,6 @@ function CategoryContainer(props) {
             setCategories(categoryData);
         })
     }, [])
-
-
 
     const [loans, setLoans] = React.useState([""])
     const [loanJson, setLoanJson] = React.useState([""])
@@ -370,7 +383,6 @@ function CategoryContainer(props) {
     }
 
     return (
-    
         <div>
             <input type="text" placeholder="Search..." value={props.inputValue} onChange={filterLoansEvent} />
             <form>
@@ -405,10 +417,8 @@ function CategoryContainer(props) {
     );
 }
 
-
-
-
 //Map Container 
+
 function MapContainer(props) {
     const location = useLocation();
     const queryDict = new URLSearchParams(location.search);
@@ -435,7 +445,104 @@ function MapContainer(props) {
 
 
 
-//Map Component
+
+
+
+
+
+// function MapContainer(props) {
+//     console.log("IN MAP CONTAINER")
+//     const location = useLocation();
+//     const queryDict = new URLSearchParams(location.search);
+    
+//     var searchTerm = "";
+//     for(const key of queryDict) {
+//         if (key[0] === "name") {
+//             searchTerm = key[1];
+//         }
+//     }
+    
+//     const lat = 37.601773;
+//     const lng = -122.202870;
+
+//     const options = { center: { lat: lat, lng: lng }, zoom: 11 }
+       
+//     return (
+//         <div id="map-container">
+//             <MapComponent options={options}
+//                           searchTerm={searchTerm} />
+//         </div>
+//     )
+// }
+
+// //Map Component
+// function MapComponent(props) {
+//     const options = props.options;
+//     const ref = React.useRef();
+//     const [googleMap, setGoogleMap] = React.useState();
+//     const [places, setPlaces] = React.useState();
+//     const [pyrmont, setPyrmont] = React.useState();
+    
+//     React.useEffect(() => {
+//         const onLoad = () => {
+//             const gMap = new window.google.maps.Map(ref.current, options);
+//             setPyrmont(new window.google.maps.LatLng(options.center.lat, options.center.lng));
+//             setPlaces(new window.google.maps.places.PlacesService(gMap));
+//             setGoogleMap(gMap);
+//         }
+
+//         let script = document.createElement("script");
+//         script.type = "text/javascript";
+//         if (script.readyState) {
+//             script.onreadystatechange = function() {
+//               if (script.readyState === "loaded" || script.readyState === "complete") {
+//                 script.onreadystatechange = null;
+//                 onLoad();
+//               }
+//             };
+//         } else {
+//             script.onload = () => onLoad();
+//         }
+
+//         script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDX3EFiSjD8lNuVqr4tue8KkoSwKuSmnbY&libraries=places';
+//         document.getElementsByTagName("head")[0].appendChild(script);
+
+//     }, [options])
+
+//     if (places) {
+//         var request = {
+//             location: pyrmont,
+//             radius: '2000',
+//             query: props.searchTerm
+//         };
+//         places.textSearch(request, callback);
+//     }
+
+//     function callback(results, status) {
+//         if (status == google.maps.places.PlacesServiceStatus.OK) {
+//             for (var i = 0; i < results.length; i++) {
+//                 var place = results[i];
+//                 console.log(place);
+//                 console.log(googleMap);
+//                 var marker = new window.google.maps.Marker({
+//                     googleMap,
+//                     position: place.geometry.location,
+//                     label: `${i + 1}`,
+//                     title: place.formatted_address,
+//                 })
+//             }
+//         }
+//     }
+    
+//     return (
+//         <div>
+//             <div id="map-div"
+//                 style={{ height: `60vh`, margin: `1em 0`, borderRadius: `0.5em`, width: '50%' }}
+//                 ref={ref}/>
+//         </div>
+//     )
+// }
+
 function MapComponent(props) {
     const options = props.options;
     const ref = React.useRef();
@@ -503,10 +610,6 @@ function MapComponent(props) {
 
 }
 
-
-    
-
-
 //Category Loan Table
 function LoanCategoryTable(props) {
     return (
@@ -531,12 +634,6 @@ function LoanCategoryTable(props) {
     )
 }
 
-
-
-
-
-
-
 //Fetch the data to compare the loans for the user 
 function LoanContainer(props) {
     let { category_id } = useParams();
@@ -559,12 +656,6 @@ function LoanContainer(props) {
         </div>
     );
 }
-
-
-
-
-
-
 
 //Fetch saved loans by user/allow user to compare them and the search feature 
 function SavedLoansRow(props) {
@@ -590,8 +681,6 @@ function SavedLoansRow(props) {
          
         })
     }
-
-
 
     const saveLoan = () => {
         fetch("/save_loan.json", {
@@ -656,9 +745,6 @@ function SavedLoansRow(props) {
     }
 }
 
-
-
-
 //Search Feature
 function searchIsMatch(loanJson, searchTerm, isGov, isUnion) {
     var match = loanJson["loan_name"].toLowerCase().includes(searchTerm.toLowerCase()) 
@@ -709,9 +795,6 @@ const filterLoans = (value, savedLoanJson, areSaved, isGov, isUnion) => {
     }
     return loanData
 }
-
-
-
 
 //Save Loans
 function SavedLoans(props) {
@@ -767,12 +850,6 @@ function SavedLoans(props) {
         </div>
     )
 }
-
-
-
-
-
-
 
 //Compare the loans the user saves
 function CompareLoansList(props) {
@@ -837,15 +914,6 @@ function CompareLoansList(props) {
     )
 }
 
-
-
-
-
-
-
-
-
-
 function App() {
 
     const isLoggedIn = localStorage.getItem('is_logged_in');
@@ -889,23 +957,25 @@ function App() {
             setLoginOutButton(listItem)
     }, [])
 
-
-
-
-    
     return (
         <Router>
 
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <a className="navbar-brand" href="/">InfoLoan!</a>
-                <button className="navbar-toggler" type="button"  data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <a className="navbar-brand" href="/">
+                    <img
+                        src="static/jpg/logo.png"
+                        width="150"
+                        height="150"
+                        className="d-inline-block align-top"
+                        alt="InfoLoan"
+                    />
+                    
+                </a>
+                <button className="navbar-toggler" type="button"  data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ml-auto">
-                        <li className="nav-item active">
-                            <a className="nav-link" href="/">Home</a>
-                        </li>
                         {loginOutButton}
                     </ul>
                 </div>
@@ -949,3 +1019,5 @@ function App() {
 }
 
 ReactDOM.render(<App />, document.getElementById('root'))
+
+
