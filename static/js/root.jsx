@@ -10,17 +10,99 @@ const Promise = ReactRouterDOM.Promise;
 const useLocation = ReactRouterDOM.useLocation;
 const useRef = ReactRouterDOM.useRef;
 
+const Form = ReactBootstrap.Form;
+const Column = ReactBootstrap.Form; 
+const Image = ReactBootstrap.Image;
+const Carousel = ReactBootstrap.Carousel;
+const Container = ReactBootstrap.Container;
+const Row = ReactBootstrap.Row;
+const Col = ReactBootstrap.Col;
+const Button = ReactBootstrap.Button;
+const Card = ReactBootstrap.Card;
+const CardGroup = ReactBootstrap.CardGroup;
+const Jumbotron = ReactBootstrap.Jumbotron;
 
 
-function Homepage() {
-    return <div>
-        <h2>Welcome we are here to help you 
-            with any financial question you may have!</h2>
-        <h4> <Link to="/loan_categories"> Check out our different loan categories </Link> </h4>
-        </div>
+
+
+function ControlledCarousel() {
+    const [index, setIndex] = React.useState(0);
+    
+    const handleSelect = (selectedIndex, e) => {
+      setIndex(selectedIndex);
+    };
+  
+    return (
+    
+        <Container fluid="md">
+            <Row>
+            <Col>
+            <Carousel activeIndex={index} onSelect={handleSelect}>
+                <Carousel.Item>
+                <img
+                    className="homepage w-100"
+                    src="static/jpg/college.jpg?text=First slide&bg=373940"
+                    alt="First slide"
+                />
+                <Carousel.Caption>
+                    <h3>Welcome to the beginning of your Loan Journey</h3>
+                    <p>Need help paying your School Loans?</p>
+                </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item>
+                <img
+                    className="homepage w-100"
+                    src="static/jpg/homepage.jpg?text=Second slide&bg=282c34"
+                    alt="Second slide"
+                />
+        
+                <Carousel.Caption>
+                    <h3>Ready to buy a home?</h3>
+                    <p>Find out what loans are best for you</p>
+                </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item>
+                <img
+                    className="homepage w-100"
+                    src="static/jpg/credit.jpg?text=Third slide&bg=20232a"
+                    alt="Third slide"
+                />
+                <Carousel.Caption>
+                    <h3>Too many credit card balances?</h3>
+                    <p>We have the best options to help you lower you balances</p>
+                </Carousel.Caption>
+                </Carousel.Item>
+            </Carousel>
+            </Col>
+            </Row>
+
+            <Row md={4}>
+                <Col>
+                <div className="money">
+                    <i class="fas fa-hand-holding-usd fa-8x"></i>
+                    We are here to help you embark in this financial journey 
+                </div>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                <div className="homepage-button">
+                    <Button variant="secondary" size="md" active= "true" onClick={CategoryContainer}>
+                    Browse our loans
+                    </Button>
+                </div>
+                </Col>
+            </Row>
+        </Container>
+    );
 }
 
 
+function Homepage() {
+    return (
+        <ControlledCarousel />
+    )
+}
 
 
 
@@ -54,19 +136,39 @@ function Login() {
     }
 
     return(
-        <div>
-            <p>Username:</p>
-            <input type="text"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}/>
-            <p>Password:</p>
-            <input type="password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}/>
 
-            <button 
-            onClick={handleLogIn}> Submit </button>
-        </div>
+
+        <Form className="log-in">
+            <Card style={{ width: '50rem' }}>
+            <Card.Img id="card-img" variant="bottom" src="static/jpg/login.jpg" />
+            <Card.Body>
+                <Card.Title>Sign In</Card.Title>
+                <Card.Text>
+                <Form.Group controlId="formBasicEmail">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control type="email" placeholder="Enter email" onChange={(e) => setEmail(e.target.value)}
+                    value={email}/>
+                    <Form.Text className="text-muted">
+                        We'll never share your email with anyone else.
+                    </Form.Text>
+                </Form.Group>
+
+                <Form.Group controlId="formBasicPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}
+                    value={password}/>
+                </Form.Group>
+                <Form.Group controlId="formBasicCheckbox">
+                <Form.Check type="checkbox" label="Remember me" />
+                </Form.Group>
+                <Button variant="primary" type="submit" onClick={handleLogIn}>
+                    Submit
+                </Button>
+                </Card.Text>
+            </Card.Body>
+            </Card>
+        </Form>
+
     )
 }
 
@@ -89,7 +191,7 @@ function Logout(props){
     .then(data => {
         localStorage.setItem('is_logged_in', false);
         //when I use the "useHook" it makes it slow
-        window.location.href = "/login";
+        window.location.href = "/";
     })
 }
 
@@ -199,49 +301,98 @@ function CreateUser() {
     }
 
     return(
-        <div>
-            <p>First Name:</p>
-            <input type="text" 
-            onChange={(e) => setFname(e.target.value)}
-            value={fname}/>
 
-            <p>Last Name:</p>
-            <input type="text"
-            onChange={(e) => setLname(e.target.value)} 
-            value={lname}/>
+        <Form>
+            <Form.Row>
+                <Form.Group as={Col} md="3" controlId="formGridName">
+                <Form.Label>First Name</Form.Label>
+                <Form.Control type="text" placeholder="First Name" onChange={(e) => setFname(e.target.value)} value={fname} />
+                </Form.Group>
+
+                <Form.Group as={Col} md="3" controlId="formGridLastName">
+                <Form.Label>Last Name </Form.Label>
+                <Form.Control type="text" placeholder="Last Name" onChange={(e) => setLname(e.target.value)} value={lname}/>
+                </Form.Group>
+            </Form.Row>
+            <Form.Row>
+                <Form.Group as={Col} md="3" controlId="formGridEmail">
+                <Form.Label>Email</Form.Label>
+                <Form.Control type="email" placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} value={email} />
+                </Form.Group>
+
+                <Form.Group as={Col} md="3" controlId="formGridPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password}/>
+                </Form.Group>
+            </Form.Row>
+
+            <Form.Group md="3" controlId="formGridAddress1">
+                <Form.Label>Address</Form.Label>
+                <Form.Control placeholder="1234 Main St" onChange={(e) => setAddress(e.target.value)} value={address}/>
+            </Form.Group>
+            <Form.Row>
+            <Form.Group as={Col} md="3" controlId="formGridDateBirth">
+                <Form.Label>Date of Birth</Form.Label>
+                <Form.Control placeholder="DOB" onChange={(e) => setDob(e.target.value)} value={dob}/>
+            </Form.Group>
+            <Form.Group as={Col} md="3" controlId="formGridCreditScore">
+                <Form.Label>Credit Score</Form.Label>
+                <Form.Control placeholder="Credit Score" onChange={(e) => setCreditScore(e.target.value)} value={credit_score}/>
+            </Form.Group>
+            </Form.Row>
+            <Button variant="primary" onClick={createUser} type="submit">
+                Submit
+            </Button>
+        </Form>
 
 
-            <p>Date of Birth:</p>
-            <input type="text"
-            onChange={(e) => setDob(e.target.value)}
-            value={dob}/>
 
 
-            <p>Address:</p>
-            <input type="text"
-            onChange={(e) => setAddress(e.target.value)}
-            value={address}/>
 
 
-            <p>Credit Score:</p>
-            <input type="text"
-            onChange={(e) => setCreditScore(e.target.value)}
-            value={credit_score}/>
+        // <div>
+        //     <p>First Name:</p>
+        //     <input type="text" 
+        //     onChange={(e) => setFname(e.target.value)}
+        //     value={fname}/>
+
+        //     <p>Last Name:</p>
+        //     <input type="text"
+        //     onChange={(e) => setLname(e.target.value)} 
+        //     value={lname}/>
 
 
-            <p>Email:</p>
-            <input type="text"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}/>
+        //     <p>Date of Birth:</p>
+        //     <input type="text"
+        //     onChange={(e) => setDob(e.target.value)}
+        //     value={dob}/>
 
 
-            <p>Password:</p>
-            <input type="password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}/>
+        //     <p>Address:</p>
+        //     <input type="text"
+        //     onChange={(e) => setAddress(e.target.value)}
+        //     value={address}/>
 
-            <button onClick={createUser}> Create Profile </button>
-        </div>
+
+        //     <p>Credit Score:</p>
+        //     <input type="text"
+        //     onChange={(e) => setCreditScore(e.target.value)}
+        //     value={credit_score}/>
+
+
+        //     <p>Email:</p>
+        //     <input type="text"
+        //     onChange={(e) => setEmail(e.target.value)}
+        //     value={email}/>
+
+
+        //     <p>Password:</p>
+        //     <input type="password"
+        //     onChange={(e) => setPassword(e.target.value)}
+        //     value={password}/>
+
+        //     <button onClick={createUser}> Create Profile </button>
+        // </div>
     )
 }
 
@@ -471,15 +622,16 @@ function MapContainer(props) {
 function MapComponent(props) {
     const options = props.options;
     const ref = React.useRef();
-    const [map, setMap] = React.useState();
+    const [googleMap, setGoogleMap] = React.useState();
     const [places, setPlaces] = React.useState();
     const [pyrmont, setPyrmont] = React.useState();
+    
     React.useEffect(() => {
         const onLoad = () => {
-            const map = new window.google.maps.Map(ref.current, options)
-            setPyrmont(new window.google.maps.LatLng(options.center.lat, options.center.lng))
-            setPlaces(new google.maps.places.PlacesService(map));
-            setMap(map)
+            const gMap = new window.google.maps.Map(ref.current, options);
+            setPyrmont(new window.google.maps.LatLng(options.center.lat, options.center.lng));
+            setGoogleMap(gMap);
+            setPlaces(new google.maps.places.PlacesService(gMap));
         }
 
         let script = document.createElement("script");
@@ -500,22 +652,22 @@ function MapComponent(props) {
 
     }, [options])
 
-    if (places) {
-        var request = {
+    if (places && googleMap) {
+        const request = {
             location: pyrmont,
             radius: '2000',
             query: props.searchTerm
         };
-        places.textSearch(request, callback);
+        places.textSearch(request, gmapCallback);
     }
 
-    function callback(results, status) {
+    function gmapCallback(results, status) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
             for (var i = 0; i < results.length; i++) {
                 var place = results[i];
                 console.log(place);
                 const marker = new window.google.maps.Marker({
-                    map,
+                    googleMap,
                     position: place.geometry.location,
                     label: `${i + 1}`,
                     title: place.formatted_address,
@@ -531,8 +683,7 @@ function MapComponent(props) {
                 ref={ref}/>
         
         </div>
-        )
-
+    )
 }
 
 //Category Loan Table
@@ -541,6 +692,7 @@ function LoanCategoryTable(props) {
         <table class="table table-striped">
             <thead>
                 <tr>
+                <th></th>
                 <th></th>
                 <th>Name</th>
                 <th>Description</th>
@@ -651,36 +803,89 @@ function SavedLoansRow(props) {
 
     if (props.isSaved === true) {
         return (
-            <tr>
-                <td><input type="checkbox" name={props.id}/>
-                    {' '}
-                    <p>Check to compare loan</p>
-                    <button 
-                        onClick={handleUnsave}>
-                        Unsave </button>
-                </td>
-                <td>{props.name}</td>
-                <td>{props.description}</td>
-                <td><a href={props.website}>Visit website</a></td>
-                <td>{props.gov}</td>
-                <td>{props.region}</td>
-                <td>{props.city}</td>
-                <td>{props.creditUnion}</td>
-            </tr>
+            <CardGroup>
+                    <Card border="secondary" style={{ width: '18rem' }} >
+                    <Card.Body>
+                        <Card.Title>{props.name} <i class="fas fa-university left fa-sm "> </i> </Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted"><a href={props.website}>Visit website</a></Card.Subtitle>
+                        <Card.Text>
+                        {props.description}
+                        </Card.Text>
+                        <Card.Text>
+                        Government: {props.gov}
+                        </Card.Text>
+                        <Card.Text>
+                        State: {props.region}
+                        </Card.Text>
+                        <Card.Text>
+                        Credit Union: {props.creditUnion}
+                        </Card.Text>
+                        <Card.Text>
+                       <Form.Check label="Compare Loans!" name={props.id}/>
+                        </Card.Text>
+                        <Button variant="primary" size="md " block onClick={handleUnsave}>
+                            UnSave 
+                        </Button>
+                        
+                    </Card.Body>
+                    </Card>
+                </CardGroup>
+
+
+
+
+
+
+
+        //     <tr>
+        //         <td><input type="checkbox" name={props.id}/>
+        //             {' '}
+        //             <p>Check to compare loan</p>
+        //             <button 
+        //                 onClick={handleUnsave}>
+        //                 Unsave </button>
+        //         </td>
+        //         <td></td>
+        //         <td>{props.name}</td>
+        //         <td>{props.description}</td>
+        //         <td><a href={props.website}>Visit website</a></td>
+        //         <td>{props.gov}</td>
+        //         <td>{props.region}</td>
+        //         <td>{props.city}</td>
+        //         <td>{props.creditUnion}</td>
+        //     </tr>
         )
     } else {
         return (
-            <tr>
-                <td><button onClick={saveLoan}>Save</button></td>
-                <td><button onClick={handleFindNearestBank}>Find the nearest bank</button></td>
-                <td>{props.name}</td>
-                <td>{props.description}</td>
-                <td><a href={props.website}>Visit website</a></td>
-                <td>{props.gov}</td>
-                <td>{props.region}</td>
-                <td>{props.city}</td>
-                <td>{props.creditUnion}</td>
-            </tr>
+                <CardGroup>
+                    <Card border="secondary" style={{ width: '18rem' }} >
+                    <Card.Body>
+                        <Card.Title>{props.name} <i class="fas fa-university left fa-sm "> </i> </Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted"><a href={props.website}>Visit website</a></Card.Subtitle>
+                        <Card.Text>
+                        {props.description}
+                        </Card.Text>
+                        <Card.Text>
+                        Government: {props.gov}
+                        </Card.Text>
+                        <Card.Text>
+                        State: {props.region}
+                        </Card.Text>
+                        <Card.Text>
+                        Credit Union: {props.creditUnion}
+                        </Card.Text>
+                        <Button variant="primary" size="md " block onClick={saveLoan}>
+                            Save 
+                        </Button>
+                        <Button variant="primary" size="md" block onClick={handleFindNearestBank} ><i class="fas fa-search-location fa-sm"></i>
+                        Near by Bank 
+                        </Button>
+                    </Card.Body>
+                    </Card>
+                </CardGroup>
+
+
+
         )
     }
 }
@@ -925,15 +1130,13 @@ function App() {
         <Router>
 
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <a className="navbar-brand" href="/">InfoLoan!</a>
+                <a className="navbar-brand" href="/">InfoLoan! <i class="fas fa-clipboard-check fa-lg"></i> </a>
                 <button className="navbar-toggler" type="button"  data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ml-auto">
-                        <li className="nav-item active">
-                            <a className="nav-link" href="/">Home</a>
-                        </li>
+            
                         {loginOutButton}
                     </ul>
                 </div>

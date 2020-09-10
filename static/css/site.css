@@ -1,11 +1,50 @@
-#map {
+
+.navbar-brand {
+  background: whitesmoke
+}
+
+.log-in{
+  width: 50%;
+  margin: 0 auto;
+  padding: 10px;
+
+
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  padding: 10px;
+  background: whitesmoke
+} 
+
+.money {
+  margin: auto;
+  width: 60%;
+  padding: 80px;
+}
+
+.homepage-button {
+  margin: auto;
+  width: 20%;
+  padding: 5px;
+
+}
+
+#card-img{
+  width: 50%; 
+  height: 50%; 
+  margin: auto;
+  object-fit: contain;
+  padding: 5px;
+}
+
+
+/* #map {
     height: 100%;
-  }
+}
+
   
   /* Optional: Makes the sample page fill the window. */
-  html,
-  body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
+  /* html,
+   
