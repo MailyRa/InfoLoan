@@ -85,8 +85,11 @@ function ControlledCarousel() {
             <Row md={4} id="hand">
                 <Col>
                 <div className="money">
-                    <i class="fas fa-hand-holding-usd fa-8x handicon"></i>
-                    <p>We are here to help you embark in this financial journey</p>
+                    <i class="fas fa-hand-holding-usd fa-8x"></i>
+                    
+                </div>
+                <div className="money-div">
+                    <p>We are here to help you embark in this financial journey!</p>
                 </div>
         
                 </Col>

@@ -7,7 +7,7 @@
   background: #5f9ea0
 } */
 
-.logo-phrase {
+.money-div {
   margin: auto;
   width: 100%;
   text-align: center;
@@ -21,18 +21,19 @@
 
 
 }
-/* #hand {
-  display: block;
+#hand {
   margin: auto;
-  width: 50%;
+  width: 100%;
+  text-align: center;
+  padding: 20px;
 
-} */
+}
 
 .homepage-button{
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
+  margin: auto;
+  width: 100%;
+  text-align: center;
+  padding: 20px;
 
 }
 
@@ -51,7 +52,7 @@ body {
   margin: auto;
   width: 50%;
   padding-top: 80px;
-  padding-bottom: 30px;
+  padding-bottom: 50px;
 
 }
 
