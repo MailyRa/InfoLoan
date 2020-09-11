@@ -1,27 +1,58 @@
 
-.navbar-brand {
-  background: whitesmoke
+/* .navbar-brand {
+  background: #5f9ea0
+}
+
+.navbarNav {
+  background: #5f9ea0
+} */
+
+.logo-phrase {
+  margin: auto;
+  width: 100%;
+  text-align: center;
+  padding: 20px;
 }
 
 .log-in{
   width: 50%;
   margin: 0 auto;
-  padding: 10px;
+  padding: 80px;
 
 
 }
+/* #hand {
+  display: block;
+  margin: auto;
+  width: 50%;
+
+} */
+
+.homepage-button{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+
+}
+
+.loan-category-table {
+  width: 50%;
+}
+
 
 body {
   height: 100%;
+  font-family:'Montseratt', sans-serif;
   margin: 0;
   padding: 10px;
-  background: whitesmoke
 } 
-
 .money {
   margin: auto;
-  width: 60%;
-  padding: 80px;
+  width: 50%;
+  padding-top: 80px;
+  padding-bottom: 30px;
+
 }
 
 .homepage-button {
@@ -38,8 +69,30 @@ body {
   object-fit: contain;
   padding: 5px;
 }
+.handicon{
+  width: 50px;
+  height: auto;
+  margin: 0 auto;
+  padding: 10px;
+  position: relative;
+  
+}
 
 
+#map-container{
+  overflow:hidden;
+  padding-bottom:56.25%;
+  position:relative;
+  height:0;
+}
+
+#map-div {
+  left:0;
+  top:0;
+  height:100%;
+  width:100%;
+  position:absolute;
+}
 /* #map {
     height: 100%;
 }

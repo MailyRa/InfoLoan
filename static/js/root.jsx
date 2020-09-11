@@ -21,16 +21,22 @@ const Button = ReactBootstrap.Button;
 const Card = ReactBootstrap.Card;
 const CardGroup = ReactBootstrap.CardGroup;
 const Jumbotron = ReactBootstrap.Jumbotron;
-
+const DropdownButton = ReactBootstrap.DropdownButton;
+const Dropdown = ReactBootstrap.Dropdown;
 
 
 
 function ControlledCarousel() {
     const [index, setIndex] = React.useState(0);
+    let history = useHistory();
     
     const handleSelect = (selectedIndex, e) => {
       setIndex(selectedIndex);
     };
+
+    const BrowseLoansClicked = (e) => {
+        history.push('/loan_categories')
+    }
   
     return (
     
@@ -76,18 +82,19 @@ function ControlledCarousel() {
             </Col>
             </Row>
 
-            <Row md={4}>
+            <Row md={4} id="hand">
                 <Col>
                 <div className="money">
-                    <i class="fas fa-hand-holding-usd fa-8x"></i>
-                    We are here to help you embark in this financial journey 
+                    <i class="fas fa-hand-holding-usd fa-8x handicon"></i>
+                    <p>We are here to help you embark in this financial journey</p>
                 </div>
+        
                 </Col>
             </Row>
             <Row>
                 <Col>
                 <div className="homepage-button">
-                    <Button variant="secondary" size="md" active= "true" onClick={CategoryContainer}>
+                    <Button variant="primary" type="submit" size="md" onClick={BrowseLoansClicked}>
                     Browse our loans
                     </Button>
                 </div>
@@ -302,97 +309,57 @@ function CreateUser() {
 
     return(
 
-        <Form>
-            <Form.Row>
-                <Form.Group as={Col} md="3" controlId="formGridName">
-                <Form.Label>First Name</Form.Label>
-                <Form.Control type="text" placeholder="First Name" onChange={(e) => setFname(e.target.value)} value={fname} />
-                </Form.Group>
+        <Card style={{ width: '30rem' }}>
+            <Card.Img variant="bottom" src="static/jpg/create_profile.jpg" />
+            <Card.Header as="h5">Create Profile</Card.Header>
+            <Form>
+                <Card.Body>
+                    <Card.Text>
+                        <Form.Row>
+                            <Form.Group as={Col} md="3" controlId="formGridName">
+                            <Form.Label>First Name</Form.Label>
+                            <Form.Control type="text" placeholder="First Name" onChange={(e) => setFname(e.target.value)} value={fname} />
+                            </Form.Group>
 
-                <Form.Group as={Col} md="3" controlId="formGridLastName">
-                <Form.Label>Last Name </Form.Label>
-                <Form.Control type="text" placeholder="Last Name" onChange={(e) => setLname(e.target.value)} value={lname}/>
-                </Form.Group>
-            </Form.Row>
-            <Form.Row>
-                <Form.Group as={Col} md="3" controlId="formGridEmail">
-                <Form.Label>Email</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} value={email} />
-                </Form.Group>
+                            <Form.Group as={Col} md="3" controlId="formGridLastName">
+                            <Form.Label>Last Name </Form.Label>
+                            <Form.Control type="text" placeholder="Last Name" onChange={(e) => setLname(e.target.value)} value={lname}/>
+                            </Form.Group>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Group as={Col} md="3" controlId="formGridEmail">
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control type="email" placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} value={email} />
+                            </Form.Group>
 
-                <Form.Group as={Col} md="3" controlId="formGridPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password}/>
-                </Form.Group>
-            </Form.Row>
+                            <Form.Group as={Col} md="3" controlId="formGridPassword">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password}/>
+                            </Form.Group>
+                        </Form.Row>
 
-            <Form.Group md="3" controlId="formGridAddress1">
-                <Form.Label>Address</Form.Label>
-                <Form.Control placeholder="1234 Main St" onChange={(e) => setAddress(e.target.value)} value={address}/>
-            </Form.Group>
-            <Form.Row>
-            <Form.Group as={Col} md="3" controlId="formGridDateBirth">
-                <Form.Label>Date of Birth</Form.Label>
-                <Form.Control placeholder="DOB" onChange={(e) => setDob(e.target.value)} value={dob}/>
-            </Form.Group>
-            <Form.Group as={Col} md="3" controlId="formGridCreditScore">
-                <Form.Label>Credit Score</Form.Label>
-                <Form.Control placeholder="Credit Score" onChange={(e) => setCreditScore(e.target.value)} value={credit_score}/>
-            </Form.Group>
-            </Form.Row>
-            <Button variant="primary" onClick={createUser} type="submit">
-                Submit
-            </Button>
-        </Form>
+                        <Form.Group md="3" controlId="formGridAddress1">
+                            <Form.Label>Address</Form.Label>
+                            <Form.Control placeholder="1234 Main St" onChange={(e) => setAddress(e.target.value)} value={address}/>
+                        </Form.Group>
+                        <Form.Row>
+                        <Form.Group as={Col} md="3" controlId="formGridDateBirth">
+                            <Form.Label>Date of Birth</Form.Label>
+                            <Form.Control placeholder="DOB" onChange={(e) => setDob(e.target.value)} value={dob}/>
+                        </Form.Group>
+                        <Form.Group as={Col} md="3" controlId="formGridCreditScore">
+                            <Form.Label>Credit Score</Form.Label>
+                            <Form.Control placeholder="Credit Score" onChange={(e) => setCreditScore(e.target.value)} value={credit_score}/>
+                        </Form.Group>
+                        </Form.Row>
+                    </Card.Text>
+                    <Button variant="primary" onClick={createUser} type="submit">
+                        Submit
+                    </Button>
+                </Card.Body>
+            </Form>
+        </Card>
 
-
-
-
-
-
-        // <div>
-        //     <p>First Name:</p>
-        //     <input type="text" 
-        //     onChange={(e) => setFname(e.target.value)}
-        //     value={fname}/>
-
-        //     <p>Last Name:</p>
-        //     <input type="text"
-        //     onChange={(e) => setLname(e.target.value)} 
-        //     value={lname}/>
-
-
-        //     <p>Date of Birth:</p>
-        //     <input type="text"
-        //     onChange={(e) => setDob(e.target.value)}
-        //     value={dob}/>
-
-
-        //     <p>Address:</p>
-        //     <input type="text"
-        //     onChange={(e) => setAddress(e.target.value)}
-        //     value={address}/>
-
-
-        //     <p>Credit Score:</p>
-        //     <input type="text"
-        //     onChange={(e) => setCreditScore(e.target.value)}
-        //     value={credit_score}/>
-
-
-        //     <p>Email:</p>
-        //     <input type="text"
-        //     onChange={(e) => setEmail(e.target.value)}
-        //     value={email}/>
-
-
-        //     <p>Password:</p>
-        //     <input type="password"
-        //     onChange={(e) => setPassword(e.target.value)}
-        //     value={password}/>
-
-        //     <button onClick={createUser}> Create Profile </button>
-        // </div>
     )
 }
 
@@ -406,7 +373,6 @@ function CreateUser() {
 // Displaying all the loans by categories
 function CategoriesListItem(props) {
     return <option value={props.id}>{props.name}</option>
-
 }
 
 function getLoans(category_id) {
@@ -529,7 +495,33 @@ function CategoryContainer(props) {
     
         <div>
             <input type="text" placeholder="Search..." value={props.inputValue} onChange={filterLoansEvent} />
-            <button> Search  </button>
+
+
+                {/* <div className="dropdown-loan-categories">
+                    <DropdownButton id="0" title="Choose Loan Type" onChange={e => updateLoans(e.target.value)}>
+                    <Dropdown.Item >{categories}</Dropdown.Item>
+                    </DropdownButton>
+                </div>
+
+                <div className="dropdown-government">
+                <DropdownButton title="Government" onChange={e => handleGovTypeUpdated(e.target.value)} >
+                <Dropdown.Item id="0">All</Dropdown.Item>
+                <Dropdown.Item id="1">Yes</Dropdown.Item>
+                <Dropdown.Item id="2">No</Dropdown.Item>
+                </DropdownButton>
+                </div>
+
+                <div className="dropdown-credit-union">
+                <DropdownButton title="Credit Union" onChange={e => handleUnionUpdated(e.target.value)}>
+                <Dropdown.Item  id="0">All</Dropdown.Item>
+                <Dropdown.Item  id="1">Yes</Dropdown.Item>
+                <Dropdown.Item  id="2">No</Dropdown.Item>
+                </DropdownButton>
+                </div> */}
+
+            
+
+
             <form>
             <div>
             <label htmlFor="Loan Categories"> Choose a loan type: </label><br/>
@@ -582,7 +574,7 @@ function MapContainer(props) {
     const options = { center: { lat: lat, lng: lng }, zoom: 11 }
        
     return (
-        <div id="map-container">
+        <div id="map-container" >
             <MapComponent options={options}
                           searchTerm={searchTerm} />
         </div>
@@ -590,31 +582,6 @@ function MapContainer(props) {
 }
 
 
-//add
-//Map Container 
-function MapContainer(props) {
-    const location = useLocation();
-    const queryDict = new URLSearchParams(location.search);
-    
-    var searchTerm = "";
-    for(const key of queryDict) {
-        if (key[0] === "name") {
-            searchTerm = key[1];
-        }
-    }
-    
-    const lat = 37.601773;
-    const lng = -122.202870;
-
-    const options = { center: { lat: lat, lng: lng }, zoom: 11 }
-       
-    return (
-        <div id="map-container">
-            <MapComponent options={options}
-                          searchTerm={searchTerm} />
-        </div>
-    )
-}
 
 
 
@@ -678,8 +645,8 @@ function MapComponent(props) {
     
     return (
         <div>
-            <div id="map-div"
-                style={{ height: `60vh`, margin: `1em 0`, borderRadius: `0.5em`, width: '50%' }}
+            <div id="map-div" 
+                style={{ height: `500px`, margin: `1em 0`, borderRadius: `0.5em`, width: '50%' }}
                 ref={ref}/>
         
         </div>
@@ -689,8 +656,8 @@ function MapComponent(props) {
 //Category Loan Table
 function LoanCategoryTable(props) {
     return (
-        <table class="table table-striped">
-            <thead>
+        <table class="table table-striped loan-category-table">
+            {/* <thead>
                 <tr>
                 <th></th>
                 <th></th>
@@ -702,7 +669,7 @@ function LoanCategoryTable(props) {
                 <th>City</th>
                 <th>Credit Union</th>
                 </tr>
-            </thead>
+            </thead> */}
             <tbody>
                 {props.rows}
             </tbody>
@@ -834,26 +801,6 @@ function SavedLoansRow(props) {
 
 
 
-
-
-
-        //     <tr>
-        //         <td><input type="checkbox" name={props.id}/>
-        //             {' '}
-        //             <p>Check to compare loan</p>
-        //             <button 
-        //                 onClick={handleUnsave}>
-        //                 Unsave </button>
-        //         </td>
-        //         <td></td>
-        //         <td>{props.name}</td>
-        //         <td>{props.description}</td>
-        //         <td><a href={props.website}>Visit website</a></td>
-        //         <td>{props.gov}</td>
-        //         <td>{props.region}</td>
-        //         <td>{props.city}</td>
-        //         <td>{props.creditUnion}</td>
-        //     </tr>
         )
     } else {
         return (
@@ -992,7 +939,6 @@ function SavedLoans(props) {
     return (
         <div>
             <input type="text" placeholder="Search..." value={props.inputValue} onChange={loanFilterOnChange} />
-            <button> Search  </button>
             <form action="/compare_loans">
                 <button>Compare Loans</button>
                 <h2>Saved Loans</h2>
@@ -1090,24 +1036,24 @@ function App() {
         let listItem = undefined;
         if(isLoggedIn === 'true') {
             listItem = 
-                    <ul>
-                        <li className="nav-item">
+                    <ul class="navbar-nav">
+                        <li className="nav-item active">
                             <a className="nav-link" href="/logout">Logout</a>
                         </li>
-                        <li className="nav-item">
+                        <li className="nav-item active">
                             <a className="nav-link" href="/user_profile">Profile</a>
                         </li>
-                        <li className="nav-item">
+                        <li className="nav-item active">
                             <a className="nav-link" href="/loan_categories"> Loan Categories</a>
                         </li>
-                        <li className="nav-item">
+                        <li className="nav-item active">
                             <a className="nav-link" href="/saved_loans"> Saved Loans</a>
                         </li>
                     </ul>
         } else {
             
             listItem =
-                    <ul>
+                    <ul class="navbar-nav">
                         <li className="nav-item active">
                             <a className="nav-link" href="/login">Login</a>
                         </li>
@@ -1126,17 +1072,26 @@ function App() {
 
 
 
+
+    
     return (
         <Router>
-
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <a className="navbar-brand" href="/">InfoLoan! <i class="fas fa-clipboard-check fa-lg"></i> </a>
-                <button className="navbar-toggler" type="button"  data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <nav className="navbar navbar-expand-sm navbar-light" id="nav">
+                <a className="navbar-brand" href="/">
+                    <img 
+                        src="static/jpg/logo.png" 
+                        width="80" 
+                        height="80" 
+                        className="d-inline-block" 
+                        alt=""/>
+                    InfoLoan!
+                        
+                </a> 
+                <button className="navbar-toggler" type="button" data-toggle="collapse"  data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ml-auto">
-            
                         {loginOutButton}
                     </ul>
                 </div>
