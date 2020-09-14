@@ -52,7 +52,8 @@ def loans_json():
             "loan_gov": loan.loan_gov,
             "loan_region": loan.loan_region,
             "loan_city": loan.loan_city,
-            "loan_credit_union": loan.loan_credit_union
+            "loan_credit_union": loan.loan_credit_union,
+            "loan_photo": loan.loan_photo
 
         } for loan in loans
     ]
@@ -167,7 +168,8 @@ def user_profile():
                 "loan_gov": loan[1].loan_gov,
                 "loan_region": loan[1].loan_region,
                 "loan_city": loan[1].loan_city,
-                "loan_credit_union": loan[1].loan_credit_union
+                "loan_credit_union": loan[1].loan_credit_union,
+                "loan_photo": loan[1].loan_photo
             } for loan in users_loans
         ]
     }
@@ -201,7 +203,8 @@ def compare_loans():
             "loan_gov": loan.loan_gov,
             "loan_region": loan.loan_region,
             "loan_city": loan.loan_city,
-            "loan_credit_union": loan.loan_credit_union
+            "loan_credit_union": loan.loan_credit_union,
+            "loan_photo": loan.loan_photo
 
         } for loan in loans
     ]

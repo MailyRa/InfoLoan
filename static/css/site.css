@@ -1,18 +1,14 @@
 
-/* .navbar-brand {
-  background: #5f9ea0
-}
-
-.navbarNav {
-  background: #5f9ea0
-} */
 
 .money-div {
   margin: auto;
   width: 100%;
   text-align: center;
   padding: 20px;
+  font-weight: 900;
+  font-family: Verdana, sans-serif;
 }
+
 
 .log-in{
   width: 50%;
@@ -42,11 +38,25 @@
 }
 
 
+.homepage-phrase {
+  font-weight: 900 bold;
+
+}
+
+
+.logo-phrase {
+  font-weight: 900;
+
+}
+
+
 body {
   height: 100%;
-  font-family:'Montseratt', sans-serif;
+  font-family:"Lucida Console", Courier, monospace;
   margin: 0;
   padding: 10px;
+  font-weight: 500;
+  background: #deeaee;  
 } 
 .money {
   margin: auto;
@@ -79,26 +89,63 @@ body {
   
 }
 
-
-#map-container{
-  overflow:hidden;
-  padding-bottom:56.25%;
-  position:relative;
-  height:0;
-}
-
 #map-div {
-  left:0;
-  top:0;
-  height:100%;
-  width:100%;
-  position:absolute;
-}
-/* #map {
-    height: 100%;
+  height: 50%;
+  width: 50%;
 }
 
+.lady:hover {
+  vertical-align: middle;
+  /* border-style: none; 
+  opacity: 0.5; */
   
-  /* Optional: Makes the sample page fill the window. */
-  /* html,
-   
+}
+.loans_choices{
+  background-repeat: no-repeat;
+  background-position: right top;
+  margin-right: 200px;
+  background-attachment: fixed;
+}
+.loans-background {
+  background-image: url("static/jpg/loan_categories.jpg");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.loans{
+  margin: 30px;
+  background-color: #ffffff;
+  border: 1px solid grey;
+  opacity: 0.9;
+  border-radius: 5px;
+  border-style: groove;
+  width: 500px;
+  padding: 10px;
+}
+
+
+.card_loans {
+  width:300px;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 30px;
+  
+  
+}
+
+.loans_info {
+  margin: 1%;
+  font-weight: bold;
+  color: #000000;
+
+}
+
+
+#search{
+  width: 320px;
+  padding: 10px;
+  margin: 0;
+}
+

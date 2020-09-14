@@ -43,6 +43,8 @@ class Loan(db.Model):
     loan_region = db.Column(db.String)
     loan_city = db.Column(db.String)
     loan_credit_union = db.Column(db.String)
+    loan_photo = db.Column(db.String)
+    
     
     def __repr__(self):
         return f'<Loan loan_id={self.loan_id}, loan_name={self.loan_name}, loan_description={self.loan_description}'

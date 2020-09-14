@@ -23,6 +23,9 @@ const CardGroup = ReactBootstrap.CardGroup;
 const Jumbotron = ReactBootstrap.Jumbotron;
 const DropdownButton = ReactBootstrap.DropdownButton;
 const Dropdown = ReactBootstrap.Dropdown;
+const CardDeck = ReactBootstrap.CardDeck;
+
+
 
 
 
@@ -37,7 +40,7 @@ function ControlledCarousel() {
     const BrowseLoansClicked = (e) => {
         history.push('/loan_categories')
     }
-  
+  ß
     return (
     
         <Container fluid="md">
@@ -50,9 +53,11 @@ function ControlledCarousel() {
                     src="static/jpg/college.jpg?text=First slide&bg=373940"
                     alt="First slide"
                 />
-                <Carousel.Caption>
+                <Carousel.Caption className="homepage-phrase">
                     <h3>Welcome to the beginning of your Loan Journey</h3>
                     <p>Need help paying your School Loans?</p>
+                    
+
                 </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
@@ -62,7 +67,7 @@ function ControlledCarousel() {
                     alt="Second slide"
                 />
         
-                <Carousel.Caption>
+                <Carousel.Caption className="homepage-phrase">
                     <h3>Ready to buy a home?</h3>
                     <p>Find out what loans are best for you</p>
                 </Carousel.Caption>
@@ -73,7 +78,7 @@ function ControlledCarousel() {
                     src="static/jpg/credit.jpg?text=Third slide&bg=20232a"
                     alt="Third slide"
                 />
-                <Carousel.Caption>
+                <Carousel.Caption className="homepage-phrase">
                     <h3>Too many credit card balances?</h3>
                     <p>We have the best options to help you lower you balances</p>
                 </Carousel.Caption>
@@ -89,7 +94,7 @@ function ControlledCarousel() {
                     
                 </div>
                 <div className="money-div">
-                    <p>We are here to help you embark in this financial journey!</p>
+                    <p>We are here to help you embark in your financial journey!</p>
                 </div>
         
                 </Col>
@@ -394,6 +399,7 @@ function getLoans(category_id) {
                     region={loan["loan_region"]}
                     city={loan["loan_city"]}
                     creditUnion={loan["loan_credit_union"]}
+                    photo={loan["loan_photo"]}
                     isSaved={false} />
             );
         }
@@ -494,67 +500,59 @@ function CategoryContainer(props) {
 
 
 
+
+
     return (
-    
-        <div>
-            <input type="text" placeholder="Search..." value={props.inputValue} onChange={filterLoansEvent} />
-
-
-                {/* <div className="dropdown-loan-categories">
-                    <DropdownButton id="0" title="Choose Loan Type" onChange={e => updateLoans(e.target.value)}>
-                    <Dropdown.Item >{categories}</Dropdown.Item>
-                    </DropdownButton>
-                </div>
-
-                <div className="dropdown-government">
-                <DropdownButton title="Government" onChange={e => handleGovTypeUpdated(e.target.value)} >
-                <Dropdown.Item id="0">All</Dropdown.Item>
-                <Dropdown.Item id="1">Yes</Dropdown.Item>
-                <Dropdown.Item id="2">No</Dropdown.Item>
-                </DropdownButton>
-                </div>
-
-                <div className="dropdown-credit-union">
-                <DropdownButton title="Credit Union" onChange={e => handleUnionUpdated(e.target.value)}>
-                <Dropdown.Item  id="0">All</Dropdown.Item>
-                <Dropdown.Item  id="1">Yes</Dropdown.Item>
-                <Dropdown.Item  id="2">No</Dropdown.Item>
-                </DropdownButton>
-                </div> */}
-
+        <Container fluid="md">
             
-
-
-            <form>
-            <div>
-            <label htmlFor="Loan Categories"> Choose a loan type: </label><br/>
-            <select name="loans" id="loans" onChange={e => updateLoans(e.target.value)}>
-                <option id="0"></option>
-                {categories}
-            </select>
-            </div>
-            <br/>
-            <div> <label htmlFor="Government"> Government Loan: </label><br/>
-            <select name="government_loans" id="gov_loan" onChange={e => handleGovTypeUpdated(e.target.value)}>
-                <option id="0">All</option>
-                <option id="1">Yes</option>
-                <option id="2">No</option>   
-            </select>
-            </div>
-            <br/>
-            <div><label htmlFor="Credit Union"> Credit Union: </label><br/>
-            <select name="credit_union" id="credit_union_bank" onChange={e => handleUnionUpdated(e.target.value)}>
-                <option id="0">All</option>
-                <option id="1">Yes</option>
-                <option id="2">No</option>   
-            </select>
-            </div>
-
-            </form>
-            <LoanCategoryTable 
-                rows={loans} />
+                <div>
+                <form >
+                    <div className="md-form mt-0" id="search">
+                        <input className="form-control" type="text" placeholder="Search" aria-label="Search" value={props.inputValue} onChange={filterLoansEvent} />
+                    </div>
+                    <br></br>
+                    {/* <Image className="lady" src="static/jpg/loan_categories.jpg" fluid/> */}
             
-        </div>
+                <Jumbotron className="loans-background" style={{
+                backgroundImage:
+                    "url('static/jpg/loan_categories.jpg')"
+                }}>
+                
+                <br></br>
+                <form className="loans">
+                    <div className="loans_info">
+                        <label htmlFor="Loan Categories"> Choose a loan type: </label><br/>
+                        <select name="loans" id="loans" onChange={e => updateLoans(e.target.value)}>
+                            <option id="0"></option>
+                            {categories}
+                        </select>
+                    </div>
+                    
+                    <br/>
+                    <div className="loans_info"> <label htmlFor="Government"> Government Loan: </label><br/>
+                        <select name="government_loans" id="gov_loan" onChange={e => handleGovTypeUpdated(e.target.value)}>
+                            <option id="0">All</option>
+                            <option id="1">Yes</option>
+                            <option id="2">No</option>   
+                        </select>
+                    </div>
+                    <br/>
+                    <div className="loans_info"><label htmlFor="Credit Union"> Credit Union: </label><br/>
+                        <select name="credit_union" id="credit_union_bank" onChange={e => handleUnionUpdated(e.target.value)}>
+                            <option id="0">All</option>
+                            <option id="1">Yes</option>
+                            <option id="2">No</option>   
+                        </select>
+                    </div>
+
+                </form>
+                
+                <LoanCategoryTable className="loans_choices"
+                    rows={loans} />
+                </Jumbotron>
+                </form>
+            </div>
+        </Container>
     );
 }
 
@@ -571,10 +569,10 @@ function MapContainer(props) {
         }
     }
     
-    const lat = 37.601773;
-    const lng = -122.202870;
+    const lat = 37.7749;
+    const lng = -122.4194;
 
-    const options = { center: { lat: lat, lng: lng }, zoom: 11 }
+    const options = { center: { lat: lat, lng: lng }, zoom: 13 }
        
     return (
         <div id="map-container" >
@@ -595,6 +593,7 @@ function MapComponent(props) {
     const [googleMap, setGoogleMap] = React.useState();
     const [places, setPlaces] = React.useState();
     const [pyrmont, setPyrmont] = React.useState();
+    const [locations, setLocations] = React.useState([]);
     
     React.useEffect(() => {
         const onLoad = () => {
@@ -604,21 +603,23 @@ function MapComponent(props) {
             setPlaces(new google.maps.places.PlacesService(gMap));
         }
 
-        let script = document.createElement("script");
-        script.type = "text/javascript";
-        if (script.readyState) {
-            script.onreadystatechange = function() {
-              if (script.readyState === "loaded" || script.readyState === "complete") {
-                script.onreadystatechange = null;
-                onLoad();
-              }
-            };
-        } else {
-            script.onload = () => onLoad();
-        }
+            let script = document.createElement("script");
+            script.type = "text/javascript";
+            if (script.readyState) {
+                script.onreadystatechange = function() {
+                if (script.readyState === "loaded" || script.readyState === "complete") {
+                    script.onreadystatechange = null;
+                    onLoad();
+                }
+                };
+            } else {
+                script.onload = () => onLoad();
+            }
 
-        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDX3EFiSjD8lNuVqr4tue8KkoSwKuSmnbY&libraries=places';
-        document.getElementsByTagName("head")[0].appendChild(script);
+            script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDX3EFiSjD8lNuVqr4tue8KkoSwKuSmnbY&libraries=places';
+
+            document.getElementsByTagName("head")[0].appendChild(script);
+            console.log("Adding script!")
 
     }, [options])
 
@@ -633,25 +634,35 @@ function MapComponent(props) {
 
     function gmapCallback(results, status) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
+            var locationList = [];
             for (var i = 0; i < results.length; i++) {
                 var place = results[i];
                 console.log(place);
-                const marker = new window.google.maps.Marker({
-                    googleMap,
+                var marker = new window.google.maps.Marker({
                     position: place.geometry.location,
+                    map: googleMap,
                     label: `${i + 1}`,
-                    title: place.formatted_address,
-                })
+                    title: place.formatted_address
+                });
+                marker.setMap(googleMap);
+                locationList.push(
+                    <li>
+                        <a href={"https://maps.google.com/?q=".concat(place.formatted_address)}>{place.formatted_address}</a>
+                    </li>
+                )
             }
+            setLocations(locationList)
         }
     }
     
     return (
         <div>
             <div id="map-div" 
-                style={{ height: `500px`, margin: `1em 0`, borderRadius: `0.5em`, width: '50%' }}
+                style={{ margin: `1em 0`, borderRadius: `0.5em` }}
                 ref={ref}/>
-        
+            <ol>
+                {locations}
+            </ol>
         </div>
     )
 }
@@ -660,19 +671,6 @@ function MapComponent(props) {
 function LoanCategoryTable(props) {
     return (
         <table class="table table-striped loan-category-table">
-            {/* <thead>
-                <tr>
-                <th></th>
-                <th></th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Website</th>
-                <th>Government</th>
-                <th>State</th>
-                <th>City</th>
-                <th>Credit Union</th>
-                </tr>
-            </thead> */}
             <tbody>
                 {props.rows}
             </tbody>
@@ -770,47 +768,52 @@ function SavedLoansRow(props) {
 
 
 
-
     if (props.isSaved === true) {
         return (
-            <CardGroup>
-                    <Card border="secondary" style={{ width: '18rem' }} >
-                    <Card.Body>
-                        <Card.Title>{props.name} <i class="fas fa-university left fa-sm "> </i> </Card.Title>
-                        <Card.Subtitle className="mb-2 text-muted"><a href={props.website}>Visit website</a></Card.Subtitle>
-                        <Card.Text>
-                        {props.description}
-                        </Card.Text>
-                        <Card.Text>
-                        Government: {props.gov}
-                        </Card.Text>
-                        <Card.Text>
-                        State: {props.region}
-                        </Card.Text>
-                        <Card.Text>
-                        Credit Union: {props.creditUnion}
-                        </Card.Text>
-                        <Card.Text>
-                       <Form.Check label="Compare Loans!" name={props.id}/>
-                        </Card.Text>
-                        <Button variant="primary" size="md " block onClick={handleUnsave}>
-                            UnSave 
-                        </Button>
-                        
-                    </Card.Body>
-                    </Card>
-                </CardGroup>
+                <CardDeck className="bsPrefix">
+                    <div class="card panels-card">
+                        <Card border="secondary" style={{ width: '18rem' }} >
+                        <Card.Img variant="top" src={props.photo} />
+                        <Card.Body>
+                            <Card.Title>{props.name} <i class="fas fa-university left fa-sm "> </i> </Card.Title>
+                            <Card.Subtitle className="mb-2 text-muted"><a href={props.website}>Visit website</a></Card.Subtitle>
+                            <Card.Text>
+                            {props.description}
+                            </Card.Text>
+                            <Card.Text>
+                            Government: {props.gov}
+                            </Card.Text>
+                            <Card.Text>
+                            State: {props.region}
+                            </Card.Text>
+                            <Card.Text>
+                            Credit Union: {props.creditUnion}
+                            </Card.Text>
+                            <Card.Text>
+                        <Form.Check label="Compare Loans!" name={props.id}/>
+                            </Card.Text>
+                            <Button variant="primary" size="md " block onClick={handleUnsave}>
+                                UnSave 
+                            </Button>
+                            
+                        </Card.Body>
+                        </Card>
+                    </div>
+            
+                </CardDeck>
 
 
-
+// border="secondary" className="cards" style={{ width: '18rem' }} 
 
         )
     } else {
         return (
-                <CardGroup>
-                    <Card border="secondary" style={{ width: '18rem' }} >
+                <div className="card-deck">
+                <CardDeck className="card_loans">
+                    <Card className="p-3">
+                    <Card.Img variant="top" src={props.photo} />
                     <Card.Body>
-                        <Card.Title>{props.name} <i class="fas fa-university left fa-sm "> </i> </Card.Title>
+                        <Card.Title>{props.name} <i class="fas fa-university center fa-sm "> </i> </Card.Title>
                         <Card.Subtitle className="mb-2 text-muted"><a href={props.website}>Visit website</a></Card.Subtitle>
                         <Card.Text>
                         {props.description}
@@ -824,15 +827,19 @@ function SavedLoansRow(props) {
                         <Card.Text>
                         Credit Union: {props.creditUnion}
                         </Card.Text>
-                        <Button variant="primary" size="md " block onClick={saveLoan}>
+
+                        <Button variant="primary" size="sm " block onClick={saveLoan}>
                             Save 
                         </Button>
-                        <Button variant="primary" size="md" block onClick={handleFindNearestBank} ><i class="fas fa-search-location fa-sm"></i>
+                        <Button variant="primary" size="" block onClick={handleFindNearestBank} ><i class="fas fa-search-location fa-sm"></i>
                         Near by Bank 
                         </Button>
+                    
                     </Card.Body>
                     </Card>
-                </CardGroup>
+
+                </CardDeck>
+                </div>
 
 
 
@@ -888,6 +895,7 @@ const filterLoans = (value, savedLoanJson, areSaved, isGov, isUnion) => {
                     region={loan["loan_region"]}
                     city={loan["loan_city"]}
                     creditUnion={loan["loan_credit_union"]}
+                    photo={loan["loan_photo"]}
                     isSaved={areSaved}/>
         );
     }
@@ -924,6 +932,7 @@ function SavedLoans(props) {
                             region={loan["loan_region"]}
                             city={loan["loan_city"]}
                             creditUnion={loan["loan_credit_union"]}
+                            photo={loan["loan_photo"]}
                             isSaved={true}/>
                 );
             }
@@ -994,6 +1003,7 @@ function CompareLoansList(props) {
                         <td>{loanJson["loan_region"]}</td>
                         <td>{loanJson["loan_city"]}</td>
                         <td>{loanJson["loan_credit_union"]}</td>
+                        <td><img src={loanJson["loan_photo"]}></img></td>
                     </tr>
                 )
             }
@@ -1047,10 +1057,10 @@ function App() {
                             <a className="nav-link" href="/user_profile">Profile</a>
                         </li>
                         <li className="nav-item active">
-                            <a className="nav-link" href="/loan_categories"> Loan Categories</a>
+                            <a className="nav-link" href="/loan_categories"> Find Loans</a>
                         </li>
                         <li className="nav-item active">
-                            <a className="nav-link" href="/saved_loans"> Saved Loans</a>
+                            <a className="nav-link" href="/saved_loans"> Your Saved Loans</a>
                         </li>
                     </ul>
         } else {
@@ -1064,7 +1074,7 @@ function App() {
                             <a className="nav-link" href="/create_user_form"> Create Profile </a>
                         </li>
                         <li className="nav-item active">
-                            <a className="nav-link" href="/loan_categories"> Loan Categories</a>
+                            <a className="nav-link" href="/loan_categories"> Find Loans</a>
                         </li>
                     </ul>
 
@@ -1081,7 +1091,7 @@ function App() {
         <Router>
             <nav className="navbar navbar-expand-sm navbar-light" id="nav">
                 <a className="navbar-brand" href="/">
-                    <img 
+                    <img className="logo-phrase"
                         src="static/jpg/logo.png" 
                         width="80" 
                         height="80" 

@@ -9,7 +9,7 @@ def create_user(fname, lname, dob, address, credit_score, email, password):
 
     return user 
 
-def create_loan(loan_name, loan_description, loan_website, loan_gov, loan_region, loan_city, loan_credit_union, category_loans_id):
+def create_loan(loan_name, loan_description, loan_website, loan_gov, loan_region, loan_city, loan_credit_union, category_loans_id, loan_photo):
 
     loan = Loan(loan_name=loan_name,
                 loan_description=loan_description,
@@ -18,7 +18,8 @@ def create_loan(loan_name, loan_description, loan_website, loan_gov, loan_region
                 loan_region=loan_region,
                 loan_city=loan_city,
                 loan_credit_union=loan_credit_union,
-                category_loans_id=category_loans_id)
+                category_loans_id=category_loans_id,
+                loan_photo=loan_photo)
 
     db.session.add(loan)
     db.session.commit()
