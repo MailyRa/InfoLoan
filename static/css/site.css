@@ -131,8 +131,6 @@ body {
   padding: 10px;
   border-radius: 5px;
   margin: 30px;
-  
-  
 }
 
 .loans_info {
@@ -143,9 +141,26 @@ body {
 }
 
 
+
+.unsave_button {
+  width: 300px;
+  padding: 10px;
+  margin: auto;
+  border: 1px solid grey;
+  padding-bottom: 10px;
+  text-align:center;
+}
+.card{
+  display: flex;
+  flex-wrap: wrap;
+}
+#compare{
+  font-weight: 600;
+}
 #search{
   width: 320px;
   padding: 10px;
   margin: 0;
+  
 }
 

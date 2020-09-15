@@ -370,7 +370,7 @@
                 "loan_region": "All-State",
                 "loan_city": "All-cities",
                 "loan_credit_union": "No",
-                "loan_photo": "static/jpg/bank_logos/small_business.loans.jpg"
+                "loan_photo": "static/jpg/bank_logos/small_business_loans.jpg"
             },
             {
                 "loan_name": "US Bank ",

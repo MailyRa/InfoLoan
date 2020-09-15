@@ -24,10 +24,7 @@ const Jumbotron = ReactBootstrap.Jumbotron;
 const DropdownButton = ReactBootstrap.DropdownButton;
 const Dropdown = ReactBootstrap.Dropdown;
 const CardDeck = ReactBootstrap.CardDeck;
-
-
-
-
+const CardColumns = ReactBootstrap.CardColumns;
 
 function ControlledCarousel() {
     const [index, setIndex] = React.useState(0);
@@ -40,7 +37,7 @@ function ControlledCarousel() {
     const BrowseLoansClicked = (e) => {
         history.push('/loan_categories')
     }
-  ß
+  
     return (
     
         <Container fluid="md">
@@ -142,6 +139,8 @@ function Login() {
         .then(response => response.json())
         .then(data => {
             if("error" in data) {
+
+    
                 alert(data["error"])
             } else { 
                 localStorage.setItem('is_logged_in', true);
@@ -510,9 +509,7 @@ function CategoryContainer(props) {
                     <div className="md-form mt-0" id="search">
                         <input className="form-control" type="text" placeholder="Search" aria-label="Search" value={props.inputValue} onChange={filterLoansEvent} />
                     </div>
-                    <br></br>
-                    {/* <Image className="lady" src="static/jpg/loan_categories.jpg" fluid/> */}
-            
+                    <br></br>            
                 <Jumbotron className="loans-background" style={{
                 backgroundImage:
                     "url('static/jpg/loan_categories.jpg')"
@@ -547,8 +544,9 @@ function CategoryContainer(props) {
 
                 </form>
                 
-                <LoanCategoryTable className="loans_choices"
-                    rows={loans} />
+                <CardColumns>
+                    {loans}
+                </CardColumns>
                 </Jumbotron>
                 </form>
             </div>
@@ -667,23 +665,6 @@ function MapComponent(props) {
     )
 }
 
-//Category Loan Table
-function LoanCategoryTable(props) {
-    return (
-        <table class="table table-striped loan-category-table">
-            <tbody>
-                {props.rows}
-            </tbody>
-        </table>
-    )
-}
-
-
-
-
-
-
-
 //Fetch the data to compare the loans for the user 
 function LoanContainer(props) {
     let { category_id } = useParams();
@@ -732,7 +713,7 @@ function SavedLoansRow(props) {
         .then(data => {
             console.log(data)
             if ("delete" in data) {
-                history.push('/saved_loans');
+                window.location.href = "/saved_loans" ;
             }
          
         })
@@ -750,10 +731,10 @@ function SavedLoansRow(props) {
         .then((response) => response.json())
         .then(data => {
             if ("success" in data) {
-                alert( "Loan Saved!")
+                window.showAlert("Loan Saved!")
             } else {
                 ("Error" in data); {
-                    alert("Loan already Saved")
+                    window.showAlert("Loan already Saved")
                 }
             }
         })
@@ -765,84 +746,76 @@ function SavedLoansRow(props) {
         history.push('/map?name='+props.name);
     }
 
-
-
-
     if (props.isSaved === true) {
         return (
-                <CardDeck className="bsPrefix">
-                    <div class="card panels-card">
-                        <Card border="secondary" style={{ width: '18rem' }} >
-                        <Card.Img variant="top" src={props.photo} />
-                        <Card.Body>
-                            <Card.Title>{props.name} <i class="fas fa-university left fa-sm "> </i> </Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted"><a href={props.website}>Visit website</a></Card.Subtitle>
-                            <Card.Text>
-                            {props.description}
-                            </Card.Text>
-                            <Card.Text>
-                            Government: {props.gov}
-                            </Card.Text>
-                            <Card.Text>
-                            State: {props.region}
-                            </Card.Text>
-                            <Card.Text>
-                            Credit Union: {props.creditUnion}
-                            </Card.Text>
-                            <Card.Text>
-                        <Form.Check label="Compare Loans!" name={props.id}/>
-                            </Card.Text>
-                            <Button variant="primary" size="md " block onClick={handleUnsave}>
-                                UnSave 
-                            </Button>
-                            
-                        </Card.Body>
-                        </Card>
-                    </div>
-            
-                </CardDeck>
-
-
-// border="secondary" className="cards" style={{ width: '18rem' }} 
-
+            <Card style={{ width: '20rem'}} >
+                <Card.Img variant="top" src={props.photo} />
+                <Card.Body>
+                    <Card.Title>{props.name} <i class="fas fa-university left fa-sm "> </i> </Card.Title>
+                    
+                    <Card.Subtitle className="mb-2 text-muted"><a href={props.website}>Visit website</a></Card.Subtitle>
+                    
+                    <Card.Text>
+                        {props.description}
+                    </Card.Text>
+                    
+                    <Card.Text>
+                        Government: {props.gov}
+                    </Card.Text>
+                    
+                    <Card.Text>
+                        State: {props.region}
+                    </Card.Text>
+                    
+                    <Card.Text>
+                        Credit Union: {props.creditUnion}
+                    </Card.Text>
+                    
+                    <Card.Text id="compare">
+                        <Form.Check label="Compare Loans!" size="md "  name={props.id}/>
+                    </Card.Text>
+                    
+                    <Button variant="primary" size="sm "  block onClick={handleUnsave}>
+                        UnSave 
+                    </Button>
+                    
+                </Card.Body>
+            </Card>
         )
     } else {
         return (
-                <div className="card-deck">
-                <CardDeck className="card_loans">
-                    <Card className="p-3">
-                    <Card.Img variant="top" src={props.photo} />
-                    <Card.Body>
-                        <Card.Title>{props.name} <i class="fas fa-university center fa-sm "> </i> </Card.Title>
-                        <Card.Subtitle className="mb-2 text-muted"><a href={props.website}>Visit website</a></Card.Subtitle>
-                        <Card.Text>
-                        {props.description}
-                        </Card.Text>
-                        <Card.Text>
-                        Government: {props.gov}
-                        </Card.Text>
-                        <Card.Text>
-                        State: {props.region}
-                        </Card.Text>
-                        <Card.Text>
-                        Credit Union: {props.creditUnion}
-                        </Card.Text>
-
-                        <Button variant="primary" size="sm " block onClick={saveLoan}>
-                            Save 
-                        </Button>
-                        <Button variant="primary" size="" block onClick={handleFindNearestBank} ><i class="fas fa-search-location fa-sm"></i>
-                        Near by Bank 
-                        </Button>
+            <Card style={{ width: '20rem'}}>
+                <Card.Img variant="top" src={props.photo} />
+                <Card.Body>
+                    <Card.Title>{props.name} <i class="fas fa-university center fa-sm "> </i> </Card.Title>
                     
-                    </Card.Body>
-                    </Card>
+                    <Card.Subtitle className="mb-2 text-muted"><a href={props.website}>Visit website</a></Card.Subtitle>
+                    
+                    <Card.Text>
+                        {props.description}
+                    </Card.Text>
+                    
+                    <Card.Text>
+                        Government: {props.gov}
+                    </Card.Text>
+                    
+                    <Card.Text>
+                        State: {props.region}
+                    </Card.Text>
+                    
+                    <Card.Text>
+                        Credit Union: {props.creditUnion}
+                    </Card.Text>
 
-                </CardDeck>
-                </div>
-
-
-
+                    <Button variant="primary" size="sm " block onClick={saveLoan}>
+                        Save 
+                    </Button>
+                    
+                    <Button variant="primary" size="" block onClick={handleFindNearestBank} ><i class="fas fa-search-location fa-sm"></i>
+                        Near by Bank 
+                    </Button>
+                </Card.Body>
+            </Card>
         )
     }
 }
@@ -950,13 +923,24 @@ function SavedLoans(props) {
 
     return (
         <div>
-            <input type="text" placeholder="Search..." value={props.inputValue} onChange={loanFilterOnChange} />
-            <form action="/compare_loans">
-                <button>Compare Loans</button>
-                <h2>Saved Loans</h2>
-                <LoanCategoryTable 
-                    rows={savedLoans} />
-            </form>
+            <div className="md-form mt-0" id="search">
+                <input className="form-control" type="text" placeholder="Search" aria-label="Search" value={props.inputValue} onChange={loanFilterOnChange} />
+            </div>
+            <br></br>
+            <div>
+                <form action="/compare_loans">
+
+                    <h1>My Saved loans</h1>
+                    <div style={{"padding-top": "30px", "padding-bottom": "30px"}}>
+                        <button className="unsave_button">Compare Loans</button>
+                    </div>
+                    <div>
+                        <CardColumns>
+                        {savedLoans} 
+                        </CardColumns>
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }
@@ -996,6 +980,7 @@ function CompareLoansList(props) {
             for(const loanJson of data) {
                 loanArr.push(
                     <tr>
+                        <td><img src={loanJson["loan_photo"]} style={{width: "100px"}}></img></td>
                         <td>{loanJson["loan_name"]}</td>
                         <td>{loanJson["loan_description"]}</td>
                         <td><a href={loanJson["loan_website"]}> Visit website</a></td>
@@ -1003,7 +988,6 @@ function CompareLoansList(props) {
                         <td>{loanJson["loan_region"]}</td>
                         <td>{loanJson["loan_city"]}</td>
                         <td>{loanJson["loan_credit_union"]}</td>
-                        <td><img src={loanJson["loan_photo"]}></img></td>
                     </tr>
                 )
             }
@@ -1015,6 +999,7 @@ function CompareLoansList(props) {
         <table class="table table-striped">
             <thead>
                 <tr>
+                <th></th>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Website</th>
