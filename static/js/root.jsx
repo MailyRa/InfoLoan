@@ -153,7 +153,7 @@ function Login() {
 
 
         <Form className="log-in">
-            <Card style={{ width: '50rem' }}>
+            <Card style={{ width: '35rem'}}>
             <Card.Img id="card-img" variant="bottom" src="static/jpg/login.jpg" />
             <Card.Body>
                 <Card.Title>Sign In</Card.Title>
