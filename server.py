@@ -84,7 +84,7 @@ def create_user():
         new_user = crud.create_user(user_fname, user_lname, user_dob, user_address, user_credit_score, user_email, user_password)
 
         return jsonify({
-            "f_name": new_user.fname, 
+            "fname": new_user.fname, 
             "lname": new_user.lname, 
             "dob": new_user.dob, 
             "address": new_user.address,

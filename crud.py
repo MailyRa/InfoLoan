@@ -75,8 +75,6 @@ def get_category_loans():
     return Category_loan.query.all()
 
 
-
-
 def get_user_loans_by_user(user_id):
     
     return db.session.query(User_loan, Loan).join(Loan, User_loan.loan_id==Loan.loan_id).filter(User_loan.user_id==user_id).all()
@@ -105,4 +103,6 @@ def get_loans_by_category_id(category_loan_id):
 def get_loans_by_ids(loan_ids):
     # Get all loans that have ids in this list
     return Loan.query.filter(Loan.loan_id.in_(loan_ids)).all()
+
+
 

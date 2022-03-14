@@ -9,9 +9,8 @@ const useHistory = ReactRouterDOM.useHistory;
 const Promise = ReactRouterDOM.Promise;
 const useLocation = ReactRouterDOM.useLocation;
 const useRef = ReactRouterDOM.useRef;
-
 const Form = ReactBootstrap.Form;
-const Column = ReactBootstrap.Form; 
+const Column = ReactBootstrap.Column; 
 const Image = ReactBootstrap.Image;
 const Carousel = ReactBootstrap.Carousel;
 const Container = ReactBootstrap.Container;
@@ -25,6 +24,7 @@ const DropdownButton = ReactBootstrap.DropdownButton;
 const Dropdown = ReactBootstrap.Dropdown;
 const CardDeck = ReactBootstrap.CardDeck;
 const CardColumns = ReactBootstrap.CardColumns;
+
 
 function ControlledCarousel() {
     const [index, setIndex] = React.useState(0);
@@ -315,14 +315,14 @@ function CreateUser() {
     }
 
     return(
-
-        <Card style={{ width: '30rem' }}>
+     
+        <Card border="dark" style={{ width: '30rem' }}>
             <Card.Img variant="bottom" src="static/jpg/create_profile.jpg" />
             <Card.Header as="h5">Create Profile</Card.Header>
             <Form>
                 <Card.Body>
                     <Card.Text>
-                        <Form.Row>
+                        <Row>
                             <Form.Group as={Col} md="3" controlId="formGridName">
                             <Form.Label>First Name</Form.Label>
                             <Form.Control type="text" placeholder="First Name" onChange={(e) => setFname(e.target.value)} value={fname} />
@@ -332,8 +332,8 @@ function CreateUser() {
                             <Form.Label>Last Name </Form.Label>
                             <Form.Control type="text" placeholder="Last Name" onChange={(e) => setLname(e.target.value)} value={lname}/>
                             </Form.Group>
-                        </Form.Row>
-                        <Form.Row>
+                        </Row>
+                        <Row>
                             <Form.Group as={Col} md="3" controlId="formGridEmail">
                             <Form.Label>Email</Form.Label>
                             <Form.Control type="email" placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} value={email} />
@@ -343,13 +343,13 @@ function CreateUser() {
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password}/>
                             </Form.Group>
-                        </Form.Row>
+                        </Row>
 
                         <Form.Group md="3" controlId="formGridAddress1">
                             <Form.Label>Address</Form.Label>
                             <Form.Control placeholder="1234 Main St" onChange={(e) => setAddress(e.target.value)} value={address}/>
                         </Form.Group>
-                        <Form.Row>
+                        <Row>
                         <Form.Group as={Col} md="3" controlId="formGridDateBirth">
                             <Form.Label>Date of Birth</Form.Label>
                             <Form.Control placeholder="DOB" onChange={(e) => setDob(e.target.value)} value={dob}/>
@@ -358,7 +358,7 @@ function CreateUser() {
                             <Form.Label>Credit Score</Form.Label>
                             <Form.Control placeholder="Credit Score" onChange={(e) => setCreditScore(e.target.value)} value={credit_score}/>
                         </Form.Group>
-                        </Form.Row>
+                        </Row>
                     </Card.Text>
                     <Button variant="primary" onClick={createUser} type="submit">
                         Submit
@@ -369,11 +369,6 @@ function CreateUser() {
 
     )
 }
-
-
-
-
-
 
 
 
@@ -406,9 +401,6 @@ function getLoans(category_id) {
     }, [])
 }
 
-
-
-
 //Getting the Category Loan Json from Server
 function CategoryContainer(props) { 
     const [categories, setCategories] = React.useState(["loading..."]);
@@ -421,18 +413,16 @@ function CategoryContainer(props) {
             for (const category of data) {
                 categoryData.push(
         
-                    <CategoriesListItem 
-                    //Play with this using Key instead of ID/make unique key using primary Key 
-                     id={category["category_id"]}
-                     name={category["category_name"]}/>
+                <CategoriesListItem 
+                //Play with this using Key instead of ID/make unique key using primary Key 
+                    id={category["category_id"]}
+                    name={category["category_name"]}/>
                 );
             }
 
             setCategories(categoryData);
         })
     }, [])
-
-
 
     const [loans, setLoans] = React.useState([""])
     const [loanJson, setLoanJson] = React.useState([""])
@@ -460,9 +450,6 @@ function CategoryContainer(props) {
         setSearchTerm(event.target.value)
         updateFilteredLoans(event.target.value, isGov, isUnion)
     }
-
-
-
 
     //add
     const handleGovTypeUpdated = (govType) => {
@@ -496,24 +483,18 @@ function CategoryContainer(props) {
         const loanData = filterLoans(searchTerm, loanJson, false, isGov, isUnion)
         setLoans(loanData)
     }
-
-
-
-
-
     return (
         <Container fluid="md">
-            
                 <div>
                 <form >
                     <div className="md-form mt-0" id="search">
                         <input className="form-control" type="text" placeholder="Search" aria-label="Search" value={props.inputValue} onChange={filterLoansEvent} />
                     </div>
                     <br></br>            
-                <Jumbotron className="loans-background" style={{
-                backgroundImage:
+                <Jumbotron className="loans-background" style={{backgroundImage:
                     "url('static/jpg/loan_categories.jpg')"
                 }}>
+                {/* <div class="jumbotron loans-background" style="background-image='static/jpg/loan_categories.jpg"> */}
                 
                 <br></br>
                 <form className="loans">
@@ -544,9 +525,9 @@ function CategoryContainer(props) {
 
                 </form>
                 
-                <CardColumns>
+                <CardDeck>
                     {loans}
-                </CardColumns>
+                </CardDeck>
                 </Jumbotron>
                 </form>
             </div>
@@ -584,7 +565,67 @@ function MapContainer(props) {
 
 
 
-//Map Component
+// //Map Component
+// function MapComponent(props) {
+//     const options = props.options;
+//     const ref = React.useRef();
+//     const [map, setMap] = React.useState();
+//     const [places, setPlaces] = React.useState();
+//     const [pyrmont, setPyrmont] = React.useState();
+//     React.useEffect(() => {
+//         const onLoad = () => {
+//             const map = new window.google.maps.Map(ref.current, options)
+//             setPyrmont(new window.google.maps.LatLng(options.center.lat, options.center.lng))
+//             setPlaces(new google.maps.places.PlacesService(map));
+//             setMap(map)
+//         }
+//         let script = document.createElement("script");
+//         script.type = "text/javascript";
+//         if (script.readyState) {
+//             script.onreadystatechange = function() {
+//               if (script.readyState === "loaded" || script.readyState === "complete") {
+//                 script.onreadystatechange = null;
+//                 onLoad();
+//               }
+//             };
+//         } else {
+//             script.onload = () => onLoad();
+//         }
+//         script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDX3EFiSjD8lNuVqr4tue8KkoSwKuSmnbY&libraries=places';
+//         document.getElementsByTagName("head")[0].appendChild(script);
+//     }, [options])
+//     if (places) {
+//         var request = {
+//             location: pyrmont,
+//             radius: '2000',
+//             query: props.searchTerm
+//         };
+//         places.textSearch(request, callback);
+//     }
+//     function callback(results, status) {
+//         if (status == google.maps.places.PlacesServiceStatus.OK) {
+//             for (var i = 0; i < results.length; i++) {
+//                 var place = results[i];
+//                 console.log(place);
+//                 const marker = new window.google.maps.Marker({
+//                     map,
+//                     position: place.geometry.location,
+//                     label: `${i + 1}`,
+//                     title: place.formatted_address,
+//                 })
+//             }
+//         }
+//     }
+    
+//     return (
+//         <div>
+//             <div id="map-div"
+//                 style={{ height: `60vh`, margin: `1em 0`, borderRadius: `0.5em`, width: '50%' }}
+//                 ref={ref}/>
+        
+//         </div>
+//         )
+// }
 function MapComponent(props) {
     const options = props.options;
     const ref = React.useRef();
@@ -644,7 +685,7 @@ function MapComponent(props) {
                 });
                 marker.setMap(googleMap);
                 locationList.push(
-                    <li>
+                    <li className="google_map_list">
                         <a href={"https://maps.google.com/?q=".concat(place.formatted_address)}>{place.formatted_address}</a>
                     </li>
                 )
@@ -652,7 +693,6 @@ function MapComponent(props) {
             setLocations(locationList)
         }
     }
-    
     return (
         <div>
             <div id="map-div" 
@@ -664,6 +704,9 @@ function MapComponent(props) {
         </div>
     )
 }
+
+
+
 
 //Fetch the data to compare the loans for the user 
 function LoanContainer(props) {
@@ -945,12 +988,6 @@ function SavedLoans(props) {
     )
 }
 
-
-
-
-
-
-
 //Compare the loans the user saves
 function CompareLoansList(props) {
     const location = useLocation();
@@ -1080,7 +1117,7 @@ function App() {
                         src="static/jpg/logo.png" 
                         width="80" 
                         height="80" 
-                        className="d-inline-block" 
+                        class="d-inline-block" 
                         alt=""/>
                     InfoLoan!
                         
