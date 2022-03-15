@@ -24,7 +24,10 @@ const DropdownButton = ReactBootstrap.DropdownButton;
 const Dropdown = ReactBootstrap.Dropdown;
 const CardDeck = ReactBootstrap.CardDeck;
 const CardColumns = ReactBootstrap.CardColumns;
+// import GoogleMapReact from 'google-map-react';
 
+// var googleApiKey = process.env.apiKey;
+var googleApiKey = 'AIzaSyAlaAqpQcTQsNsUPnlKrwJYA-BJioBbwCU';
 
 function ControlledCarousel() {
     const [index, setIndex] = React.useState(0);
@@ -39,7 +42,6 @@ function ControlledCarousel() {
     }
   
     return (
-    
         <Container fluid="md">
             <Row>
             <Col>
@@ -204,7 +206,6 @@ function Logout(props){
     .then(response => response.json())
     .then(data => {
         localStorage.setItem('is_logged_in', false);
-        //when I use the "useHook" it makes it slow
         window.location.href = "/";
     })
 }
@@ -561,71 +562,6 @@ function MapContainer(props) {
     )
 }
 
-
-
-
-
-// //Map Component
-// function MapComponent(props) {
-//     const options = props.options;
-//     const ref = React.useRef();
-//     const [map, setMap] = React.useState();
-//     const [places, setPlaces] = React.useState();
-//     const [pyrmont, setPyrmont] = React.useState();
-//     React.useEffect(() => {
-//         const onLoad = () => {
-//             const map = new window.google.maps.Map(ref.current, options)
-//             setPyrmont(new window.google.maps.LatLng(options.center.lat, options.center.lng))
-//             setPlaces(new google.maps.places.PlacesService(map));
-//             setMap(map)
-//         }
-//         let script = document.createElement("script");
-//         script.type = "text/javascript";
-//         if (script.readyState) {
-//             script.onreadystatechange = function() {
-//               if (script.readyState === "loaded" || script.readyState === "complete") {
-//                 script.onreadystatechange = null;
-//                 onLoad();
-//               }
-//             };
-//         } else {
-//             script.onload = () => onLoad();
-//         }
-//         script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDX3EFiSjD8lNuVqr4tue8KkoSwKuSmnbY&libraries=places';
-//         document.getElementsByTagName("head")[0].appendChild(script);
-//     }, [options])
-//     if (places) {
-//         var request = {
-//             location: pyrmont,
-//             radius: '2000',
-//             query: props.searchTerm
-//         };
-//         places.textSearch(request, callback);
-//     }
-//     function callback(results, status) {
-//         if (status == google.maps.places.PlacesServiceStatus.OK) {
-//             for (var i = 0; i < results.length; i++) {
-//                 var place = results[i];
-//                 console.log(place);
-//                 const marker = new window.google.maps.Marker({
-//                     map,
-//                     position: place.geometry.location,
-//                     label: `${i + 1}`,
-//                     title: place.formatted_address,
-//                 })
-//             }
-//         }
-//     }
-    
-//     return (
-//         <div>
-//             <div id="map-div"
-//                 style={{ height: `60vh`, margin: `1em 0`, borderRadius: `0.5em`, width: '50%' }}
-//                 ref={ref}/>
-        
-//         </div>
-//         )
-// }
 function MapComponent(props) {
     const options = props.options;
     const ref = React.useRef();
@@ -642,24 +578,20 @@ function MapComponent(props) {
             setPlaces(new google.maps.places.PlacesService(gMap));
         }
 
-            let script = document.createElement("script");
-            script.type = "text/javascript";
-            if (script.readyState) {
-                script.onreadystatechange = function() {
-                if (script.readyState === "loaded" || script.readyState === "complete") {
-                    script.onreadystatechange = null;
-                    onLoad();
-                }
-                };
-            } else {
-                script.onload = () => onLoad();
+        let script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=' + googleApiKey + '&libraries=places';
+        if (script.readyState) {
+            script.onreadystatechange = function() {
+            if (script.readyState === "loaded" || script.readyState === "complete") {
+                script.onreadystatechange = null;
+                onLoad();
             }
-
-            script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDX3EFiSjD8lNuVqr4tue8KkoSwKuSmnbY&libraries=places';
-
-            document.getElementsByTagName("head")[0].appendChild(script);
-            console.log("Adding script!")
-
+            };
+        } else {
+            script.onload = () => onLoad();
+        }
+        document.getElementsByTagName("head")[0].appendChild(script);
     }, [options])
 
     if (places && googleMap) {
@@ -676,13 +608,18 @@ function MapComponent(props) {
             var locationList = [];
             for (var i = 0; i < results.length; i++) {
                 var place = results[i];
+                console.log("Testing 3");
                 console.log(place);
-                var marker = new window.google.maps.Marker({
-                    position: place.geometry.location,
+                const lat = place.geometry.location.lat();
+                const lng = place.geometry.location.lng();
+                const marker = new window.google.maps.Marker({
+                    position: {
+                        lat: lat,
+                        lng: lng,
+                    },
                     map: googleMap,
-                    label: `${i + 1}`,
-                    title: place.formatted_address
-                });
+                    title: "Test",
+                });        
                 marker.setMap(googleMap);
                 locationList.push(
                     <li className="google_map_list">
@@ -785,7 +722,6 @@ function SavedLoansRow(props) {
 
     //add
     const handleFindNearestBank = () => {
-        console.log("Handling button click")
         history.push('/map?name='+props.name);
     }
 

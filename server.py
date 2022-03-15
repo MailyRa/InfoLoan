@@ -3,6 +3,7 @@ from model import connect_to_db, User
 from datetime import datetime 
 
 from jinja2 import StrictUndefined
+import os
 
 import crud 
 
@@ -10,6 +11,7 @@ app = Flask(__name__)
 app.secret_key = 'dev'
 app.jinja_env.undefined = StrictUndefined
 
+API_KEY = os.environ['GOOGLE_KEY']
 
 
 
@@ -17,8 +19,6 @@ app.jinja_env.undefined = StrictUndefined
 @app.route('/<path:path>')
 def homepage(path):
     return render_template("root.html")
-
-
 
 
 @app.route("/loan_categories.json")
@@ -34,15 +34,10 @@ def loan_categories_json():
     return jsonify(category_json)
 
 
-
-
 @app.route("/loans.json", methods=['GET'])
 def loans_json():
-
     category_id = int(request.args.get("category_id"))
-    
     loans = crud.get_loans_by_category_id(category_id)
-
     loan_json = [
         {
             "loan_id": loan.loan_id,
@@ -61,12 +56,9 @@ def loans_json():
     return jsonify(loan_json)
 
 
-
 @app.route("/create_user", methods=['POST'])
-def create_user():
-   
+def create_user(): 
     data = request.get_json()
-
     user_fname = data.get('user_fname')
     user_lname = data.get('user_lname')
     user_dob = data.get('user_dob')
@@ -74,7 +66,6 @@ def create_user():
     user_credit_score = data.get('user_credit_score')
     user_email = data.get('user_email')
     user_password = data.get('user_password')
-
     user = crud.get_user_by_email(user_email)
 
     if user:
@@ -143,7 +134,6 @@ def delete_loan_json():
     return jsonify({"delete": "Completed"})
 
 
-
 @app.route("/user_profile.json", methods=['GET'])
 def user_profile():
     user_id = session['current_user']
@@ -176,16 +166,10 @@ def user_profile():
     return jsonify(user_json)
 
 
-
-
 @app.route("/handle_logout", methods=['POST'])
 def handle_logout():
-
     session.clear()
-
     return jsonify({"success": True})
-
-
 
 
 @app.route("/compare_loans.json", methods=['POST'])
@@ -212,7 +196,6 @@ def compare_loans():
     return jsonify(loans_json)
 
 
-
 if __name__ == '__main__':
     connect_to_db(app)
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0')
