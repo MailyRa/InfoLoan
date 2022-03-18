@@ -114,12 +114,12 @@ body {
   padding: 10px;
 }
 
-
-.card_loans {
-  width:300px;
-  padding: 10px;
-  border-radius: 5px;
-  margin: 30px;
+.card-deck{
+  margin-top: 10px;
+  margin-left: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-gap: .5rem;
 }
 
 .loans_info {

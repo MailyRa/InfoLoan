@@ -147,7 +147,7 @@ function Login() {
 
     return(
         <Form className="log-in">
-            <Card style={{ width: '35rem'}}>
+            <Card style={{ width: '30rem'}}>
             <Card.Img id="card-img" variant="bottom" src="static/jpg/login.jpg" />
             <Card.Body>
                 <Card.Title>Sign In</Card.Title>
@@ -281,7 +281,7 @@ function CreateUser() {
 
     return(
         <Form className="log-in" >
-            <Card style={{ width: '35rem' }}>
+            <Card style={{ width: '30rem' }}>
                 <Card.Img id="card-img" variant="bottom" src="static/jpg/create_profile.jpg" />
                 <Card.Header as="h5">Create Profile</Card.Header>
                     <Card.Body>
@@ -448,9 +448,7 @@ function CategoryContainer(props) {
                     <br></br>            
                 <Jumbotron className="loans-background" style={{backgroundImage:
                     "url('static/jpg/loan_categories.jpg')"
-                }}>
-                {/* <div class="jumbotron loans-background" style="background-image='static/jpg/loan_categories.jpg"> */}
-                
+                }}>                
                 <br></br>
                 <form className="loans">
                     <div className="loans_info">
@@ -479,7 +477,6 @@ function CategoryContainer(props) {
                     </div>
 
                 </form>
-                
                 <CardDeck>
                     {loans}
                 </CardDeck>
@@ -670,74 +667,78 @@ function SavedLoansRow(props) {
 
     if (props.isSaved === true) {
         return (
-            <Card style={{ width: '20rem'}} >
-                <Card.Img variant="top" src={props.photo} />
-                <Card.Body>
-                    <Card.Title>{props.name} <i class="fas fa-university left fa-sm "> </i> </Card.Title>
-                    
-                    <Card.Subtitle className="mb-2 text-muted"><a href={props.website}>Visit website</a></Card.Subtitle>
-                    
-                    <Card.Text>
-                        {props.description}
-                    </Card.Text>
-                    
-                    <Card.Text>
-                        Government: {props.gov}
-                    </Card.Text>
-                    
-                    <Card.Text>
-                        State: {props.region}
-                    </Card.Text>
-                    
-                    <Card.Text>
-                        Credit Union: {props.creditUnion}
-                    </Card.Text>
-                    
-                    <Card.Text id="compare">
-                        <Form.Check label="Compare Loans!" size="md "  name={props.id}/>
-                    </Card.Text>
-                    
-                    <Button variant="primary" size="sm "  block onClick={handleUnsave}>
-                        UnSave 
-                    </Button>
-                    
-                </Card.Body>
-            </Card>
+            <div class="col-lg-3">
+                <Card style={{ width: '20em', padding: '10px'}}>
+                    <Card.Img variant="top" src={props.photo} />
+                    <Card.Body>
+                        <Card.Title>{props.name} <i class="fas fa-university left fa-sm "> </i> </Card.Title>
+                        
+                        <Card.Subtitle className="mb-2 text-muted"><a href={props.website}>Visit website</a></Card.Subtitle>
+                        
+                        <Card.Text>
+                            {props.description}
+                        </Card.Text>
+                        
+                        <Card.Text>
+                            Government: {props.gov}
+                        </Card.Text>
+                        
+                        <Card.Text>
+                            State: {props.region}
+                        </Card.Text>
+                        
+                        <Card.Text>
+                            Credit Union: {props.creditUnion}
+                        </Card.Text>
+                        
+                        <Card.Text id="compare">
+                            <Form.Check label="Compare Loans!" size="md "  name={props.id}/>
+                        </Card.Text>
+                        
+                        <Button variant="primary" size="sm "  block onClick={handleUnsave}>
+                            UnSave 
+                        </Button>
+                        
+                    </Card.Body>
+                </Card>
+            </div>
         )
     } else {
         return (
-            <Card style={{ width: '20rem'}}>
-                <Card.Img variant="top" src={props.photo} />
-                <Card.Body>
-                    <Card.Title>{props.name} <i class="fas fa-university center fa-sm "> </i> </Card.Title>
-                    
-                    <Card.Subtitle className="mb-2 text-muted"><a href={props.website}>Visit website</a></Card.Subtitle>
-                    
-                    <Card.Text>
-                        {props.description}
-                    </Card.Text>
-                    
-                    <Card.Text>
-                        Government: {props.gov}
-                    </Card.Text>
-                    
-                    <Card.Text>
-                        State: {props.region}
-                    </Card.Text>
-                    
-                    <Card.Text>
-                        Credit Union: {props.creditUnion}
-                    </Card.Text>
+            <div class="col-lg-3">
+                <Card style={{ width: '20em', padding: '10px'}}>
+                    <Card.Img variant="top" src={props.photo} />
+                    <Card.Body>
+                        <Card.Title>{props.name} <i class="fas fa-university center fa-sm "> </i> </Card.Title>
+                        
+                        <Card.Subtitle className="mb-2 text-muted"><a href={props.website}>Visit website</a></Card.Subtitle>
+                        
+                        <Card.Text>
+                            {props.description}
+                        </Card.Text>
+                        
+                        <Card.Text>
+                            Government: {props.gov}
+                        </Card.Text>
+                        
+                        <Card.Text>
+                            State: {props.region}
+                        </Card.Text>
+                        
+                        <Card.Text>
+                            Credit Union: {props.creditUnion}
+                        </Card.Text>
 
-                    <Button variant="primary" size="sm " block onClick={saveLoan}>
-                        Save 
-                    </Button>
-                    
-                    <Button variant="primary" size="" block onClick={handleFindNearestBank} ><i class="fas fa-search-location fa-sm"></i>
-                        Near by Bank 
-                    </Button>
-                </Card.Body>
-            </Card>
+                        <Button variant="primary" size="sm " block onClick={saveLoan}>
+                            Save 
+                        </Button>
+                        
+                        <Button variant="primary" size="" block onClick={handleFindNearestBank} ><i class="fas fa-search-location fa-sm"></i>
+                            Near by Bank 
+                        </Button>
+                    </Card.Body>
+                </Card>
+            </div>
         )
     }
 }
@@ -849,9 +850,11 @@ function SavedLoans(props) {
                         <button className="unsave_button">Compare Loans</button>
                     </div>
                     <div>
-                        <CardColumns>
+                        {/* <CardColumns> */}
+                        <CardDeck>
                         {savedLoans} 
-                        </CardColumns>
+                        </CardDeck>
+                        {/* </CardColumns> */}
                     </div>
                 </form>
             </div>
