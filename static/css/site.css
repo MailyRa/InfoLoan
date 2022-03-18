@@ -9,20 +9,17 @@
   font-family: Verdana, sans-serif;
 }
 
-
 .log-in{
   width: 50%;
   margin: 0 auto;
   padding: 80px;
-
-
 }
+
 #hand {
   margin: auto;
   width: 100%;
   text-align: center;
   padding: 20px;
-
 }
 
 .homepage-button{
@@ -30,25 +27,19 @@
   width: 100%;
   text-align: center;
   padding: 20px;
-
 }
 
 .loan-category-table {
   width: 50%;
 }
 
-
 .homepage-phrase {
   font-weight: 900 bold;
-
 }
-
 
 .logo-phrase {
   font-weight: 900;
-
 }
-
 
 body {
   height: 100%;
@@ -58,19 +49,18 @@ body {
   font-weight: 500;
   background: #deeaee;  
 } 
+
 .money {
   margin: auto;
   width: 50%;
   padding-top: 80px;
   padding-bottom: 50px;
-
 }
 
 .homepage-button {
   margin: auto;
   width: 20%;
   padding: 5px;
-
 }
 
 #card-img{
@@ -80,13 +70,13 @@ body {
   object-fit: contain;
   padding: 5px;
 }
+
 .handicon{
   width: 50px;
   height: auto;
   margin: 0 auto;
   padding: 10px;
   position: relative;
-  
 }
 
 #map-div {
@@ -96,16 +86,15 @@ body {
 
 .lady:hover {
   vertical-align: middle;
-  /* border-style: none; 
-  opacity: 0.5; */
-  
 }
+
 .loans_choices{
   background-repeat: no-repeat;
   background-position: right top;
   margin-right: 200px;
   background-attachment: fixed;
 }
+
 .loans-background {
   background-image: url("static/jpg/loan_categories.jpg");
   height: 100vh;
@@ -137,9 +126,7 @@ body {
   margin: 1%;
   font-weight: bold;
   color: #000000;
-
 }
-
 
 .unsave_button {
   width: 300px;
@@ -149,16 +136,18 @@ body {
   padding-bottom: 10px;
   text-align:center;
 }
-.card{
+
+.card {
   display: flex;
   flex-wrap: wrap;
 }
-#compare{
+
+#compare {
   font-weight: 600;
 }
-#search{
+
+#search {
   width: 320px;
   padding: 10px;
   margin: 0;
-  
 }

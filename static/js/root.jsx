@@ -24,9 +24,7 @@ const DropdownButton = ReactBootstrap.DropdownButton;
 const Dropdown = ReactBootstrap.Dropdown;
 const CardDeck = ReactBootstrap.CardDeck;
 const CardColumns = ReactBootstrap.CardColumns;
-// import GoogleMapReact from 'google-map-react';
 
-// var googleApiKey = process.env.apiKey;
 var googleApiKey = 'AIzaSyAlaAqpQcTQsNsUPnlKrwJYA-BJioBbwCU';
 
 function ControlledCarousel() {
@@ -38,8 +36,8 @@ function ControlledCarousel() {
     };
 
     const BrowseLoansClicked = (e) => {
-        history.push('/loan_categories')
-    }
+        history.push('/loan_categories');
+    };
   
     return (
         <Container fluid="md">
@@ -119,7 +117,6 @@ function Homepage() {
 }
 
 
-
 // Handling User login 
 function Login() {
 
@@ -137,12 +134,9 @@ function Login() {
                 'Content-Type': 'application/json'
             },
         })
-
         .then(response => response.json())
         .then(data => {
             if("error" in data) {
-
-    
                 alert(data["error"])
             } else { 
                 localStorage.setItem('is_logged_in', true);
@@ -152,8 +146,6 @@ function Login() {
     }
 
     return(
-
-
         <Form className="log-in">
             <Card style={{ width: '35rem'}}>
             <Card.Img id="card-img" variant="bottom" src="static/jpg/login.jpg" />
@@ -184,20 +176,12 @@ function Login() {
             </Card.Body>
             </Card>
         </Form>
-
     )
 }
 
-
-
-
-
-
-
 // Handle Logout 
 function Logout(props){
-
-    fetch("handle_logout", {
+    fetch("/handle_logout", {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -205,29 +189,20 @@ function Logout(props){
     })
     .then(response => response.json())
     .then(data => {
-        localStorage.setItem('is_logged_in', false);
+        localStorage.setItem('is_logged_in', "false");
         window.location.href = "/";
     })
 }
 
 
-
-
-
-
-
 //User profile 
 function Userprofile (props) {
-
-
     const[fname, setFname] = React.useState('');
     const[lname, setLname] = React.useState('');
     const[dob, setDob] = React.useState('');
     const[address, setAddress] = React.useState('');
     const[credit_score, setCreditScore] = React.useState('');
     const[email, setEmail] = React.useState('');
-    
-
 
     React.useEffect(() => {
         fetch("/user_profile.json", {
@@ -246,39 +221,27 @@ function Userprofile (props) {
             setEmail(data["email"])
             const loanList =[]
             for(const loan of data["loans"]) {
-                console.log(loan)
                 loanList.push(<p>{loan["loan_name"]}</p>);
             }
-    
         })
     }, [])
 
     return (
         <div>
-        <h1> Profile </h1> 
-        <p>First Name: {fname} </p>
-        <p>Last Name: {lname}</p>
-        <p>Date of Birth: {dob} </p>
-        <p>Address: {address} </p>
-        <p>Credit Score: {credit_score}</p>
-        <p>Email: {email}</p>
-
-
-    </div>
+            <h1> Profile </h1> 
+            <p>First Name: {fname} </p>
+            <p>Last Name: {lname}</p>
+            <p>Date of Birth: {dob} </p>
+            <p>Address: {address} </p>
+            <p>Credit Score: {credit_score}</p>
+            <p>Email: {email}</p>
+        </div>
     )
 }
 
-
-
-
-
-
-
 // Creating User
 function CreateUser() {
-
     let history = useHistory();
-
     const[fname, setFname] = React.useState('');
     const[lname, setLname] = React.useState('');
     const[dob, setDob] = React.useState('');
@@ -305,73 +268,71 @@ function CreateUser() {
         })
         .then(response => response.json())
         .then(data => {
+            alert(data)
             if ("error" in data) {
                 alert(data["error"])
-                history.push('/login');
+                window.location.href = '/login';
             } else {
-                history.push('/loan_categories');
+                localStorage.setItem('is_logged_in', true);
+                window.location.href = '/loan_categories';
             }
-    
         })
     }
 
     return(
-     
-        <Card border="dark" style={{ width: '30rem' }}>
-            <Card.Img variant="bottom" src="static/jpg/create_profile.jpg" />
-            <Card.Header as="h5">Create Profile</Card.Header>
-            <Form>
-                <Card.Body>
-                    <Card.Text>
-                        <Row>
-                            <Form.Group as={Col} md="3" controlId="formGridName">
-                            <Form.Label>First Name</Form.Label>
-                            <Form.Control type="text" placeholder="First Name" onChange={(e) => setFname(e.target.value)} value={fname} />
-                            </Form.Group>
+        <Form className="log-in" >
+            <Card style={{ width: '35rem' }}>
+                <Card.Img id="card-img" variant="bottom" src="static/jpg/create_profile.jpg" />
+                <Card.Header as="h5">Create Profile</Card.Header>
+                    <Card.Body>
+                        <Card.Text>
+                            <Row>
+                                <Form.Group as={Col} controlId="formGridName">
+                                <Form.Label>First Name</Form.Label>
+                                <Form.Control type="text" placeholder="First Name" onChange={(e) => setFname(e.target.value)} value={fname} />
+                                </Form.Group>
 
-                            <Form.Group as={Col} md="3" controlId="formGridLastName">
-                            <Form.Label>Last Name </Form.Label>
-                            <Form.Control type="text" placeholder="Last Name" onChange={(e) => setLname(e.target.value)} value={lname}/>
-                            </Form.Group>
-                        </Row>
-                        <Row>
-                            <Form.Group as={Col} md="3" controlId="formGridEmail">
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} value={email} />
-                            </Form.Group>
+                                <Form.Group as={Col} controlId="formGridLastName">
+                                <Form.Label>Last Name </Form.Label>
+                                <Form.Control type="text" placeholder="Last Name" onChange={(e) => setLname(e.target.value)} value={lname}/>
+                                </Form.Group>
+                            </Row>
+                            <Row>
+                                <Form.Group as={Col} controlId="formGridEmail">
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control type="email" placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} value={email} />
+                                </Form.Group>
 
-                            <Form.Group as={Col} md="3" controlId="formGridPassword">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password}/>
-                            </Form.Group>
-                        </Row>
+                                <Form.Group as={Col}  controlId="formGridPassword">
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password}/>
+                                </Form.Group>
+                            </Row>
 
-                        <Form.Group md="3" controlId="formGridAddress1">
-                            <Form.Label>Address</Form.Label>
-                            <Form.Control placeholder="1234 Main St" onChange={(e) => setAddress(e.target.value)} value={address}/>
-                        </Form.Group>
-                        <Row>
-                        <Form.Group as={Col} md="3" controlId="formGridDateBirth">
-                            <Form.Label>Date of Birth</Form.Label>
-                            <Form.Control placeholder="DOB" onChange={(e) => setDob(e.target.value)} value={dob}/>
-                        </Form.Group>
-                        <Form.Group as={Col} md="3" controlId="formGridCreditScore">
-                            <Form.Label>Credit Score</Form.Label>
-                            <Form.Control placeholder="Credit Score" onChange={(e) => setCreditScore(e.target.value)} value={credit_score}/>
-                        </Form.Group>
-                        </Row>
-                    </Card.Text>
-                    <Button variant="primary" onClick={createUser} type="submit">
-                        Submit
-                    </Button>
-                </Card.Body>
-            </Form>
-        </Card>
+                            <Form.Group md="3" controlId="formGridAddress1">
+                                <Form.Label>Address</Form.Label>
+                                <Form.Control placeholder="1234 Main St" onChange={(e) => setAddress(e.target.value)} value={address}/>
+                            </Form.Group>
+                            <Row>
+                            <Form.Group as={Col}  controlId="formGridDateBirth">
+                                <Form.Label>Date of Birth</Form.Label>
+                                <Form.Control placeholder="DOB" onChange={(e) => setDob(e.target.value)} value={dob}/>
+                            </Form.Group>
+                            <Form.Group as={Col} controlId="formGridCreditScore">
+                                <Form.Label>Credit Score</Form.Label>
+                                <Form.Control placeholder="Credit Score" onChange={(e) => setCreditScore(e.target.value)} value={credit_score}/>
+                            </Form.Group>
+                            </Row>
+                        </Card.Text>
+                        <Button variant="primary" onClick={createUser} type="submit">
+                            Submit
+                        </Button>
+                    </Card.Body>
+            </Card>
+        </Form>
 
     )
 }
-
-
 
 // Displaying all the loans by categories
 function CategoriesListItem(props) {
@@ -402,6 +363,7 @@ function getLoans(category_id) {
     }, [])
 }
 
+
 //Getting the Category Loan Json from Server
 function CategoryContainer(props) { 
     const [categories, setCategories] = React.useState(["loading..."]);
@@ -415,7 +377,6 @@ function CategoryContainer(props) {
                 categoryData.push(
         
                 <CategoriesListItem 
-                //Play with this using Key instead of ID/make unique key using primary Key 
                     id={category["category_id"]}
                     name={category["category_name"]}/>
                 );
@@ -435,24 +396,19 @@ function CategoryContainer(props) {
         getLoans(category_id).then(response => {
             setLoans(response[0])
             setLoanJson(response[1])
-            //add
             updateFilteredLoans(searchTerm, isGov);
         })
     }
 
-    //add
     const [isUnion, setIsUnion] = React.useState();
     const [isGov, setIsGov] = React.useState();
     const [searchTerm, setSearchTerm] = React.useState('')
 
-
-    //add
     const filterLoansEvent = (event) => {
         setSearchTerm(event.target.value)
         updateFilteredLoans(event.target.value, isGov, isUnion)
     }
 
-    //add
     const handleGovTypeUpdated = (govType) => {
         var isGovTemp = null;
         if (govType === "Yes"){
@@ -465,7 +421,6 @@ function CategoryContainer(props) {
         updateFilteredLoans(searchTerm, isGovTemp, isUnion)
     }
 
-    //add
     const handleUnionUpdated = (unionType) => {
         var isUnionTemp = null;
         if (unionType === "Yes"){
@@ -479,7 +434,6 @@ function CategoryContainer(props) {
 
     }
 
-    //add
     function updateFilteredLoans(searchTerm, isGov, isUnion) {
         const loanData = filterLoans(searchTerm, loanJson, false, isGov, isUnion)
         setLoans(loanData)
@@ -536,7 +490,7 @@ function CategoryContainer(props) {
     );
 }
 
-//add
+
 //Map Container 
 function MapContainer(props) {
     const location = useLocation();
@@ -561,6 +515,7 @@ function MapContainer(props) {
         </div>
     )
 }
+
 
 function MapComponent(props) {
     const options = props.options;
@@ -608,8 +563,6 @@ function MapComponent(props) {
             var locationList = [];
             for (var i = 0; i < results.length; i++) {
                 var place = results[i];
-                console.log("Testing 3");
-                console.log(place);
                 const lat = place.geometry.location.lat();
                 const lng = place.geometry.location.lng();
                 const marker = new window.google.maps.Marker({
@@ -643,8 +596,6 @@ function MapComponent(props) {
 }
 
 
-
-
 //Fetch the data to compare the loans for the user 
 function LoanContainer(props) {
     let { category_id } = useParams();
@@ -669,11 +620,6 @@ function LoanContainer(props) {
 }
 
 
-
-
-
-
-
 //Fetch saved loans by user/allow user to compare them and the search feature 
 function SavedLoansRow(props) {
     
@@ -691,11 +637,9 @@ function SavedLoansRow(props) {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             if ("delete" in data) {
                 window.location.href = "/saved_loans" ;
             }
-         
         })
     }
 
@@ -720,7 +664,6 @@ function SavedLoansRow(props) {
         })
     }
 
-    //add
     const handleFindNearestBank = () => {
         history.push('/map?name='+props.name);
     }
@@ -824,7 +767,6 @@ function searchIsMatch(loanJson, searchTerm, isGov, isUnion) {
     return match
 }
 
-//add
 const filterLoans = (value, savedLoanJson, areSaved, isGov, isUnion) => {
     const filteredLoans = [];
     for(const loanJson of savedLoanJson) {
@@ -832,8 +774,6 @@ const filterLoans = (value, savedLoanJson, areSaved, isGov, isUnion) => {
             filteredLoans.push(loanJson);
         }
     }
-
-
 
     const loanData = []
     for(const loan of filteredLoans) {
@@ -855,11 +795,8 @@ const filterLoans = (value, savedLoanJson, areSaved, isGov, isUnion) => {
 }
 
 
-
-
 //Save Loans
 function SavedLoans(props) {
-
     const [savedLoans, setSavedLoans] = React.useState(['']);
     const [savedLoanJson, setSavedLoanJson] = React.useState([])
     React.useEffect(() => {
@@ -871,7 +808,6 @@ function SavedLoans(props) {
         })
         .then((response) => response.json())
         .then((data) => {
-            console.log(data)
             const loanData = []
             for(const loan of data["loans"]) {
                 loanData.push(
@@ -895,7 +831,6 @@ function SavedLoans(props) {
     }, [])
 
     const loanFilterOnChange = (event) => {
-        //add
         const loanData = filterLoans(event.target.value, savedLoanJson, true, null, null)
         setSavedLoans(loanData)
     }
@@ -948,7 +883,6 @@ function CompareLoansList(props) {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             let loanArr = [];
             for(const loanJson of data) {
                 loanArr.push(
@@ -972,15 +906,14 @@ function CompareLoansList(props) {
         <table class="table table-striped">
             <thead>
                 <tr>
-                <th></th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Website</th>
-                <th>Government</th>
-                <th>State</th>
-                <th>City</th>
-                <th>Credit Union</th>
-
+                    <th></th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Website</th>
+                    <th>Government</th>
+                    <th>State</th>
+                    <th>City</th>
+                    <th>Credit Union</th>
                 </tr>
             </thead>
             <tbody>
@@ -991,54 +924,44 @@ function CompareLoansList(props) {
 }
 
 
-
-
-
-
-
-
-
 function App() {
-
     const isLoggedIn = localStorage.getItem('is_logged_in');
-
     const [loginOutButton, setLoginOutButton] = React.useState(['']);
     React.useEffect(() => {
         let listItem = undefined;
         if(isLoggedIn === 'true') {
-            listItem = 
-                    <ul class="navbar-nav">
-                        <li className="nav-item active">
-                            <a className="nav-link" href="/logout">Logout</a>
-                        </li>
-                        <li className="nav-item active">
-                            <a className="nav-link" href="/user_profile">Profile</a>
-                        </li>
-                        <li className="nav-item active">
-                            <a className="nav-link" href="/loan_categories"> Find Loans</a>
-                        </li>
-                        <li className="nav-item active">
-                            <a className="nav-link" href="/saved_loans"> Your Saved Loans</a>
-                        </li>
-                    </ul>
+            listItem = (
+                <ul class="navbar-nav">
+                    <li className="nav-item active">
+                        <a className="nav-link" href="/logout">Logout</a>
+                    </li>
+                    <li className="nav-item active">
+                        <a className="nav-link" href="/user_profile">Profile</a>
+                    </li>
+                    <li className="nav-item active">
+                        <a className="nav-link" href="/loan_categories"> Find Loans</a>
+                    </li>
+                    <li className="nav-item active">
+                        <a className="nav-link" href="/saved_loans"> Your Saved Loans</a>
+                    </li>
+                </ul>
+            )
         } else {
-            
-            listItem =
-                    <ul class="navbar-nav">
-                        <li className="nav-item active">
-                            <a className="nav-link" href="/login">Login</a>
-                        </li>
-                        <li className="nav-item active">
-                            <a className="nav-link" href="/create_user_form"> Create Profile </a>
-                        </li>
-                        <li className="nav-item active">
-                            <a className="nav-link" href="/loan_categories"> Find Loans</a>
-                        </li>
-                    </ul>
-
+            listItem = (
+                <ul class="navbar-nav">
+                    <li className="nav-item active">
+                        <a className="nav-link" href="/login">Login</a>
+                    </li>
+                    <li className="nav-item active">
+                        <a className="nav-link" href="/create_user_form"> Create Profile </a>
+                    </li>
+                    <li className="nav-item active">
+                        <a className="nav-link" href="/loan_categories"> Find Loans</a>
+                    </li>
+                </ul>
+            )
         }
-
-            setLoginOutButton(listItem)
+        setLoginOutButton(listItem)
     }, [])
 
 
